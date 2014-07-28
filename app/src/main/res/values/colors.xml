@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="Black">#000000</color>
+    <color name="BlackAlpha">#26000000</color>
+    <color name="White">#FFFFFF</color>
+    <color name="WhiteHalf">#80FFFFFF</color>
+    <color name="Appbg">#eeeeee</color>
+    <color name="Blue">#0076bb</color>
+    <color name="LightBlue">#edf5fa</color>
+    <color name="Orange">#e87542</color>
+    <color name="LightOrange">#1ae87542</color>
+    <color name="Navy">#274367</color>
+    <color name="Grey">#707070</color>
+    <color name="MidGrey">#b2b2b2</color>
+    <color name="LightGrey">#c5c5c5</color>
+    <color name="Divider">#dcdcdc</color>
+    <color name="NavmenuDivider">#eeeeee</color>
+    <color name="BlueSelected">#00539A</color>
+    <color name="Green">#83b765</color>
+</resources>
