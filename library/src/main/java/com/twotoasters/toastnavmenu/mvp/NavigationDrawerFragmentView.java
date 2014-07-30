@@ -11,6 +11,8 @@ import com.twotoasters.toastnavmenu.NavMenuItem;
  */
 public interface NavigationDrawerFragmentView {
 
+//    void setMenuItems(NavMenuItem[] items);
+
     void setMenuItems(NavMenuItem[] items);
 
     void setCurrentSelectedPosition(int position);
@@ -28,12 +30,12 @@ public interface NavigationDrawerFragmentView {
             this.position = position;
         }
 
-        public int getPosition() {
-            return position;
-        }
-
-        public void setPosition(int position) {
-            this.position = position;
-        }
+//        public int getPosition() {
+//            return position;
+//        }
+//
+//        public void setPosition(int position) {
+//            this.position = position;
+//        }
     }
 }

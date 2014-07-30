@@ -8,7 +8,6 @@ import com.twotoasters.toastnavmenu.NavMenuItem;
  */
 public interface NavigationDrawerFragmentModel {
 
-    NavMenuItem[] getNavMenuItemsForRole(int roleType, boolean loggedIn);
 
     int getCurrentSelectedPosition();
 

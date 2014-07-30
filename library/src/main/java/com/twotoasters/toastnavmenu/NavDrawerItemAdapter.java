@@ -39,17 +39,17 @@ public class NavDrawerItemAdapter extends ArrayAdapter<NavMenuItem> {
         NavMenuItemHolder navMenuItemHolder = null;
 
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.navmenu_item, parentView, false);
-            TextView labelView = (TextView) convertView
-                    .findViewById(R.id.navmenuitem_label);
-            ImageView iconView = (ImageView) convertView
-                    .findViewById(R.id.navmenuitem_icon);
-
-            navMenuItemHolder = new NavMenuItemHolder();
-            navMenuItemHolder.labelView = labelView;
-            navMenuItemHolder.iconView = iconView;
-
-            convertView.setTag(navMenuItemHolder);
+//            convertView = inflater.inflate(R.layout.navmenu_item, parentView, false);
+//            TextView labelView = (TextView) convertView
+//                    .findViewById(R.id.navmenuitem_label);
+//            ImageView iconView = (ImageView) convertView
+//                    .findViewById(R.id.navmenuitem_icon);
+//
+//            navMenuItemHolder = new NavMenuItemHolder();
+//            navMenuItemHolder.labelView = labelView;
+//            navMenuItemHolder.iconView = iconView;
+//
+//            convertView.setTag(navMenuItemHolder);
         }
 
         if (navMenuItemHolder == null) {
@@ -66,23 +66,23 @@ public class NavDrawerItemAdapter extends ArrayAdapter<NavMenuItem> {
     public View getSectionView(View convertView, ViewGroup parentView,
                                NavMenuItem navMenuItem) {
 
-        NavMenuSectionHolder navMenuItemHolder = null;
-
-        if (convertView == null) {
-            convertView = inflater.inflate(R.layout.navmenu_section, parentView, false);
-            TextView labelView = (TextView) convertView
-                    .findViewById(R.id.navmenusection_label);
-
-            navMenuItemHolder = new NavMenuSectionHolder();
-            navMenuItemHolder.labelView = labelView;
-            convertView.setTag(navMenuItemHolder);
-        }
-
-        if (navMenuItemHolder == null) {
-            navMenuItemHolder = (NavMenuSectionHolder) convertView.getTag();
-        }
-
-        navMenuItemHolder.labelView.setText(navMenuItem.getLabel());
+//        NavMenuSectionHolder navMenuItemHolder = null;
+//
+//        if (convertView == null) {
+//            convertView = inflater.inflate(R.layout.navmenu_section, parentView, false);
+//            TextView labelView = (TextView) convertView
+//                    .findViewById(R.id.navmenusection_label);
+//
+//            navMenuItemHolder = new NavMenuSectionHolder();
+//            navMenuItemHolder.labelView = labelView;
+//            convertView.setTag(navMenuItemHolder);
+//        }
+//
+//        if (navMenuItemHolder == null) {
+//            navMenuItemHolder = (NavMenuSectionHolder) convertView.getTag();
+//        }
+//
+//        navMenuItemHolder.labelView.setText(navMenuItem.getLabel());
 
         return convertView;
     }
