@@ -9,8 +9,8 @@ public class MenuItem {
     private final int menuId;
     private final int itemViewType;
     private int titleResId;
-    private HashMap imageMap;
-    private HashMap textMap;
+    private HashMap<Integer, Integer> imageMap;
+    private HashMap<Integer, Integer> textMap;
     private boolean enabled;
 
     private MenuItem(Builder builder) {
@@ -22,13 +22,39 @@ public class MenuItem {
         itemViewType = builder.itemViewType;
     }
 
+    public int getMenuId() {
+        return menuId;
+    }
 
+    public int getItemViewType() {
+        return itemViewType;
+    }
+
+    public int getTitleResId() {
+        return titleResId;
+    }
+
+    public HashMap getImageMap() {
+        return imageMap;
+    }
+
+    public HashMap getTextMap() {
+        return textMap;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public int getTextResourceForView(Integer viewId) {
+        return textMap.get(viewId);
+    }
     public static class Builder {
         private final int menuId;
         private final int itemViewType;
         private int titleResId;
-        private HashMap imageMap;
-        private HashMap textMap;
+        private HashMap<Integer, Integer> imageMap;
+        private HashMap<Integer, Integer> textMap;
         private boolean enabled = true;
 
         public Builder(int menuId, int itemViewType) {
@@ -43,8 +69,8 @@ public class MenuItem {
             return this;
         }
 
-        public Builder addText(int resourceId, int textResourceId) {
-            imageMap.put(resourceId, textResourceId);
+        public Builder addText(Integer resourceId, Integer textResourceId) {
+            textMap.put(resourceId, textResourceId);
             return this;
         }
 

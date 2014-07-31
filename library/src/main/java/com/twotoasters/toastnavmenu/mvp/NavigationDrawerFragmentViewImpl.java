@@ -12,7 +12,9 @@ import android.widget.ListView;
 
 import com.twotoasters.toastnavmenu.BusProvider;
 import com.twotoasters.toastnavmenu.FragmentViewImpl;
-import com.twotoasters.toastnavmenu.NavMenuItem;
+import com.twotoasters.toastnavmenu.NavDrawerItemAdapter;
+import com.twotoasters.toastnavmenu.R;
+import com.twotoasters.toastnavmenu.Toaster;
 
 
 public class NavigationDrawerFragmentViewImpl extends FragmentViewImpl<Fragment>
@@ -34,8 +36,8 @@ public class NavigationDrawerFragmentViewImpl extends FragmentViewImpl<Fragment>
     }
 
     public void setupWidgets() {
-//        drawerLayout = (DrawerLayout) getActivity().findViewById(R.id.drawer_layout);
-//        drawerListView = (ListView) findViewInFragment(R.id.drawerListView);
+        drawerLayout = (DrawerLayout) getActivity().findViewById(R.id.drawer_layout);
+        drawerListView = (ListView) findViewInFragment(R.id.drawerListView);
         drawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -56,16 +58,17 @@ public class NavigationDrawerFragmentViewImpl extends FragmentViewImpl<Fragment>
 
 
     @Override
-    public void setMenuItems(final NavMenuItem[] items) {
-//        getActivity().runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                drawerListView.setAdapter(
-//                        new NavDrawerItemAdapter(getActivity(),
-//                                R.layout.navmenu_item,
-//                                items));
-//            }
-//        });
+    public void setMenuItems(final com.twotoasters.toastnavmenu.MenuItem[] items,
+                             final Toaster toaster ) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                drawerListView.setAdapter(
+                        new NavDrawerItemAdapter(getActivity(),
+                                (int) toaster.getItemViewTypes().values().iterator().next(),
+                                toaster));
+            }
+        });
     }
 
     @Override
@@ -81,7 +84,7 @@ public class NavigationDrawerFragmentViewImpl extends FragmentViewImpl<Fragment>
 
 
     public void setUpNavDrawer() {
-//        fragmentContainerView = getActivity().findViewById(R.id.navigation_drawer);
+        fragmentContainerView = getActivity().findViewById(R.id.navigation_drawer);
 
         // set a custom shadow that overlays the main content when the drawer opens
 //        this.drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
@@ -93,43 +96,43 @@ public class NavigationDrawerFragmentViewImpl extends FragmentViewImpl<Fragment>
 
         // ActionBarDrawerToggle ties together the the proper interactions
         // between the navigation drawer and the action bar app icon.
-//        drawerToggle = new ActionBarDrawerToggle(
-//                getActivity(),                    /* host Activity */
-//                NavigationDrawerFragmentViewImpl.this.drawerLayout,                    /* DrawerLayout object */
-//                R.drawable.ic_navigation_drawer,             /* nav drawer image to replace 'Up' caret */
-//                R.string.navigation_drawer_open,  /* "open drawer" description for accessibility */
-//                R.string.navigation_drawer_close  /* "close drawer" description for accessibility */
-//        ) {
-//            @Override
-//            public void onDrawerClosed(View drawerView) {
-//                super.onDrawerClosed(drawerView);
-//                if (!getFragment().isAdded()) {
-//                    return;
-//                }
-//
-//                getActivity().invalidateOptionsMenu();
-//            }
-//
-//            @Override
-//            public void onDrawerOpened(View drawerView) {
-//                super.onDrawerOpened(drawerView);
-//                if (!getFragment().isAdded()) {
-//                    return;
-//                }
-//
-//                getActivity().invalidateOptionsMenu();
-//            }
-//        };
-//
-//        this.drawerLayout.post(new Runnable() {
-//            @Override
-//            public void run() {
-//                drawerToggle.syncState();
-//            }
-//        });
-//
-//        this.drawerLayout.setDrawerListener(drawerToggle);
-//
+        drawerToggle = new ActionBarDrawerToggle(
+                getActivity(),                    /* host Activity */
+                NavigationDrawerFragmentViewImpl.this.drawerLayout,                    /* DrawerLayout object */
+                R.drawable.ic_navigation_drawer,             /* nav drawer image to replace 'Up' caret */
+                R.string.navigation_drawer_open,  /* "open drawer" description for accessibility */
+                R.string.navigation_drawer_close  /* "close drawer" description for accessibility */
+        ) {
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+                if (!getFragment().isAdded()) {
+                    return;
+                }
+
+                getActivity().invalidateOptionsMenu();
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                if (!getFragment().isAdded()) {
+                    return;
+                }
+
+                getActivity().invalidateOptionsMenu();
+            }
+        };
+
+        this.drawerLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                drawerToggle.syncState();
+            }
+        });
+
+        this.drawerLayout.setDrawerListener(drawerToggle);
+
     }
 
     public void setDrawerToggleConfiguration(Configuration newConfig) {

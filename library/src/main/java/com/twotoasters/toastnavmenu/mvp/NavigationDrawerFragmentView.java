@@ -3,7 +3,7 @@ package com.twotoasters.toastnavmenu.mvp;
 import android.content.res.Configuration;
 import android.view.MenuItem;
 
-import com.twotoasters.toastnavmenu.NavMenuItem;
+import com.twotoasters.toastnavmenu.Toaster;
 
 
 /**
@@ -13,7 +13,8 @@ public interface NavigationDrawerFragmentView {
 
 //    void setMenuItems(NavMenuItem[] items);
 
-    void setMenuItems(NavMenuItem[] items);
+    void setMenuItems(com.twotoasters.toastnavmenu.MenuItem[] items,
+                      Toaster toaster);
 
     void setCurrentSelectedPosition(int position);
 

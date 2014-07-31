@@ -29,8 +29,8 @@ public class NavigationDrawerFragmentPresenter {
 
     public void restoreInstanceState(Bundle savedInstanceState) {
         if (savedInstanceState != null) {
-            model.setCurrentSelectedPosition(savedInstanceState.getInt(STATE_SELECTED_POSITION));
-            view.setCurrentSelectedPosition(model.getCurrentSelectedPosition());
+//            model.setCurrentSelectedPosition(savedInstanceState.getInt(STATE_SELECTED_POSITION));
+//            view.setCurrentSelectedPosition(model.getCurrentSelectedPosition());
 
         }
     }
@@ -48,9 +48,9 @@ public class NavigationDrawerFragmentPresenter {
     }
 
     public void refreshNavMenu() {
-//        view.setMenuItems(model.getNavMenuItemsForRole(userDataGateway.getRole(),
-//                apiCredentialsGateway.isAuthenticated()
-//        ));
+        view.setMenuItems(model.getMenuItems(),
+        model.getToaster());
+
 //        model.setCurrentSelectedPosition(apiCredentialsGateway.isAuthenticated() ? 0 : 1);
 //        view.setCurrentSelectedPosition(model.getCurrentSelectedPosition());
     }
