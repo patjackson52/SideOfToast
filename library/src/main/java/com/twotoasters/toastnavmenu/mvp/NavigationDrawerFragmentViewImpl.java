@@ -14,7 +14,8 @@ import com.twotoasters.toastnavmenu.BusProvider;
 import com.twotoasters.toastnavmenu.FragmentViewImpl;
 import com.twotoasters.toastnavmenu.NavDrawerItemAdapter;
 import com.twotoasters.toastnavmenu.R;
-import com.twotoasters.toastnavmenu.Toaster;
+import com.twotoasters.toastnavmenu.ToastMenuItem;
+import com.twotoasters.toastnavmenu.SideOfToast;
 
 
 public class NavigationDrawerFragmentViewImpl extends FragmentViewImpl<Fragment>
@@ -58,15 +59,15 @@ public class NavigationDrawerFragmentViewImpl extends FragmentViewImpl<Fragment>
 
 
     @Override
-    public void setMenuItems(final com.twotoasters.toastnavmenu.MenuItem[] items,
-                             final Toaster toaster ) {
+    public void setMenuItems(final ToastMenuItem[] items,
+                             final SideOfToast sideOfToast) {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 drawerListView.setAdapter(
                         new NavDrawerItemAdapter(getActivity(),
-                                (int) toaster.getItemViewTypes().values().iterator().next(),
-                                toaster));
+                                (int) sideOfToast.getItemViewTypes().values().iterator().next(),
+                                sideOfToast));
             }
         });
     }

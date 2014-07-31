@@ -9,7 +9,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.twotoasters.toastnavmenu.Toaster;
+import com.twotoasters.toastnavmenu.ToastMenuItem;
+import com.twotoasters.toastnavmenu.SideOfToast;
 
 public class MainActivity extends FragmentActivity {
 
@@ -27,16 +28,25 @@ public class MainActivity extends FragmentActivity {
     }
 
     private void addNavMenu() {
-        com.twotoasters.toastnavmenu.MenuItem menuItem1 =
-                new com.twotoasters.toastnavmenu.MenuItem.Builder(0, 0)
-                .addText(R.id.navmenuitem_label, R.string.menu_title_toasting)
-                .build();
+        ToastMenuItem messagesToastMenuItem =
+                new ToastMenuItem.Builder(0, 0)
+                        .addText(R.id.navmenuitem_label, R.string.menu_title_messages)
+                        .addImage(R.id.navmenuitem_icon, R.drawable.selector_messages_menu_icon)
+                        .build();
 
-        new Toaster.ToasterBuilder(R.layout.navigation_drawer)
+        ToastMenuItem homeToastMenuItem =
+                new ToastMenuItem.Builder(0, 0)
+                        .addText(R.id.navmenuitem_label, R.string.menu_title_home)
+                        .addImage(R.id.navmenuitem_icon, R.drawable.selector_home_menu_icon)
+                        .build();
+        new SideOfToast.Builder(R.layout.navigation_drawer)
                 .addItemViewType(0, R.layout.navmenu_item)
-                .item(menuItem1)
-                .build().create(this);
+                .item(homeToastMenuItem)
+                .item(messagesToastMenuItem)
+                .build()
+                .create(this);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -67,7 +77,7 @@ public class MainActivity extends FragmentActivity {
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
+                                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             return rootView;
         }

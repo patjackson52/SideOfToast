@@ -18,10 +18,10 @@ import java.util.HashMap;
 /**
  * Created by patrickjackson on 7/27/14.
  */
-public class Toaster implements Serializable {
+public class SideOfToast implements Serializable {
     private final int listLayoutId;
     private final HashMap itemViewTypes;
-    private MenuItem[] items;
+    private ToastMenuItem[] items;
     private final SIDE side;
     DrawerLayout drawerLayout;
 
@@ -31,12 +31,12 @@ public class Toaster implements Serializable {
     }
 
 
-    private Toaster(ToasterBuilder toasterBuilder) {
-        items = new MenuItem[toasterBuilder.items.size()];
-        toasterBuilder.items.toArray(items);
-        listLayoutId = toasterBuilder.listLayoutId;
-        side = toasterBuilder.side;
-        this.itemViewTypes = toasterBuilder.itemViewTypes;
+    private SideOfToast(Builder builder) {
+        items = new ToastMenuItem[builder.items.size()];
+        builder.items.toArray(items);
+        listLayoutId = builder.listLayoutId;
+        side = builder.side;
+        this.itemViewTypes = builder.itemViewTypes;
     }
 
     public View create(FragmentActivity activity) {
@@ -89,7 +89,7 @@ public class Toaster implements Serializable {
         return itemViewTypes;
     }
 
-    public MenuItem[] getItems() {
+    public ToastMenuItem[] getItems() {
         return items;
     }
 
@@ -105,20 +105,20 @@ public class Toaster implements Serializable {
         return (int) getItemViewTypes().get(type);
     }
 
-    public static class ToasterBuilder {
+    public static class Builder {
         private final int listLayoutId;
         private HashMap itemViewTypes;
-        private ArrayList<MenuItem> items;
+        private ArrayList<ToastMenuItem> items;
         private SIDE side = SIDE.LEFT;
 
 
-        public ToasterBuilder(int listLayoutId) {
+        public Builder(int listLayoutId) {
             this.listLayoutId = listLayoutId;
             items = new ArrayList<>();
             itemViewTypes = new HashMap();
         }
 
-        public ToasterBuilder item(MenuItem item) {
+        public Builder item(ToastMenuItem item) {
             items.add(item);
             return this;
         }
@@ -129,22 +129,22 @@ public class Toaster implements Serializable {
          * @param side
          * @return
          */
-        public ToasterBuilder setSide(SIDE side) {
+        public Builder setSide(SIDE side) {
             this.side = side;
             return this;
         }
 
-        public ToasterBuilder addItemViewType(final int type, final int layoutResourceId) {
+        public Builder addItemViewType(final int type, final int layoutResourceId) {
             this.itemViewTypes.put(type, layoutResourceId);
             return this;
         }
 
 
-        public Toaster build() {
+        public SideOfToast build() {
             if (itemViewTypes.size() < 1) {
 //                throw new NoItemViewTypesException();
             }
-            return new Toaster(this);
+            return new SideOfToast(this);
         }
 
         public static class NoItemViewTypesException extends Exception {

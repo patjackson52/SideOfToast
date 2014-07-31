@@ -1,18 +1,18 @@
 package com.twotoasters.toastnavmenu.mvp;
 
-import com.twotoasters.toastnavmenu.MenuItem;
-import com.twotoasters.toastnavmenu.Toaster;
+import com.twotoasters.toastnavmenu.ToastMenuItem;
+import com.twotoasters.toastnavmenu.SideOfToast;
 
 public class NavigationDrawerFragmentModelImpl implements NavigationDrawerFragmentModel {
 
     private int currentSelectedPosition = 1;
-    private Toaster toaster;
+    private SideOfToast sideOfToast;
 
 
-    public NavigationDrawerFragmentModelImpl(Toaster toaster,
+    public NavigationDrawerFragmentModelImpl(SideOfToast sideOfToast,
                                              int startPosition) {
         currentSelectedPosition = startPosition;
-        this.toaster = toaster;
+        this.sideOfToast = sideOfToast;
 
     }
     @Override
@@ -36,12 +36,12 @@ public class NavigationDrawerFragmentModelImpl implements NavigationDrawerFragme
     }
 
     @Override
-    public MenuItem[] getMenuItems() {
-        return toaster.getItems();
+    public ToastMenuItem[] getMenuItems() {
+        return sideOfToast.getItems();
     }
 
     @Override
-    public Toaster getToaster() {
-        return toaster;
+    public SideOfToast getSideOfToast() {
+        return sideOfToast;
     }
 }

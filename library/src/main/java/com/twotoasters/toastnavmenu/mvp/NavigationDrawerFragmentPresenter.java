@@ -49,7 +49,7 @@ public class NavigationDrawerFragmentPresenter {
 
     public void refreshNavMenu() {
         view.setMenuItems(model.getMenuItems(),
-        model.getToaster());
+        model.getSideOfToast());
 
 //        model.setCurrentSelectedPosition(apiCredentialsGateway.isAuthenticated() ? 0 : 1);
 //        view.setCurrentSelectedPosition(model.getCurrentSelectedPosition());

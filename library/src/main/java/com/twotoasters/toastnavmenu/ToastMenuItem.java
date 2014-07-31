@@ -5,7 +5,7 @@ import java.util.HashMap;
 /**
  * Created by patrickjackson on 7/29/14.
  */
-public class MenuItem {
+public class ToastMenuItem {
     private final int menuId;
     private final int itemViewType;
     private int titleResId;
@@ -13,7 +13,7 @@ public class MenuItem {
     private HashMap<Integer, Integer> textMap;
     private boolean enabled;
 
-    private MenuItem(Builder builder) {
+    private ToastMenuItem(Builder builder) {
         menuId = builder.menuId;
         imageMap = builder.imageMap;
         textMap = builder.textMap;
@@ -49,6 +49,12 @@ public class MenuItem {
     public int getTextResourceForView(Integer viewId) {
         return textMap.get(viewId);
     }
+
+    public int getImageResourceForView(Integer viewId) {
+       return imageMap.get(viewId);
+    }
+
+
     public static class Builder {
         private final int menuId;
         private final int itemViewType;
@@ -84,8 +90,8 @@ public class MenuItem {
             return this;
         }
 
-        public MenuItem build() {
-            return new MenuItem(this);
+        public ToastMenuItem build() {
+            return new ToastMenuItem(this);
         }
     }
 }

@@ -24,10 +24,10 @@ public class NavigationDrawerFragment extends Fragment {
     NavigationDrawerFragmentPresenter presenter;
     Bundle savedInstanceState;
 
-    public static NavigationDrawerFragment getInstance(Toaster toaster) {
+    public static NavigationDrawerFragment getInstance(SideOfToast sideOfToast) {
         NavigationDrawerFragment fragment = new NavigationDrawerFragment();
         Bundle bundle = new Bundle();
-        bundle.putSerializable(TOASTER_KEY, toaster);
+        bundle.putSerializable(TOASTER_KEY, sideOfToast);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -109,7 +109,7 @@ public class NavigationDrawerFragment extends Fragment {
         int startPosition = 0;
         return new NavigationDrawerFragmentPresenter(
                 new NavigationDrawerFragmentModelImpl(
-                        (Toaster) getArguments().getSerializable(TOASTER_KEY),
+                        (SideOfToast) getArguments().getSerializable(TOASTER_KEY),
                         startPosition),
                 new NavigationDrawerFragmentViewImpl(this));
     }

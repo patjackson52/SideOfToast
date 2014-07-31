@@ -9,41 +9,48 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-public class NavDrawerItemAdapter extends ArrayAdapter<MenuItem> {
+public class NavDrawerItemAdapter extends ArrayAdapter<ToastMenuItem> {
 
 
     private LayoutInflater inflater;
-    private Toaster toaster;
+    private SideOfToast sideOfToast;
 
     public NavDrawerItemAdapter(Context context,
                                 int textViewResourceId,
-                                Toaster toaster) {
+                                SideOfToast sideOfToast) {
 
-        super(context, textViewResourceId, toaster.getItems());
+        super(context, textViewResourceId, sideOfToast.getItems());
         this.inflater = LayoutInflater.from(context);
-        this.toaster = toaster;
+        this.sideOfToast = sideOfToast;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = null;
-        MenuItem menuItem = this.getItem(position);
+        ToastMenuItem toastMenuItem = this.getItem(position);
 
-        view = inflater.inflate(toaster.getLayoutForType(menuItem.getItemViewType()), null);
+        view = inflater.inflate(sideOfToast.getLayoutForType(toastMenuItem.getItemViewType()), null);
 
-        for (Object id : menuItem.getTextMap().keySet()) {
+        for (Object id : toastMenuItem.getTextMap().keySet()) {
             TextView tmp = (TextView) view.findViewById((Integer) id);
-            tmp.setText(menuItem.getTextResourceForView((Integer) id));
+            tmp.setText(toastMenuItem.getTextResourceForView((Integer) id));
         }
+
+        for (Object id : toastMenuItem.getImageMap().keySet()) {
+            ImageView tmp = (ImageView) view.findViewById((Integer) id);
+            tmp.setImageResource(toastMenuItem.getImageResourceForView((Integer) id));
+        }
+
         return view;
     }
 
 
     @Override
     public int getViewTypeCount() {
-        return toaster.getItemViewTypes().size();
+        return sideOfToast.getItemViewTypes().size();
     }
 
     @Override

@@ -1,8 +1,8 @@
 package com.twotoasters.toastnavmenu.mvp;
 
 
-import com.twotoasters.toastnavmenu.MenuItem;
-import com.twotoasters.toastnavmenu.Toaster;
+import com.twotoasters.toastnavmenu.ToastMenuItem;
+import com.twotoasters.toastnavmenu.SideOfToast;
 
 /**
  * Created by patrickjackson on 4/23/14.
@@ -18,7 +18,7 @@ public interface NavigationDrawerFragmentModel {
 
     int getMenuIdForPosition(int position);
 
-    MenuItem[] getMenuItems();
+    ToastMenuItem[] getMenuItems();
 
-    Toaster getToaster();
+    SideOfToast getSideOfToast();
 }
