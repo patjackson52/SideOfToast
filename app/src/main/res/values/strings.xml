@@ -8,5 +8,11 @@
     <string name="menu_title_toasting">Toasting</string>
     <string name="menu_title_home">Home</string>
     <string name="menu_title_messages">Messages</string>
-
+    <string name="parent_menu_title">Parent View</string>
+    <string name="menu_need_account_to_post_jobs">You need an account to post jobs</string>
+    <string name="menu_login_title">Log In</string>
+    <string name="menu_sign_up_title">Sign Up</string>
+    <string name="menu_switch_title">Switch to View Jobs</string>
+    <string name="menu_are_you_sitter_title">Are you a Sitter?</string>
+    <string name="roboto">sans-serif</string>
 </resources>

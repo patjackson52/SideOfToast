@@ -5,7 +5,7 @@ import java.util.HashMap;
 /**
  * Created by patrickjackson on 7/29/14.
  */
-public class ToastMenuItem {
+public class ToastMenuItem implements Comparable<ToastMenuItem> {
     private final int menuId;
     private final int itemViewType;
     private int titleResId;
@@ -14,7 +14,7 @@ public class ToastMenuItem {
     private boolean enabled;
 
     private ToastMenuItem(Builder builder) {
-        menuId = builder.menuId;
+        menuId = builder.position;
         imageMap = builder.imageMap;
         textMap = builder.textMap;
         titleResId = builder.titleResId;
@@ -22,7 +22,7 @@ public class ToastMenuItem {
         itemViewType = builder.itemViewType;
     }
 
-    public int getMenuId() {
+    public int getPosition() {
         return menuId;
     }
 
@@ -54,17 +54,22 @@ public class ToastMenuItem {
        return imageMap.get(viewId);
     }
 
+    @Override
+    public int compareTo(ToastMenuItem another) {
+        return this.getPosition() - another.getPosition();
+    }
+
 
     public static class Builder {
-        private final int menuId;
+        private final int position;
         private final int itemViewType;
         private int titleResId;
         private HashMap<Integer, Integer> imageMap;
         private HashMap<Integer, Integer> textMap;
         private boolean enabled = true;
 
-        public Builder(int menuId, int itemViewType) {
-            this.menuId = menuId;
+        public Builder(int position, int itemViewType) {
+            this.position = position;
             this.itemViewType = itemViewType;
             this.imageMap = new HashMap();
             this.textMap = new HashMap();

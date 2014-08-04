@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,31 +13,44 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by patrickjackson on 7/27/14.
  */
 public class SideOfToast implements Serializable {
+    private static final String TAG = "SideOfToast";
+    private static final int DEFAULT_WIDTH = 700;
+
     private final int listLayoutId;
     private final HashMap itemViewTypes;
-    private ToastMenuItem[] items;
-    private final SIDE side;
+    private ToastMenuItem items[];
+    private int width;
+    private static Level logLevel = Level.OFF;
     DrawerLayout drawerLayout;
-
-    enum SIDE {
-        LEFT,
-        RIGHT
-    }
-
 
     private SideOfToast(Builder builder) {
         items = new ToastMenuItem[builder.items.size()];
         builder.items.toArray(items);
+
         listLayoutId = builder.listLayoutId;
-        side = builder.side;
         this.itemViewTypes = builder.itemViewTypes;
+        this.width = builder.width;
+
+        logLevel = (builder.logLevel != null)
+                ? builder.logLevel
+                : Level.OFF;
+    }
+
+    public static void log(String message) {
+        Logger.getLogger(TAG).log(logLevel, message);
     }
 
     public View create(FragmentActivity activity) {
@@ -47,11 +61,14 @@ public class SideOfToast implements Serializable {
 
         drawerLayout = new DrawerLayout(activity);
 
+        width = (width ==0) ? DEFAULT_WIDTH : width;
 
         DrawerLayout.LayoutParams lp = new DrawerLayout.LayoutParams(
-                700 , LinearLayout.LayoutParams.MATCH_PARENT);
+                width,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+        log(activity.getString(R.string.log_setting_width) + width);
 
-        lp.gravity=Gravity.START;
+        lp.gravity = Gravity.START;
 
 
         final FrameLayout fl = new FrameLayout(activity);
@@ -59,7 +76,9 @@ public class SideOfToast implements Serializable {
         fl.setLayoutParams(lp);
 
         activityRoot.removeView(firstViewInLayout);
-        drawerLayout.addView(firstViewInLayout, new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
+        drawerLayout.addView(firstViewInLayout,
+                new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
+                        FrameLayout.LayoutParams.MATCH_PARENT));
         drawerLayout.addView(fl);
         drawerLayout.setId(R.id.drawer_layout);
 
@@ -74,11 +93,13 @@ public class SideOfToast implements Serializable {
                 "NavMenu");
         fragmentTransaction.commit();
 
+        log(activity.getString(R.string.log_create_finished));
         return drawerLayout;
     }
 
+
     private View inflateListView(FragmentActivity activity) {
-       return activity.getLayoutInflater().inflate(listLayoutId, null);
+        return activity.getLayoutInflater().inflate(listLayoutId, null);
     }
 
     public int getListLayoutId() {
@@ -93,10 +114,6 @@ public class SideOfToast implements Serializable {
         return items;
     }
 
-    public SIDE getSide() {
-        return side;
-    }
-
     public DrawerLayout getDrawerLayout() {
         return drawerLayout;
     }
@@ -109,7 +126,8 @@ public class SideOfToast implements Serializable {
         private final int listLayoutId;
         private HashMap itemViewTypes;
         private ArrayList<ToastMenuItem> items;
-        private SIDE side = SIDE.LEFT;
+        private Level logLevel;
+        public int width;
 
 
         public Builder(int listLayoutId) {
@@ -118,34 +136,56 @@ public class SideOfToast implements Serializable {
             itemViewTypes = new HashMap();
         }
 
-        public Builder item(ToastMenuItem item) {
+        public Builder addMenuItem(ToastMenuItem item) {
             items.add(item);
             return this;
         }
 
-        /**
-         * Set side menu to Left or Right side - optional
-         *
-         * @param side
-         * @return
-         */
-        public Builder setSide(SIDE side) {
-            this.side = side;
-            return this;
-        }
 
         public Builder addItemViewType(final int type, final int layoutResourceId) {
             this.itemViewTypes.put(type, layoutResourceId);
             return this;
         }
 
+        /**
+         * Logging level from Log class constants
+         * Log.VERBOSE, Log.ERROR, etc
+         *
+         * @param level
+         * @return
+         */
+        public Builder setLogLevel(Level level) {
+            this.logLevel = level;
+            return this;
+        }
+
+        /**
+         * Sets the width of the NavigationDrawer when open.
+         * Default is 700dp
+         * @param width
+         * @return
+         */
+        public Builder setWidth(int width) {
+            this.width = width;
+            return this;
+        }
 
         public SideOfToast build() {
             if (itemViewTypes.size() < 1) {
 //                throw new NoItemViewTypesException();
             }
+            Collections.sort(items);
             return new SideOfToast(this);
         }
+//
+//        private void countItemViewTypes() {
+//            ArrayList<Integer> list = new ArrayList<>();
+//            for (ToastMenuItem item: items) {
+//                if (list.contains(item.))
+//            }
+//
+//        }
+
 
         public static class NoItemViewTypesException extends Exception {
         }

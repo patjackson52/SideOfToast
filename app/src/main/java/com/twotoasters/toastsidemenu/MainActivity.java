@@ -24,7 +24,7 @@ public class MainActivity extends FragmentActivity {
                     .commit();
         }
 
-        addNavMenu();
+        addUnauthParentMenu();
     }
 
     private void addNavMenu() {
@@ -35,14 +35,75 @@ public class MainActivity extends FragmentActivity {
                         .build();
 
         ToastMenuItem homeToastMenuItem =
-                new ToastMenuItem.Builder(0, 0)
+                new ToastMenuItem.Builder(1, 0)
                         .addText(R.id.navmenuitem_label, R.string.menu_title_home)
                         .addImage(R.id.navmenuitem_icon, R.drawable.selector_home_menu_icon)
                         .build();
+
         new SideOfToast.Builder(R.layout.navigation_drawer)
                 .addItemViewType(0, R.layout.navmenu_item)
-                .item(homeToastMenuItem)
-                .item(messagesToastMenuItem)
+                .addMenuItem(homeToastMenuItem)
+                .addMenuItem(messagesToastMenuItem)
+                .build()
+                .create(this);
+    }
+
+    private void addUnauthParentMenu() {
+         ToastMenuItem parentHomeTitleToastMenuItem =
+                new ToastMenuItem.Builder(0, 0)
+                        .addText(R.id.navmenusection_label, R.string.parent_menu_title)
+                        .setEnabled(false)
+                        .build();
+
+        ToastMenuItem homeToastMenuItem =
+                new ToastMenuItem.Builder(1, 1)
+                        .addText(R.id.navmenuitem_label, R.string.menu_title_home)
+                        .addImage(R.id.navmenuitem_icon, R.drawable.selector_home_menu_icon)
+                        .build();
+
+
+        ToastMenuItem needAccountSectionHeader =
+                new ToastMenuItem.Builder(2, 0)
+                        .addText(R.id.navmenusection_label, R.string.menu_need_account_to_post_jobs)
+                        .setEnabled(false)
+                        .build();
+
+
+        ToastMenuItem loginMenuItem =
+                new ToastMenuItem.Builder(3, 1)
+                        .addText(R.id.navmenuitem_label, R.string.menu_login_title)
+                        .addImage(R.id.navmenuitem_icon, R.drawable.selector_login_menu_icon)
+                        .build();
+
+        ToastMenuItem signupMenuItem =
+                new ToastMenuItem.Builder(4, 1)
+                        .addText(R.id.navmenuitem_label, R.string.menu_sign_up_title)
+                        .addImage(R.id.navmenuitem_icon, R.drawable.selector_join_menu_icon)
+                        .build();
+
+        ToastMenuItem areYouASitter =
+                new ToastMenuItem.Builder(5, 0)
+                        .addText(R.id.navmenusection_label, R.string.menu_are_you_sitter_title)
+                        .setEnabled(false)
+                        .build();
+
+
+        ToastMenuItem switchMenuItem =
+                new ToastMenuItem.Builder(6, 1)
+                        .addText(R.id.navmenuitem_label, R.string.menu_switch_title)
+                        .addImage(R.id.navmenuitem_icon, R.drawable.selector_switch_menu_icon)
+                        .build();
+
+        new SideOfToast.Builder(R.layout.navigation_drawer)
+                .addItemViewType(0, R.layout.navmenu_section)
+                .addItemViewType(1, R.layout.navmenu_item)
+                .addMenuItem(homeToastMenuItem)
+                .addMenuItem(parentHomeTitleToastMenuItem)
+                .addMenuItem(needAccountSectionHeader)
+                .addMenuItem(loginMenuItem)
+                .addMenuItem(signupMenuItem)
+                .addMenuItem(areYouASitter)
+                .addMenuItem(switchMenuItem)
                 .build()
                 .create(this);
     }
@@ -56,7 +117,7 @@ public class MainActivity extends FragmentActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
+        // Handle action bar addMenuItem clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
