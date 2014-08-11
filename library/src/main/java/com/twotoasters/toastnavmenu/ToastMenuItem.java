@@ -1,22 +1,22 @@
 package com.twotoasters.toastnavmenu;
 
+import android.content.Context;
+import android.util.Log;
+
 import java.util.HashMap;
 
 /**
  * Created by patrickjackson on 7/29/14.
  */
-public class ToastMenuItem implements Comparable<ToastMenuItem> {
+public class ToastMenuItem extends ValueMappedItem implements Comparable<ToastMenuItem> {
     private final int menuId;
     private final int itemViewType;
     private int titleResId;
-    private HashMap<Integer, Integer> imageMap;
-    private HashMap<Integer, Integer> textMap;
     private boolean enabled;
 
     private ToastMenuItem(Builder builder) {
+        super(builder.textMap, builder.imageMap);
         menuId = builder.position;
-        imageMap = builder.imageMap;
-        textMap = builder.textMap;
         titleResId = builder.titleResId;
         enabled = builder.enabled;
         itemViewType = builder.itemViewType;
@@ -34,24 +34,9 @@ public class ToastMenuItem implements Comparable<ToastMenuItem> {
         return titleResId;
     }
 
-    public HashMap getImageMap() {
-        return imageMap;
-    }
-
-    public HashMap getTextMap() {
-        return textMap;
-    }
 
     public boolean isEnabled() {
         return enabled;
-    }
-
-    public int getTextResourceForView(Integer viewId) {
-        return textMap.get(viewId);
-    }
-
-    public int getImageResourceForView(Integer viewId) {
-       return imageMap.get(viewId);
     }
 
     @Override
@@ -65,7 +50,8 @@ public class ToastMenuItem implements Comparable<ToastMenuItem> {
         private final int itemViewType;
         private int titleResId;
         private HashMap<Integer, Integer> imageMap;
-        private HashMap<Integer, Integer> textMap;
+        private HashMap<Integer, String> textMap;
+        private HashMap<Integer, Integer> textIdMap;
         private boolean enabled = true;
 
         public Builder(int position, int itemViewType) {
@@ -73,6 +59,7 @@ public class ToastMenuItem implements Comparable<ToastMenuItem> {
             this.itemViewType = itemViewType;
             this.imageMap = new HashMap();
             this.textMap = new HashMap();
+            this.textIdMap = new HashMap();
         }
 
         public Builder addImage(int resourceId, int drawableId) {
@@ -80,8 +67,14 @@ public class ToastMenuItem implements Comparable<ToastMenuItem> {
             return this;
         }
 
+
         public Builder addText(Integer resourceId, Integer textResourceId) {
-            textMap.put(resourceId, textResourceId);
+            textIdMap.put(resourceId, textResourceId);
+            return this;
+        }
+
+        public Builder addText(Integer resourceId, String string) {
+            textMap.put(resourceId, string);
             return this;
         }
 
@@ -95,8 +88,17 @@ public class ToastMenuItem implements Comparable<ToastMenuItem> {
             return this;
         }
 
-        public ToastMenuItem build() {
+
+        public ToastMenuItem build(Context context) {
+            for (Integer id : textIdMap.keySet()) {
+                try {
+                    textMap.put(id, context.getString(textIdMap.get(id)));
+                } catch (Exception e) {
+                    SideOfToast.log(context.getString(R.string.error_bad_string_map));
+                }
+            }
             return new ToastMenuItem(this);
         }
+
     }
 }

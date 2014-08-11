@@ -8,15 +8,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import com.twotoasters.toastnavmenu.ToastMenuItem;
+import com.squareup.otto.Subscribe;
+import com.twotoasters.toastnavmenu.BusProvider;
 import com.twotoasters.toastnavmenu.SideOfToast;
+import com.twotoasters.toastnavmenu.ToastMenuFooterItem;
+import com.twotoasters.toastnavmenu.ToastMenuItem;
+import com.twotoasters.toastnavmenu.mvp.NavigationDrawerFragmentViewImpl;
 
 public class MainActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        BusProvider.register(this);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
@@ -24,7 +30,7 @@ public class MainActivity extends FragmentActivity {
                     .commit();
         }
 
-        addUnauthParentMenu();
+        addEbatesMenu();
     }
 
     private void addNavMenu() {
@@ -49,7 +55,7 @@ public class MainActivity extends FragmentActivity {
     }
 
     private void addUnauthParentMenu() {
-         ToastMenuItem parentHomeTitleToastMenuItem =
+        ToastMenuItem parentHomeTitleToastMenuItem =
                 new ToastMenuItem.Builder(0, 0)
                         .addText(R.id.navmenusection_label, R.string.parent_menu_title)
                         .setEnabled(false)
@@ -104,8 +110,64 @@ public class MainActivity extends FragmentActivity {
                 .addMenuItem(signupMenuItem)
                 .addMenuItem(areYouASitter)
                 .addMenuItem(switchMenuItem)
+                .setWidth(800)
                 .build()
                 .create(this);
+    }
+
+
+    private void addEbatesMenu() {
+        ToastMenuItem featuredItem =
+                new ToastMenuItem.Builder(0, 0)
+                        .addText(R.id.txtSidebar, R.string.ebates_item_featured)
+                        .addImage(R.id.navmenuitem_icon, R.drawable.selector_ebates_menu_featured)
+                        .build(this);
+        ToastMenuItem allStores =
+                new ToastMenuItem.Builder(1, 0)
+                        .addText(R.id.txtSidebar, R.string.ebates_item_all_stores)
+                        .addImage(R.id.navmenuitem_icon, R.drawable.selector_ebates_menu_all_stores)
+                        .build(this);
+        ToastMenuItem tafItem =
+                new ToastMenuItem.Builder(1, 0)
+                        .addText(R.id.txtSidebar, R.string.ebates_item_tell_friend)
+                        .addImage(R.id.navmenuitem_icon, R.drawable.selector_ebates_menu_taf)
+                        .build(this);
+        ToastMenuItem helpItem =
+                new ToastMenuItem.Builder(1, 0)
+                        .addText(R.id.txtSidebar, R.string.ebates_item_help)
+                        .addImage(R.id.navmenuitem_icon, R.drawable.selector_ebates_menu_help)
+                        .build(this);
+        ToastMenuItem myEbatesItem =
+                new ToastMenuItem.Builder(1, 0)
+                        .addText(R.id.txtSidebar, R.string.ebates_item_my_ebates)
+                        .addImage(R.id.navmenuitem_icon, R.drawable.selector_ebates_myebates)
+                        .build(this);
+
+
+        ToastMenuFooterItem footer =
+                new ToastMenuFooterItem.Builder(R.layout.ebates_view_sidebar_footer)
+                        .addText(R.id.txtSidebarName, R.string.ebates_sidebar_account_name, this)
+                        .addText(R.id.txtSidebarCashPaidValue, "Patrick Jackson")
+                        .setEnabled(false)
+                        .build();
+
+        new SideOfToast.Builder(R.layout.ebates_fragment_sidebar)
+                .addItemViewType(0, R.layout.ebates_item_sidebar)
+                .addMenuItem(featuredItem)
+                .addMenuItem(allStores)
+                .addMenuItem(tafItem)
+                .addMenuItem(helpItem)
+                .addMenuItem(myEbatesItem)
+                .addFooter(footer)
+                .setWidth(500)
+                .build()
+                .create(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        BusProvider.unregister(this);
+        super.onDestroy();
     }
 
     @Override
@@ -142,5 +204,12 @@ public class MainActivity extends FragmentActivity {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             return rootView;
         }
+    }
+
+    @Subscribe
+    public void onToastMenuItemClick(
+            NavigationDrawerFragmentViewImpl.ToastMenuItemClickEvent event) {
+        Toast.makeText(this, "Item " + event.getPosition() + " clicked.", Toast.LENGTH_SHORT)
+                .show();
     }
 }

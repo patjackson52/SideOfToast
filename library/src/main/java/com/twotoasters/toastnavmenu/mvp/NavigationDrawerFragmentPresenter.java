@@ -49,9 +49,11 @@ public class NavigationDrawerFragmentPresenter {
 
     public void refreshNavMenu() {
         view.setMenuItems(model.getMenuItems(),
-        model.getSideOfToast());
+                model.getSideOfToast());
 
-//        model.setCurrentSelectedPosition(apiCredentialsGateway.isAuthenticated() ? 0 : 1);
+        if (model.getFooterItem() != null) {
+            view.setFooterLayout(model.getFooterItem());
+        }//        model.setCurrentSelectedPosition(apiCredentialsGateway.isAuthenticated() ? 0 : 1);
 //        view.setCurrentSelectedPosition(model.getCurrentSelectedPosition());
     }
 

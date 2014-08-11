@@ -13,5 +13,6 @@
     <string name="log_create_finished">Side of Toast is Ready!</string>
     <string name="log_bad_view_id">View id not found!  Text not set on menu item: </string>
     <string name="log_setting_width">Setting width to </string>
+    <string name="error_bad_string_map">Error setting text for item - check your add text methods on ToastMenuItems</string>
 
 </resources>

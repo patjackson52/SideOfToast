@@ -1,5 +1,6 @@
 package com.twotoasters.toastnavmenu.mvp;
 
+import com.twotoasters.toastnavmenu.ToastMenuFooterItem;
 import com.twotoasters.toastnavmenu.ToastMenuItem;
 import com.twotoasters.toastnavmenu.SideOfToast;
 
@@ -43,5 +44,10 @@ public class NavigationDrawerFragmentModelImpl implements NavigationDrawerFragme
     @Override
     public SideOfToast getSideOfToast() {
         return sideOfToast;
+    }
+
+    @Override
+    public ToastMenuFooterItem getFooterItem() {
+        return sideOfToast.getFooterItem();
     }
 }

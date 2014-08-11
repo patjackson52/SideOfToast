@@ -14,6 +14,7 @@ import com.twotoasters.toastnavmenu.BusProvider;
 import com.twotoasters.toastnavmenu.FragmentViewImpl;
 import com.twotoasters.toastnavmenu.NavDrawerItemAdapter;
 import com.twotoasters.toastnavmenu.R;
+import com.twotoasters.toastnavmenu.ToastMenuFooterItem;
 import com.twotoasters.toastnavmenu.ToastMenuItem;
 import com.twotoasters.toastnavmenu.SideOfToast;
 
@@ -42,19 +43,25 @@ public class NavigationDrawerFragmentViewImpl extends FragmentViewImpl<Fragment>
         drawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                BusProvider.post(new NavMenuItemSelectedEvent(position));
+                BusProvider.post(new ToastMenuItemClickEvent(position));
             }
         });
-//        if (gateway.isAuthenticated()) {
-//            drawerListView.setDivider(getFragment().getResources().getDrawable(R.drawable.navmenu_divider));
-//            drawerListView.setDividerHeight(1);
-//            drawerListView.setFooterDividersEnabled(false);
-//        }
+
     }
 
 
     public boolean isDrawerOpen() {
         return drawerLayout != null && drawerLayout.isDrawerOpen(fragmentContainerView);
+    }
+
+    @Override
+    public void setFooterLayout(ToastMenuFooterItem footerItem) {
+        View footer = View.inflate(getActivity(),
+               footerItem.getLayoutId(),
+               null);
+       drawerListView.addFooterView(footer, null, footerItem.isEnabled());
+
+        footerItem.setImageAndText(footer, -1);
     }
 
 
@@ -67,7 +74,8 @@ public class NavigationDrawerFragmentViewImpl extends FragmentViewImpl<Fragment>
                 drawerListView.setAdapter(
                         new NavDrawerItemAdapter(getActivity(),
                                 (int) sideOfToast.getItemViewTypes().values().iterator().next(),
-                                sideOfToast));
+                                sideOfToast)
+                );
             }
         });
     }
@@ -145,4 +153,15 @@ public class NavigationDrawerFragmentViewImpl extends FragmentViewImpl<Fragment>
         return drawerToggle.onOptionsItemSelected(item);
     }
 
+    public static class ToastMenuItemClickEvent {
+        final int position;
+
+        public ToastMenuItemClickEvent(int position) {
+            this.position = position;
+        }
+
+        public int getPosition() {
+            return position;
+        }
+    }
 }

@@ -3,6 +3,7 @@ package com.twotoasters.toastnavmenu.mvp;
 import android.content.res.Configuration;
 import android.view.MenuItem;
 
+import com.twotoasters.toastnavmenu.ToastMenuFooterItem;
 import com.twotoasters.toastnavmenu.ToastMenuItem;
 import com.twotoasters.toastnavmenu.SideOfToast;
 
@@ -13,6 +14,8 @@ import com.twotoasters.toastnavmenu.SideOfToast;
 public interface NavigationDrawerFragmentView {
 
 //    void setMenuItems(NavMenuItem[] items);
+
+    void setFooterLayout(ToastMenuFooterItem footerItem);
 
     void setMenuItems(ToastMenuItem[] items,
                       SideOfToast sideOfToast);

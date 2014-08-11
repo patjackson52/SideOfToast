@@ -34,23 +34,8 @@ public class NavDrawerItemAdapter extends ArrayAdapter<ToastMenuItem> {
 
         view = inflater.inflate(sideOfToast.getLayoutForType(toastMenuItem.getItemViewType()), null);
 
-        for (Object id : toastMenuItem.getTextMap().keySet()) {
-            TextView tmp = (TextView) view.findViewById((Integer) id);
-            if (tmp != null) {
-                tmp.setText(toastMenuItem.getTextResourceForView((Integer) id));
-            } else {
-                sideOfToast.log(getContext().getString(R.string.log_bad_view_id) + position);
-            }
-        }
+        toastMenuItem.setImageAndText(view, position);
 
-        for (Object id : toastMenuItem.getImageMap().keySet()) {
-            ImageView tmp = (ImageView) view.findViewById((Integer) id);
-            if (tmp != null) {
-                tmp.setImageResource(toastMenuItem.getImageResourceForView((Integer) id));
-            } else {
-                sideOfToast.log(getContext().getString(R.string.log_bad_view_id) + position);
-            }
-        }
 
         return view;
     }

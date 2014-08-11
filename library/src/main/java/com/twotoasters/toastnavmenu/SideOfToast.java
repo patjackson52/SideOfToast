@@ -5,7 +5,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +12,9 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,12 +22,24 @@ import java.util.logging.Logger;
  * Created by patrickjackson on 7/27/14.
  */
 public class SideOfToast implements Serializable {
+
+
+    public int getFooterLayout() {
+        return footer.getLayoutId();
+    }
+
+
+    public interface ReadyForToast {
+        void ToastMenuItemClicked(int position);
+    }
+
     private static final String TAG = "SideOfToast";
     private static final int DEFAULT_WIDTH = 700;
 
     private final int listLayoutId;
     private final HashMap itemViewTypes;
     private ToastMenuItem items[];
+    private ToastMenuFooterItem footer;
     private int width;
     private static Level logLevel = Level.OFF;
     DrawerLayout drawerLayout;
@@ -43,6 +51,7 @@ public class SideOfToast implements Serializable {
         listLayoutId = builder.listLayoutId;
         this.itemViewTypes = builder.itemViewTypes;
         this.width = builder.width;
+        this.footer = builder.footerItem;
 
         logLevel = (builder.logLevel != null)
                 ? builder.logLevel
@@ -61,7 +70,7 @@ public class SideOfToast implements Serializable {
 
         drawerLayout = new DrawerLayout(activity);
 
-        width = (width ==0) ? DEFAULT_WIDTH : width;
+        width = (width == 0) ? DEFAULT_WIDTH : width;
 
         DrawerLayout.LayoutParams lp = new DrawerLayout.LayoutParams(
                 width,
@@ -78,7 +87,8 @@ public class SideOfToast implements Serializable {
         activityRoot.removeView(firstViewInLayout);
         drawerLayout.addView(firstViewInLayout,
                 new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
-                        FrameLayout.LayoutParams.MATCH_PARENT));
+                        FrameLayout.LayoutParams.MATCH_PARENT)
+        );
         drawerLayout.addView(fl);
         drawerLayout.setId(R.id.drawer_layout);
 
@@ -122,10 +132,15 @@ public class SideOfToast implements Serializable {
         return (int) getItemViewTypes().get(type);
     }
 
+    public ToastMenuFooterItem getFooterItem() {
+        return footer;
+    }
+
     public static class Builder {
         private final int listLayoutId;
         private HashMap itemViewTypes;
         private ArrayList<ToastMenuItem> items;
+        private ToastMenuFooterItem footerItem;
         private Level logLevel;
         public int width;
 
@@ -141,6 +156,10 @@ public class SideOfToast implements Serializable {
             return this;
         }
 
+        public Builder addFooter(ToastMenuFooterItem footerItem) {
+            this.footerItem = footerItem;
+            return this;
+        }
 
         public Builder addItemViewType(final int type, final int layoutResourceId) {
             this.itemViewTypes.put(type, layoutResourceId);
@@ -162,6 +181,7 @@ public class SideOfToast implements Serializable {
         /**
          * Sets the width of the NavigationDrawer when open.
          * Default is 700dp
+         *
          * @param width
          * @return
          */
@@ -170,6 +190,7 @@ public class SideOfToast implements Serializable {
             return this;
         }
 
+
         public SideOfToast build() {
             if (itemViewTypes.size() < 1) {
 //                throw new NoItemViewTypesException();
@@ -177,6 +198,7 @@ public class SideOfToast implements Serializable {
             Collections.sort(items);
             return new SideOfToast(this);
         }
+
 //
 //        private void countItemViewTypes() {
 //            ArrayList<Integer> list = new ArrayList<>();
