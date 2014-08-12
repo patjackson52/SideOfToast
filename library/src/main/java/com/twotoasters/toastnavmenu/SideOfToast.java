@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +35,7 @@ public class SideOfToast implements Serializable {
     }
 
     private static final String TAG = "SideOfToast";
-    private static final int DEFAULT_WIDTH = 700;
+    private static final int DEFAULT_WIDTH = 300;
 
     private final int listLayoutId;
     private final HashMap itemViewTypes;
@@ -72,13 +73,15 @@ public class SideOfToast implements Serializable {
 
         width = (width == 0) ? DEFAULT_WIDTH : width;
 
+        width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                width, activity.getResources().getDisplayMetrics());
+
         DrawerLayout.LayoutParams lp = new DrawerLayout.LayoutParams(
                 width,
                 LinearLayout.LayoutParams.MATCH_PARENT);
         log(activity.getString(R.string.log_setting_width) + width);
 
         lp.gravity = Gravity.START;
-
 
         final FrameLayout fl = new FrameLayout(activity);
         fl.setId(R.id.drawer_contents);
@@ -179,10 +182,10 @@ public class SideOfToast implements Serializable {
         }
 
         /**
-         * Sets the width of the NavigationDrawer when open.
-         * Default is 700dp
+         * Sets the width in dp of the NavigationDrawer when open.
+         * Default is 300dp
          *
-         * @param width
+         * @param width dp
          * @return
          */
         public Builder setWidth(int width) {

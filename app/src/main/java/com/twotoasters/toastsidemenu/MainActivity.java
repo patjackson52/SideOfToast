@@ -38,13 +38,13 @@ public class MainActivity extends FragmentActivity {
                 new ToastMenuItem.Builder(0, 0)
                         .addText(R.id.navmenuitem_label, R.string.menu_title_messages)
                         .addImage(R.id.navmenuitem_icon, R.drawable.selector_messages_menu_icon)
-                        .build();
+                        .build(this);
 
         ToastMenuItem homeToastMenuItem =
                 new ToastMenuItem.Builder(1, 0)
                         .addText(R.id.navmenuitem_label, R.string.menu_title_home)
                         .addImage(R.id.navmenuitem_icon, R.drawable.selector_home_menu_icon)
-                        .build();
+                        .build(this);
 
         new SideOfToast.Builder(R.layout.navigation_drawer)
                 .addItemViewType(0, R.layout.navmenu_item)
@@ -59,46 +59,46 @@ public class MainActivity extends FragmentActivity {
                 new ToastMenuItem.Builder(0, 0)
                         .addText(R.id.navmenusection_label, R.string.parent_menu_title)
                         .setEnabled(false)
-                        .build();
+                        .build(this);
 
         ToastMenuItem homeToastMenuItem =
                 new ToastMenuItem.Builder(1, 1)
                         .addText(R.id.navmenuitem_label, R.string.menu_title_home)
                         .addImage(R.id.navmenuitem_icon, R.drawable.selector_home_menu_icon)
-                        .build();
+                        .build(this);
 
 
         ToastMenuItem needAccountSectionHeader =
                 new ToastMenuItem.Builder(2, 0)
                         .addText(R.id.navmenusection_label, R.string.menu_need_account_to_post_jobs)
                         .setEnabled(false)
-                        .build();
+                        .build(this);
 
 
         ToastMenuItem loginMenuItem =
                 new ToastMenuItem.Builder(3, 1)
                         .addText(R.id.navmenuitem_label, R.string.menu_login_title)
                         .addImage(R.id.navmenuitem_icon, R.drawable.selector_login_menu_icon)
-                        .build();
+                        .build(this);
 
         ToastMenuItem signupMenuItem =
                 new ToastMenuItem.Builder(4, 1)
                         .addText(R.id.navmenuitem_label, R.string.menu_sign_up_title)
                         .addImage(R.id.navmenuitem_icon, R.drawable.selector_join_menu_icon)
-                        .build();
+                        .build(this);
 
         ToastMenuItem areYouASitter =
                 new ToastMenuItem.Builder(5, 0)
                         .addText(R.id.navmenusection_label, R.string.menu_are_you_sitter_title)
                         .setEnabled(false)
-                        .build();
+                        .build(this);
 
 
         ToastMenuItem switchMenuItem =
                 new ToastMenuItem.Builder(6, 1)
                         .addText(R.id.navmenuitem_label, R.string.menu_switch_title)
                         .addImage(R.id.navmenuitem_icon, R.drawable.selector_switch_menu_icon)
-                        .build();
+                        .build(this);
 
         new SideOfToast.Builder(R.layout.navigation_drawer)
                 .addItemViewType(0, R.layout.navmenu_section)
@@ -159,7 +159,7 @@ public class MainActivity extends FragmentActivity {
                 .addMenuItem(helpItem)
                 .addMenuItem(myEbatesItem)
                 .addFooter(footer)
-                .setWidth(500)
+                .setWidth(300)
                 .build()
                 .create(this);
     }
