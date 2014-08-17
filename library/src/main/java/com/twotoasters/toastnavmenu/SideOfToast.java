@@ -29,6 +29,10 @@ public class SideOfToast implements Serializable {
         return footer.getLayoutId();
     }
 
+    public int getSelectedPosition() {
+        return selectedPosition;
+    }
+
 
     public interface ReadyForToast {
         void ToastMenuItemClicked(int position);
@@ -42,6 +46,7 @@ public class SideOfToast implements Serializable {
     private ToastMenuItem items[];
     private ToastMenuFooterItem footer;
     private int width;
+    private int selectedPosition;
     private static Level logLevel = Level.OFF;
     DrawerLayout drawerLayout;
 
@@ -57,13 +62,14 @@ public class SideOfToast implements Serializable {
         logLevel = (builder.logLevel != null)
                 ? builder.logLevel
                 : Level.OFF;
+        this.selectedPosition = builder.selectedPosition;
     }
 
     public static void log(String message) {
         Logger.getLogger(TAG).log(logLevel, message);
     }
 
-    public View create(FragmentActivity activity) {
+    public SideOfToast create(FragmentActivity activity) {
         final ViewGroup firstViewInLayout = (ViewGroup) ((ViewGroup) activity
                 .findViewById(android.R.id.content)).getChildAt(0);
         final ViewGroup activityRoot = (ViewGroup) ((ViewGroup) activity
@@ -107,9 +113,17 @@ public class SideOfToast implements Serializable {
         fragmentTransaction.commit();
 
         log(activity.getString(R.string.log_create_finished));
-        return drawerLayout;
+        return this;
     }
 
+
+    public void setSelected(int position) {
+       BusProvider.post(new SetSelectedItemEvent(position));
+    }
+
+    public void setSelectedPosition(int selectedPosition) {
+        this.selectedPosition = selectedPosition;
+    }
 
     private View inflateListView(FragmentActivity activity) {
         return activity.getLayoutInflater().inflate(listLayoutId, null);
@@ -145,7 +159,8 @@ public class SideOfToast implements Serializable {
         private ArrayList<ToastMenuItem> items;
         private ToastMenuFooterItem footerItem;
         private Level logLevel;
-        public int width;
+        private int width;
+        private int selectedPosition;
 
 
         public Builder(int listLayoutId) {
@@ -202,6 +217,11 @@ public class SideOfToast implements Serializable {
             return new SideOfToast(this);
         }
 
+        public Builder setSelected(int position) {
+            this.selectedPosition = position;
+            return this;
+        }
+
 //
 //        private void countItemViewTypes() {
 //            ArrayList<Integer> list = new ArrayList<>();
@@ -216,4 +236,15 @@ public class SideOfToast implements Serializable {
         }
     }
 
+    public class SetSelectedItemEvent {
+    private final int position;
+
+        public SetSelectedItemEvent(int position) {
+            this.position = position;
+        }
+
+        public int getPosition() {
+            return position;
+        }
+    }
 }

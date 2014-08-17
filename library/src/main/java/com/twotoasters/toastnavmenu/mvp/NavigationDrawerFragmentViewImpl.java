@@ -87,13 +87,13 @@ public class NavigationDrawerFragmentViewImpl extends FragmentViewImpl<Fragment>
         }
 
         if (drawerLayout != null) {
-            drawerLayout.closeDrawer(fragmentContainerView);
+//            drawerLayout.closeDrawer(fragmentContainerView);
         }
     }
 
 
     public void setUpNavDrawer() {
-        fragmentContainerView = getActivity().findViewById(R.id.navigation_drawer);
+        fragmentContainerView = getActivity().findViewById(R.id.drawer_layout);
 
         // set a custom shadow that overlays the main content when the drawer opens
 //        this.drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);

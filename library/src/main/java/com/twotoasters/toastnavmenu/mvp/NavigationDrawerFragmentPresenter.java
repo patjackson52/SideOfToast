@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.squareup.otto.Subscribe;
+import com.twotoasters.toastnavmenu.SideOfToast;
+
 /**
  * Created by patrickjackson on 4/23/14.
  */
@@ -21,6 +24,7 @@ public class NavigationDrawerFragmentPresenter {
         this.view = view;
         refreshNavMenu();
     }
+
 
     public Bundle onSaveInstanceState(Bundle outState) {
         outState.putInt(STATE_SELECTED_POSITION, model.getCurrentSelectedPosition());
@@ -50,11 +54,16 @@ public class NavigationDrawerFragmentPresenter {
     public void refreshNavMenu() {
         view.setMenuItems(model.getMenuItems(),
                 model.getSideOfToast());
-
         if (model.getFooterItem() != null) {
             view.setFooterLayout(model.getFooterItem());
-        }//        model.setCurrentSelectedPosition(apiCredentialsGateway.isAuthenticated() ? 0 : 1);
-//        view.setCurrentSelectedPosition(model.getCurrentSelectedPosition());
+        }
+        view.setCurrentSelectedPosition(model.getCurrentSelectedPosition());
+    }
+
+    @Subscribe
+    public void onSetSelectedItem(SideOfToast.SetSelectedItemEvent event) {
+        model.setCurrentSelectedPosition(event.getPosition());
+        view.setCurrentSelectedPosition(event.getPosition());
     }
 
 

@@ -146,12 +146,15 @@ public class MainActivity extends FragmentActivity {
 
         ToastMenuFooterItem footer =
                 new ToastMenuFooterItem.Builder(R.layout.ebates_view_sidebar_footer)
-                        .addText(R.id.txtSidebarName, R.string.ebates_sidebar_account_name, this)
-                        .addText(R.id.txtSidebarCashPaidValue, "Patrick Jackson")
+                        .addText(R.id.txtSidebarName, R.string.ebates_sidebar_account_name)
+                        .addText(R.id.txtSidebarCashPaidValue, "$158.22")
+                        .addText(R.id.txtSidebarCashPendingValue, "$1000.00")
+                        .addText(R.id.txtSidebarTotalCashValue, "$1158.22")
+                        .addText(R.id.txtSidebarNextCashValue, "9/06/2014")
                         .setEnabled(false)
-                        .build();
+                        .build(this);
 
-        new SideOfToast.Builder(R.layout.ebates_fragment_sidebar)
+        SideOfToast sideOfToast = new SideOfToast.Builder(R.layout.ebates_fragment_sidebar)
                 .addItemViewType(0, R.layout.ebates_item_sidebar)
                 .addMenuItem(featuredItem)
                 .addMenuItem(allStores)
@@ -160,8 +163,10 @@ public class MainActivity extends FragmentActivity {
                 .addMenuItem(myEbatesItem)
                 .addFooter(footer)
                 .setWidth(300)
+                .setSelected(2)
                 .build()
                 .create(this);
+
     }
 
     @Override

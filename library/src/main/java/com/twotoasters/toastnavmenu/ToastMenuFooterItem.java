@@ -31,14 +31,23 @@ public class ToastMenuFooterItem extends ValueMappedItem {
         private boolean enabled = true;
         private HashMap<Integer, Integer> imageMap;
         private HashMap<Integer, String> textMap;
+        private HashMap<Integer, Integer> textIdMap;
 
         public Builder(int layoutId) {
             this.imageMap = new HashMap();
             this.textMap = new HashMap();
+            this.textIdMap = new HashMap();
             this.layoutId = layoutId;
         }
 
-        public ToastMenuFooterItem build() {
+        public ToastMenuFooterItem build(Context context) {
+            for (Integer id : textIdMap.keySet()) {
+                try {
+                    textMap.put(id, context.getString(textIdMap.get(id)));
+                } catch (Exception e) {
+                    SideOfToast.log(context.getString(R.string.error_bad_string_map));
+                }
+            }
             return new ToastMenuFooterItem(this);
         }
 
@@ -53,8 +62,8 @@ public class ToastMenuFooterItem extends ValueMappedItem {
             return this;
         }
 
-        public Builder addText(Integer resourceId, Integer textResourceId, Context context) {
-            textMap.put(resourceId, context.getString(textResourceId));
+        public Builder addText(Integer resourceId, Integer textResourceId) {
+            textIdMap.put(resourceId, textResourceId);
             return this;
         }
 

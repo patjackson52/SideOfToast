@@ -14,6 +14,7 @@ public class NavigationDrawerFragmentModelImpl implements NavigationDrawerFragme
                                              int startPosition) {
         currentSelectedPosition = startPosition;
         this.sideOfToast = sideOfToast;
+        currentSelectedPosition = sideOfToast.getSelectedPosition();
 
     }
     @Override
