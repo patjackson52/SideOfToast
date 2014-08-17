@@ -2,10 +2,7 @@
 <resources>
 
     <string name="app_name">ToastSideMenu</string>
-    <string name="title_activity_main">MainActivity</string>
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-    <string name="menu_title_toasting">Toasting</string>
 
     <!--SitterCity-->
     <string name="menu_title_home">Home</string>
@@ -46,5 +43,8 @@
     <string name="ebates_item_help">Help</string>
     <string name="ebates_item_my_ebates">My Ebates</string>
     <string name="ebates_sidebar_account_name">Patrick Jackson</string>
+    <string name="sitter_city">SitterCity</string>
+    <string name="sittercity_title">SitterCity</string>
+    <string name="ebates_title">Ebates</string>
 
 </resources>

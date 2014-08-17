@@ -48,7 +48,6 @@ public class SideOfToast implements Serializable {
     private int width;
     private int selectedPosition;
     private static Level logLevel = Level.OFF;
-    DrawerLayout drawerLayout;
 
     private SideOfToast(Builder builder) {
         items = new ToastMenuItem[builder.items.size()];
@@ -75,7 +74,7 @@ public class SideOfToast implements Serializable {
         final ViewGroup activityRoot = (ViewGroup) ((ViewGroup) activity
                 .findViewById(android.R.id.content));
 
-        drawerLayout = new DrawerLayout(activity);
+        DrawerLayout drawerLayout = new DrawerLayout(activity);
 
         width = (width == 0) ? DEFAULT_WIDTH : width;
 
@@ -139,10 +138,6 @@ public class SideOfToast implements Serializable {
 
     public ToastMenuItem[] getItems() {
         return items;
-    }
-
-    public DrawerLayout getDrawerLayout() {
-        return drawerLayout;
     }
 
     public int getLayoutForType(int type) {

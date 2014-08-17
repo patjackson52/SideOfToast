@@ -1,6 +1,7 @@
 package com.twotoasters.toastsidemenu;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
@@ -13,11 +14,10 @@ import android.widget.Toast;
 import com.squareup.otto.Subscribe;
 import com.twotoasters.toastnavmenu.BusProvider;
 import com.twotoasters.toastnavmenu.SideOfToast;
-import com.twotoasters.toastnavmenu.ToastMenuFooterItem;
 import com.twotoasters.toastnavmenu.ToastMenuItem;
 import com.twotoasters.toastnavmenu.mvp.NavigationDrawerFragmentViewImpl;
 
-public class MainActivity extends FragmentActivity {
+public class SitterCityActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,32 +26,11 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
+                    .add(R.id.container, new SCFragmentFragment())
                     .commit();
         }
 
-        addEbatesMenu();
-    }
-
-    private void addNavMenu() {
-        ToastMenuItem messagesToastMenuItem =
-                new ToastMenuItem.Builder(0, 0)
-                        .addText(R.id.navmenuitem_label, R.string.menu_title_messages)
-                        .addImage(R.id.navmenuitem_icon, R.drawable.selector_messages_menu_icon)
-                        .build(this);
-
-        ToastMenuItem homeToastMenuItem =
-                new ToastMenuItem.Builder(1, 0)
-                        .addText(R.id.navmenuitem_label, R.string.menu_title_home)
-                        .addImage(R.id.navmenuitem_icon, R.drawable.selector_home_menu_icon)
-                        .build(this);
-
-        new SideOfToast.Builder(R.layout.navigation_drawer)
-                .addItemViewType(0, R.layout.navmenu_item)
-                .addMenuItem(homeToastMenuItem)
-                .addMenuItem(messagesToastMenuItem)
-                .build()
-                .create(this);
+        addUnauthParentMenu();
     }
 
     private void addUnauthParentMenu() {
@@ -116,59 +95,6 @@ public class MainActivity extends FragmentActivity {
     }
 
 
-    private void addEbatesMenu() {
-        ToastMenuItem featuredItem =
-                new ToastMenuItem.Builder(0, 0)
-                        .addText(R.id.txtSidebar, R.string.ebates_item_featured)
-                        .addImage(R.id.navmenuitem_icon, R.drawable.selector_ebates_menu_featured)
-                        .build(this);
-        ToastMenuItem allStores =
-                new ToastMenuItem.Builder(1, 0)
-                        .addText(R.id.txtSidebar, R.string.ebates_item_all_stores)
-                        .addImage(R.id.navmenuitem_icon, R.drawable.selector_ebates_menu_all_stores)
-                        .build(this);
-        ToastMenuItem tafItem =
-                new ToastMenuItem.Builder(1, 0)
-                        .addText(R.id.txtSidebar, R.string.ebates_item_tell_friend)
-                        .addImage(R.id.navmenuitem_icon, R.drawable.selector_ebates_menu_taf)
-                        .build(this);
-        ToastMenuItem helpItem =
-                new ToastMenuItem.Builder(1, 0)
-                        .addText(R.id.txtSidebar, R.string.ebates_item_help)
-                        .addImage(R.id.navmenuitem_icon, R.drawable.selector_ebates_menu_help)
-                        .build(this);
-        ToastMenuItem myEbatesItem =
-                new ToastMenuItem.Builder(1, 0)
-                        .addText(R.id.txtSidebar, R.string.ebates_item_my_ebates)
-                        .addImage(R.id.navmenuitem_icon, R.drawable.selector_ebates_myebates)
-                        .build(this);
-
-
-        ToastMenuFooterItem footer =
-                new ToastMenuFooterItem.Builder(R.layout.ebates_view_sidebar_footer)
-                        .addText(R.id.txtSidebarName, R.string.ebates_sidebar_account_name)
-                        .addText(R.id.txtSidebarCashPaidValue, "$158.22")
-                        .addText(R.id.txtSidebarCashPendingValue, "$1000.00")
-                        .addText(R.id.txtSidebarTotalCashValue, "$1158.22")
-                        .addText(R.id.txtSidebarNextCashValue, "9/06/2014")
-                        .setEnabled(false)
-                        .build(this);
-
-        SideOfToast sideOfToast = new SideOfToast.Builder(R.layout.ebates_fragment_sidebar)
-                .addItemViewType(0, R.layout.ebates_item_sidebar)
-                .addMenuItem(featuredItem)
-                .addMenuItem(allStores)
-                .addMenuItem(tafItem)
-                .addMenuItem(helpItem)
-                .addMenuItem(myEbatesItem)
-                .addFooter(footer)
-                .setWidth(300)
-                .setSelected(2)
-                .build()
-                .create(this);
-
-    }
-
     @Override
     protected void onDestroy() {
         BusProvider.unregister(this);
@@ -177,19 +103,15 @@ public class MainActivity extends FragmentActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.sittercity_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar addMenuItem clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.ebates) {
+            startActivity(new Intent(this, EbatesActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -198,9 +120,9 @@ public class MainActivity extends FragmentActivity {
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment {
+    public static class SCFragmentFragment extends Fragment {
 
-        public PlaceholderFragment() {
+        public SCFragmentFragment() {
         }
 
         @Override

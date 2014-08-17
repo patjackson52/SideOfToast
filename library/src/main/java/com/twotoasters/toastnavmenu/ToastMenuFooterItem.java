@@ -2,12 +2,14 @@ package com.twotoasters.toastnavmenu;
 
 import android.content.Context;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 /**
  * Created by patrickjackson on 8/7/14.
  */
-public class ToastMenuFooterItem extends ValueMappedItem {
+public class ToastMenuFooterItem extends ValueMappedItem
+        implements Serializable {
     private final int layoutId;
     private final boolean enabled;
 

@@ -3,12 +3,14 @@ package com.twotoasters.toastnavmenu;
 import android.content.Context;
 import android.util.Log;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 /**
  * Created by patrickjackson on 7/29/14.
  */
-public class ToastMenuItem extends ValueMappedItem implements Comparable<ToastMenuItem> {
+public class ToastMenuItem extends ValueMappedItem
+        implements Comparable<ToastMenuItem>, Serializable {
     private final int menuId;
     private final int itemViewType;
     private int titleResId;
