@@ -66,5 +66,31 @@ public class NavigationDrawerFragmentPresenter {
         view.setCurrentSelectedPosition(event.getPosition());
     }
 
+    @Subscribe
+    public void onSetResource(SetResourceEvent event) {
+        if (event.str != null) {
+            model.updateSideOfToast(event.menuId, event.layoutId, event.str);
+        } else {
+            model.updateSideOfToast(event.menuId, event.layoutId, event.resourceId);
+        }
+        refreshNavMenu();
+    }
+
+    public static class SetResourceEvent {
+        private int menuId, layoutId, resourceId;
+        private String str;
+
+        public SetResourceEvent(int menuId, int layoutId, int resourceId) {
+            this.layoutId = layoutId;
+            this.resourceId = resourceId;
+            this.menuId = menuId;
+        }
+
+        public SetResourceEvent(int menuId, int layoutId, String str) {
+            this.menuId = menuId;
+            this.layoutId = layoutId;
+            this.str = str;
+        }
+    }
 
 }

@@ -13,9 +13,8 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,15 +22,6 @@ import java.util.logging.Logger;
  * Created by patrickjackson on 7/27/14.
  */
 public class SideOfToast implements Serializable {
-
-
-    public int getFooterLayout() {
-        return footer.getLayoutId();
-    }
-
-    public int getSelectedPosition() {
-        return selectedPosition;
-    }
 
 
     public interface ReadyForToast {
@@ -43,15 +33,14 @@ public class SideOfToast implements Serializable {
 
     private final int listLayoutId;
     private final HashMap itemViewTypes;
-    private ToastMenuItem items[];
+    private LinkedHashMap<Integer, ToastMenuItem> items;
     private ToastMenuFooterItem footer;
     private int width;
     private int selectedPosition;
     private static Level logLevel = Level.OFF;
 
     private SideOfToast(Builder builder) {
-        items = new ToastMenuItem[builder.items.size()];
-        builder.items.toArray(items);
+        items = builder.items;
 
         listLayoutId = builder.listLayoutId;
         this.itemViewTypes = builder.itemViewTypes;
@@ -77,7 +66,6 @@ public class SideOfToast implements Serializable {
         DrawerLayout drawerLayout = new DrawerLayout(activity);
 
         width = (width == 0) ? DEFAULT_WIDTH : width;
-
         width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 width, activity.getResources().getDisplayMetrics());
 
@@ -117,7 +105,7 @@ public class SideOfToast implements Serializable {
 
 
     public void setSelected(int position) {
-       BusProvider.post(new SetSelectedItemEvent(position));
+        BusProvider.post(new SetSelectedItemEvent(position));
     }
 
     public void setSelectedPosition(int selectedPosition) {
@@ -136,7 +124,7 @@ public class SideOfToast implements Serializable {
         return itemViewTypes;
     }
 
-    public ToastMenuItem[] getItems() {
+    public HashMap<Integer, ToastMenuItem> getItems() {
         return items;
     }
 
@@ -148,10 +136,54 @@ public class SideOfToast implements Serializable {
         return footer;
     }
 
+    public int getFooterLayout() {
+        return footer.getLayoutId();
+    }
+
+    public int getSelectedPosition() {
+        return selectedPosition;
+    }
+
+
+    public void updateResource(int id, int layoutId, String str) {
+        if (footer.getMenuId() == id) {
+            footer.updateTextMap(layoutId, str);
+        } else {
+            ToastMenuItem tmp = items.get(Integer.valueOf(id));
+            if (tmp != null) {
+                tmp.updateTextMap(layoutId, str);
+            }
+        }
+
+    }
+
+    public void updateImageResource(int menuId, int layoutId, int resourceId) {
+        if (footer.getMenuId() == menuId) {
+            footer.updateImageMap(layoutId, resourceId);
+        } else {
+            ToastMenuItem tmp = items.get(Integer.valueOf(menuId));
+            if (tmp != null) {
+                tmp.updateImageMap(layoutId, resourceId);
+            }
+        }
+    }
+
+    private void updateTextResource(int layoutId, int resourceId) {
+
+    }
+
+    private void updateImageResource(int layoutId, int resourceId) {
+
+    }
+
+    /**
+     * ******************** BEGIN BUILDER CLASS **************************************
+     */
+
     public static class Builder {
         private final int listLayoutId;
         private HashMap itemViewTypes;
-        private ArrayList<ToastMenuItem> items;
+        private LinkedHashMap<Integer, ToastMenuItem> items;
         private ToastMenuFooterItem footerItem;
         private Level logLevel;
         private int width;
@@ -160,12 +192,18 @@ public class SideOfToast implements Serializable {
 
         public Builder(int listLayoutId) {
             this.listLayoutId = listLayoutId;
-            items = new ArrayList<>();
+            items = new LinkedHashMap<>();
             itemViewTypes = new HashMap();
         }
 
+        /**
+         * Adds ToastMenuItem to the Side Menu.  Will display in the order they were added.
+         *
+         * @param item
+         * @return
+         */
         public Builder addMenuItem(ToastMenuItem item) {
-            items.add(item);
+            items.put(item.getMenuId(), item);
             return this;
         }
 
@@ -208,7 +246,6 @@ public class SideOfToast implements Serializable {
             if (itemViewTypes.size() < 1) {
 //                throw new NoItemViewTypesException();
             }
-            Collections.sort(items);
             return new SideOfToast(this);
         }
 
@@ -232,7 +269,7 @@ public class SideOfToast implements Serializable {
     }
 
     public class SetSelectedItemEvent {
-    private final int position;
+        private final int position;
 
         public SetSelectedItemEvent(int position) {
             this.position = position;

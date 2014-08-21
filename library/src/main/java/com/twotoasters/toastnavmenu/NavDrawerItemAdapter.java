@@ -22,7 +22,7 @@ public class NavDrawerItemAdapter extends ArrayAdapter<ToastMenuItem> {
                                 int textViewResourceId,
                                 SideOfToast sideOfToast) {
 
-        super(context, textViewResourceId, sideOfToast.getItems());
+        super(context, textViewResourceId, Utils.getArrayOfMenuItems(sideOfToast));
         this.inflater = LayoutInflater.from(context);
         this.sideOfToast = sideOfToast;
     }

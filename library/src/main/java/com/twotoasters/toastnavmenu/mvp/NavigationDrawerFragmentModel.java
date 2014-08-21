@@ -24,4 +24,8 @@ public interface NavigationDrawerFragmentModel {
     SideOfToast getSideOfToast();
 
     ToastMenuFooterItem getFooterItem();
+
+    void updateSideOfToast(int menuId, int layoutId, String str);
+
+    void updateSideOfToast(int menuId, int layoutId, int resourceId);
 }

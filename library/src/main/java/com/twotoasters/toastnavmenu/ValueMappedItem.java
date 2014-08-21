@@ -40,6 +40,24 @@ public abstract class ValueMappedItem {
         }
     }
 
+    public void updateTextMap(int layoutId, String str) {
+        for (int id : getTextMap().keySet()) {
+            if (id == layoutId) {
+                getTextMap().put(layoutId, str);
+                break;
+            }
+
+        }
+    }
+
+    public void updateImageMap(int layoutId, int resourceId) {
+            for (int id : getImageMap().keySet()) {
+            if (id == layoutId) {
+                getImageMap().put(layoutId, resourceId);
+                break;
+            }
+        }
+    }
 
     public String getStringForView(Integer viewId) {
         return textMap.get(viewId);
@@ -64,4 +82,5 @@ public abstract class ValueMappedItem {
     public void setTextMap(HashMap<Integer, String> textMap) {
         this.textMap = textMap;
     }
+
 }

@@ -46,5 +46,8 @@
     <string name="sitter_city">SitterCity</string>
     <string name="sittercity_title">SitterCity</string>
     <string name="ebates_title">Ebates</string>
+    <string name="ebates_context">Ebates</string>
+    <string name="ebates_cash_pending">Change cash pending</string>
+    <string name="ebates_btn_change_featured_image">Change Featured Icon</string>
 
 </resources>

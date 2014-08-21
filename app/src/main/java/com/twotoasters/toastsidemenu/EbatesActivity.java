@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.squareup.otto.Subscribe;
@@ -16,9 +17,17 @@ import com.twotoasters.toastnavmenu.BusProvider;
 import com.twotoasters.toastnavmenu.SideOfToast;
 import com.twotoasters.toastnavmenu.ToastMenuFooterItem;
 import com.twotoasters.toastnavmenu.ToastMenuItem;
+import com.twotoasters.toastnavmenu.mvp.NavigationDrawerFragmentPresenter;
 import com.twotoasters.toastnavmenu.mvp.NavigationDrawerFragmentViewImpl;
 
 public class EbatesActivity extends FragmentActivity {
+
+    public static final int FEATURED_ID = 0;
+    public static final int ALL_STORES_ID = 1;
+    public static final int TELL_A_FRIEND_ID = 2;
+    public static final int HELP_ID = 3;
+    public static final int MY_EBATES_ID = 4;
+    public static final int FOOTER_ID = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,27 +45,27 @@ public class EbatesActivity extends FragmentActivity {
 
     private void addEbatesMenu() {
         ToastMenuItem featuredItem =
-                new ToastMenuItem.Builder(0, 0)
+                new ToastMenuItem.Builder(FEATURED_ID, 0)
                         .addText(R.id.txtSidebar, R.string.ebates_item_featured)
                         .addImage(R.id.navmenuitem_icon, R.drawable.selector_ebates_menu_featured)
                         .build(this);
         ToastMenuItem allStores =
-                new ToastMenuItem.Builder(1, 0)
+                new ToastMenuItem.Builder(ALL_STORES_ID, 0)
                         .addText(R.id.txtSidebar, R.string.ebates_item_all_stores)
                         .addImage(R.id.navmenuitem_icon, R.drawable.selector_ebates_menu_all_stores)
                         .build(this);
         ToastMenuItem tafItem =
-                new ToastMenuItem.Builder(1, 0)
+                new ToastMenuItem.Builder(TELL_A_FRIEND_ID, 0)
                         .addText(R.id.txtSidebar, R.string.ebates_item_tell_friend)
                         .addImage(R.id.navmenuitem_icon, R.drawable.selector_ebates_menu_taf)
                         .build(this);
         ToastMenuItem helpItem =
-                new ToastMenuItem.Builder(1, 0)
+                new ToastMenuItem.Builder(HELP_ID, 0)
                         .addText(R.id.txtSidebar, R.string.ebates_item_help)
                         .addImage(R.id.navmenuitem_icon, R.drawable.selector_ebates_menu_help)
                         .build(this);
         ToastMenuItem myEbatesItem =
-                new ToastMenuItem.Builder(1, 0)
+                new ToastMenuItem.Builder(MY_EBATES_ID, 0)
                         .addText(R.id.txtSidebar, R.string.ebates_item_my_ebates)
                         .addImage(R.id.navmenuitem_icon, R.drawable.selector_ebates_myebates)
                         .build(this);
@@ -64,6 +73,7 @@ public class EbatesActivity extends FragmentActivity {
 
         ToastMenuFooterItem footer =
                 new ToastMenuFooterItem.Builder(R.layout.ebates_view_sidebar_footer)
+                        .setMenuId(FOOTER_ID)
                         .addText(R.id.txtSidebarName, R.string.ebates_sidebar_account_name)
                         .addText(R.id.txtSidebarCashPaidValue, "$158.22")
                         .addText(R.id.txtSidebarCashPendingValue, "$1000.00")
@@ -81,7 +91,7 @@ public class EbatesActivity extends FragmentActivity {
                 .addMenuItem(myEbatesItem)
                 .addFooter(footer)
                 .setWidth(300)
-                .setSelected(2)
+                .setSelected(0)
                 .build()
                 .create(this);
 
@@ -109,9 +119,6 @@ public class EbatesActivity extends FragmentActivity {
     }
 
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
     public static class EbatesFragment extends Fragment {
 
         public EbatesFragment() {
@@ -120,7 +127,30 @@ public class EbatesActivity extends FragmentActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_ebates, container, false);
+            ((Button) rootView.findViewById(R.id.btn_change_cash)).setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            BusProvider.post(
+                                    new NavigationDrawerFragmentPresenter.SetResourceEvent(
+                                            FOOTER_ID,
+                                            R.id.txtSidebarCashPendingValue,
+                                            "$1500"));
+                        }
+                    });
+
+            ((Button) rootView.findViewById(R.id.btn_change_icon)).setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            BusProvider.post(
+                                    new NavigationDrawerFragmentPresenter.SetResourceEvent(
+                                            FEATURED_ID,
+                                            R.id.navmenuitem_icon,
+                                            R.drawable.selector_ebates_menu_help));
+                        }
+                    });
             return rootView;
         }
     }
@@ -128,7 +158,8 @@ public class EbatesActivity extends FragmentActivity {
     @Subscribe
     public void onToastMenuItemClick(
             NavigationDrawerFragmentViewImpl.ToastMenuItemClickEvent event) {
-        Toast.makeText(this, "Item " + event.getPosition() + " clicked.", Toast.LENGTH_SHORT)
+        Toast.makeText(this, "Menu Item Id: " + event.getMenuId() + ", position: "
+                + event.getPosition() + " clicked.", Toast.LENGTH_SHORT)
                 .show();
     }
 }

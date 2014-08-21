@@ -11,16 +11,22 @@ import java.util.HashMap;
 public class ToastMenuFooterItem extends ValueMappedItem
         implements Serializable {
     private final int layoutId;
+    private int menuId;
     private final boolean enabled;
 
     private ToastMenuFooterItem(Builder builder) {
         super(builder.textMap, builder.imageMap);
         this.layoutId = builder.layoutId;
         this.enabled = builder.enabled;
+        this.menuId = builder.menuId;
     }
 
     public int getLayoutId() {
         return layoutId;
+    }
+
+    public int getMenuId() {
+        return menuId;
     }
 
     public boolean isEnabled() {
@@ -30,6 +36,7 @@ public class ToastMenuFooterItem extends ValueMappedItem
 
     public static class Builder {
         private final int layoutId;
+        private int menuId;
         private boolean enabled = true;
         private HashMap<Integer, Integer> imageMap;
         private HashMap<Integer, String> textMap;
@@ -40,6 +47,11 @@ public class ToastMenuFooterItem extends ValueMappedItem
             this.textMap = new HashMap();
             this.textIdMap = new HashMap();
             this.layoutId = layoutId;
+        }
+
+        public Builder setMenuId(int menuId) {
+            this.menuId = menuId;
+            return this;
         }
 
         public ToastMenuFooterItem build(Context context) {

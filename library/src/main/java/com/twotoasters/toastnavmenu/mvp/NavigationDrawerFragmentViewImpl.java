@@ -25,6 +25,7 @@ public class NavigationDrawerFragmentViewImpl extends FragmentViewImpl<Fragment>
     private DrawerLayout drawerLayout;
     private ListView drawerListView;
     private View fragmentContainerView;
+    private View footer;
 
     /**
      * Helper component that ties the action bar to the navigation drawer.
@@ -43,7 +44,9 @@ public class NavigationDrawerFragmentViewImpl extends FragmentViewImpl<Fragment>
         drawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                BusProvider.post(new ToastMenuItemClickEvent(position));
+                BusProvider.post(new ToastMenuItemClickEvent(position,
+                        ((ToastMenuItem) drawerListView
+                                .getAdapter().getItem(position)).getMenuId()));
             }
         });
 
@@ -56,10 +59,14 @@ public class NavigationDrawerFragmentViewImpl extends FragmentViewImpl<Fragment>
 
     @Override
     public void setFooterLayout(ToastMenuFooterItem footerItem) {
-        View footer = View.inflate(getActivity(),
-               footerItem.getLayoutId(),
-               null);
-       drawerListView.addFooterView(footer, null, footerItem.isEnabled());
+        if (footer != null) {
+            drawerListView.removeFooterView(footer);
+        }
+
+        footer = View.inflate(getActivity(),
+                footerItem.getLayoutId(),
+                null);
+        drawerListView.addFooterView(footer, null, footerItem.isEnabled());
 
         footerItem.setImageAndText(footer, -1);
     }
@@ -154,14 +161,19 @@ public class NavigationDrawerFragmentViewImpl extends FragmentViewImpl<Fragment>
     }
 
     public static class ToastMenuItemClickEvent {
-        final int position;
+        final int position, menuId;
 
-        public ToastMenuItemClickEvent(int position) {
+        public ToastMenuItemClickEvent(int position, int menuId) {
             this.position = position;
+            this.menuId = menuId;
         }
 
         public int getPosition() {
             return position;
+        }
+
+        public int getMenuId() {
+            return menuId;
         }
     }
 }

@@ -19,6 +19,17 @@ import com.twotoasters.toastnavmenu.mvp.NavigationDrawerFragmentViewImpl;
 
 public class SitterCityActivity extends FragmentActivity {
 
+    public static final int TITLE_TYPE = 0;
+    public static final int ITEM_TYPE = 1;
+
+    public static final int TITLE_ID = 0;
+    public static final int HOME_ID = 1;
+    public static final int NEED_ACCOUNT_ID = 2;
+    public static final int LOGIN_ID = 3;
+    public static final int SIGN_UP_ID = 4;
+    public static final int ARE_YOU_SITTER_ID = 5;
+    public static final int SWITCH_ID = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,46 +46,46 @@ public class SitterCityActivity extends FragmentActivity {
 
     private void addUnauthParentMenu() {
         ToastMenuItem parentHomeTitleToastMenuItem =
-                new ToastMenuItem.Builder(0, 0)
+                new ToastMenuItem.Builder(TITLE_ID, TITLE_TYPE)
                         .addText(R.id.navmenusection_label, R.string.parent_menu_title)
                         .setEnabled(false)
                         .build(this);
 
         ToastMenuItem homeToastMenuItem =
-                new ToastMenuItem.Builder(1, 1)
+                new ToastMenuItem.Builder(HOME_ID, ITEM_TYPE)
                         .addText(R.id.navmenuitem_label, R.string.menu_title_home)
                         .addImage(R.id.navmenuitem_icon, R.drawable.selector_home_menu_icon)
                         .build(this);
 
 
         ToastMenuItem needAccountSectionHeader =
-                new ToastMenuItem.Builder(2, 0)
+                new ToastMenuItem.Builder(NEED_ACCOUNT_ID, TITLE_TYPE)
                         .addText(R.id.navmenusection_label, R.string.menu_need_account_to_post_jobs)
                         .setEnabled(false)
                         .build(this);
 
 
         ToastMenuItem loginMenuItem =
-                new ToastMenuItem.Builder(3, 1)
+                new ToastMenuItem.Builder(LOGIN_ID, ITEM_TYPE)
                         .addText(R.id.navmenuitem_label, R.string.menu_login_title)
                         .addImage(R.id.navmenuitem_icon, R.drawable.selector_login_menu_icon)
                         .build(this);
 
         ToastMenuItem signupMenuItem =
-                new ToastMenuItem.Builder(4, 1)
+                new ToastMenuItem.Builder(SIGN_UP_ID, ITEM_TYPE)
                         .addText(R.id.navmenuitem_label, R.string.menu_sign_up_title)
                         .addImage(R.id.navmenuitem_icon, R.drawable.selector_join_menu_icon)
                         .build(this);
 
         ToastMenuItem areYouASitter =
-                new ToastMenuItem.Builder(5, 0)
+                new ToastMenuItem.Builder(ARE_YOU_SITTER_ID, TITLE_TYPE)
                         .addText(R.id.navmenusection_label, R.string.menu_are_you_sitter_title)
                         .setEnabled(false)
                         .build(this);
 
 
         ToastMenuItem switchMenuItem =
-                new ToastMenuItem.Builder(6, 1)
+                new ToastMenuItem.Builder(SWITCH_ID, ITEM_TYPE)
                         .addText(R.id.navmenuitem_label, R.string.menu_switch_title)
                         .addImage(R.id.navmenuitem_icon, R.drawable.selector_switch_menu_icon)
                         .build(this);
@@ -82,14 +93,15 @@ public class SitterCityActivity extends FragmentActivity {
         new SideOfToast.Builder(R.layout.navigation_drawer)
                 .addItemViewType(0, R.layout.navmenu_section)
                 .addItemViewType(1, R.layout.navmenu_item)
-                .addMenuItem(homeToastMenuItem)
                 .addMenuItem(parentHomeTitleToastMenuItem)
+                .addMenuItem(homeToastMenuItem)
                 .addMenuItem(needAccountSectionHeader)
                 .addMenuItem(loginMenuItem)
                 .addMenuItem(signupMenuItem)
                 .addMenuItem(areYouASitter)
                 .addMenuItem(switchMenuItem)
-                .setWidth(800)
+                .setSelected(1)
+                .setWidth(300)
                 .build()
                 .create(this);
     }
@@ -128,7 +140,7 @@ public class SitterCityActivity extends FragmentActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_ebates, container, false);
             return rootView;
         }
     }
@@ -136,7 +148,8 @@ public class SitterCityActivity extends FragmentActivity {
     @Subscribe
     public void onToastMenuItemClick(
             NavigationDrawerFragmentViewImpl.ToastMenuItemClickEvent event) {
-        Toast.makeText(this, "Item " + event.getPosition() + " clicked.", Toast.LENGTH_SHORT)
+        Toast.makeText(this, "Menu Item Id: " + event.getMenuId() + ", position: "
+                + event.getPosition() + " clicked.", Toast.LENGTH_SHORT)
                 .show();
     }
 }

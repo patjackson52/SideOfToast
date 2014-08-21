@@ -18,7 +18,7 @@ public class ToastMenuItem extends ValueMappedItem
 
     private ToastMenuItem(Builder builder) {
         super(builder.textMap, builder.imageMap);
-        menuId = builder.position;
+        menuId = builder.menuId;
         titleResId = builder.titleResId;
         enabled = builder.enabled;
         itemViewType = builder.itemViewType;
@@ -41,14 +41,20 @@ public class ToastMenuItem extends ValueMappedItem
         return enabled;
     }
 
+    public int getMenuId() { return menuId; }
+
     @Override
     public int compareTo(ToastMenuItem another) {
         return this.getPosition() - another.getPosition();
     }
 
+    public void updateTextMap(int layoutId, String str) {
+
+    }
+
 
     public static class Builder {
-        private final int position;
+        private int menuId;
         private final int itemViewType;
         private int titleResId;
         private HashMap<Integer, Integer> imageMap;
@@ -56,12 +62,17 @@ public class ToastMenuItem extends ValueMappedItem
         private HashMap<Integer, Integer> textIdMap;
         private boolean enabled = true;
 
-        public Builder(int position, int itemViewType) {
-            this.position = position;
+        public Builder(int menuId, int itemViewType) {
+            this.menuId = menuId;
             this.itemViewType = itemViewType;
             this.imageMap = new HashMap();
             this.textMap = new HashMap();
             this.textIdMap = new HashMap();
+        }
+
+        public Builder setMenuId(int menuId) {
+            this.menuId = menuId;
+            return this;
         }
 
         public Builder addImage(int resourceId, int drawableId) {

@@ -3,6 +3,7 @@ package com.twotoasters.toastnavmenu.mvp;
 import com.twotoasters.toastnavmenu.ToastMenuFooterItem;
 import com.twotoasters.toastnavmenu.ToastMenuItem;
 import com.twotoasters.toastnavmenu.SideOfToast;
+import com.twotoasters.toastnavmenu.Utils;
 
 public class NavigationDrawerFragmentModelImpl implements NavigationDrawerFragmentModel {
 
@@ -39,7 +40,7 @@ public class NavigationDrawerFragmentModelImpl implements NavigationDrawerFragme
 
     @Override
     public ToastMenuItem[] getMenuItems() {
-        return sideOfToast.getItems();
+        return Utils.getArrayOfMenuItems(sideOfToast);
     }
 
     @Override
@@ -51,4 +52,16 @@ public class NavigationDrawerFragmentModelImpl implements NavigationDrawerFragme
     public ToastMenuFooterItem getFooterItem() {
         return sideOfToast.getFooterItem();
     }
+
+    @Override
+    public void updateSideOfToast(int menuId, int layoutId, String str) {
+       sideOfToast.updateResource(menuId, layoutId, str);
+    }
+
+    @Override
+    public void updateSideOfToast(int menuId, int layoutId, int resourceId) {
+        sideOfToast.updateImageResource(menuId, layoutId, resourceId);
+
+    }
+
 }
