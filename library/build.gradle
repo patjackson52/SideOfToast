@@ -11,16 +11,26 @@ buildscript {
 apply plugin: 'android-sdk-manager'
 apply plugin: 'com.android.library'
 
+libVersionName = "0.1"
+archivesBaseName = "sideoftoast"
+version = libVersionName
+
+def gitSha = 'git rev-parse --short HEAD'.execute([], project.rootDir).text.trim()
+def buildTime = new Date().format("yyyy-MM-dd'T'HH:mm'Z'", TimeZone.getTimeZone("UTC"))
 android {
     compileSdkVersion 20
     buildToolsVersion "20.0.0"
 
     defaultConfig {
-        applicationId "com.twotoasters.toastnavmenu"
+        applicationId "com.twotoasters.sideoftoast"
         minSdkVersion 14
         targetSdkVersion 20
         versionCode 1
-        versionName "0.1"
+        versionName libVersionName
+
+
+        buildConfigField "String", "GIT_SHA", "\"${gitSha}\""
+        buildConfigField "String", "BUILD_TIME", "\"${buildTime}\""
     }
 
     compileOptions {
@@ -28,9 +38,17 @@ android {
         targetCompatibility JavaVersion.VERSION_1_7
     }
     buildTypes {
-        release {
+        debug {
+            versionNameSuffix '-dev'
             runProguard false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable true
+            signingConfig signingConfigs.debug
+        }
+
+        release {
+            versionNameSuffix '-release'
+            runProguard false
+            debuggable false
         }
     }
 }
