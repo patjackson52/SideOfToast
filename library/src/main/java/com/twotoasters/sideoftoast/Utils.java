@@ -1,8 +1,5 @@
-package com.twotoasters.toastnavmenu;
+package com.twotoasters.sideoftoast;
 
-/**
- * Created by patrickjackson on 8/20/14.
- */
 public final class Utils {
     private Utils() {
     }

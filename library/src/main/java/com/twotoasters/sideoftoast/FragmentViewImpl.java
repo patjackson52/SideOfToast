@@ -1,4 +1,4 @@
-package com.twotoasters.toastnavmenu;
+package com.twotoasters.sideoftoast;
 
 import android.app.ActionBar;
 import android.app.Activity;

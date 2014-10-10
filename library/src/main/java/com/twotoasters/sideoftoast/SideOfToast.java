@@ -1,4 +1,4 @@
-package com.twotoasters.toastnavmenu;
+package com.twotoasters.sideoftoast;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -19,7 +19,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Created by patrickjackson on 7/27/14.
+ * Holds data for the Side Nav and creates the Navigation Drawer
+ * when when create() is called.
  */
 public class SideOfToast implements Serializable {
 
@@ -57,6 +58,12 @@ public class SideOfToast implements Serializable {
         Logger.getLogger(TAG).log(logLevel, message);
     }
 
+    /**
+     * Inserts a NavigationDrawer View in the view hierarchy for the supplied activity.
+     * Then attaches a fragment containing the Nav Menu
+     * @param activity
+     * @return SideOfToast
+     */
     public SideOfToast create(FragmentActivity activity) {
         final ViewGroup firstViewInLayout = (ViewGroup) ((ViewGroup) activity
                 .findViewById(android.R.id.content)).getChildAt(0);
@@ -96,7 +103,7 @@ public class SideOfToast implements Serializable {
         Fragment fragment = (Fragment) NavigationDrawerFragment.getInstance(this);
         fragmentTransaction.add(R.id.drawer_contents,
                 fragment,
-                "NavMenu");
+                NavigationDrawerFragment.TAG);
         fragmentTransaction.commit();
 
         log(activity.getString(R.string.log_create_finished));

@@ -1,4 +1,4 @@
-package com.twotoasters.toastnavmenu;
+package com.twotoasters.sideoftoast;
 
 
 import android.content.res.Configuration;
@@ -10,10 +10,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.twotoasters.toastnavmenu.mvp.NavigationDrawerFragmentModelImpl;
-import com.twotoasters.toastnavmenu.mvp.NavigationDrawerFragmentPresenter;
-import com.twotoasters.toastnavmenu.mvp.NavigationDrawerFragmentViewImpl;
 
 
 public class NavigationDrawerFragment extends Fragment {
@@ -72,6 +68,7 @@ public class NavigationDrawerFragment extends Fragment {
         }
         super.onPrepareOptionsMenu(menu);
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -98,20 +95,17 @@ public class NavigationDrawerFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (presenter.onOptionsItemSelected(item)) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        return presenter.onOptionsItemSelected(item)
+                || super.onOptionsItemSelected(item);
     }
 
     private NavigationDrawerFragmentPresenter createPresenter() {
         int startPosition = 0;
         return new NavigationDrawerFragmentPresenter(
-                new NavigationDrawerFragmentModelImpl(
+                new NavigationDrawerFragmentModel(
                         (SideOfToast) getArguments().getSerializable(TOASTER_KEY),
                         startPosition),
-                new NavigationDrawerFragmentViewImpl(this));
+                new NavigationDrawerFragmentView(this));
     }
 
     public void refreshNavDrawerList() {

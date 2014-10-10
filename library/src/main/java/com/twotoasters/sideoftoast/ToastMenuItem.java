@@ -1,4 +1,4 @@
-package com.twotoasters.toastnavmenu;
+package com.twotoasters.sideoftoast;
 
 import android.content.Context;
 import android.util.Log;

@@ -1,8 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="ToastSideMenu.twotoasters.com.toastsidemenu.MainActivity" >
+    xmlns:tools="http://schemas.android.com/tools">
     <item android:id="@+id/sitter_city"
-        android:title="@string/sitter_city"
-        android:orderInCategory="100"
-        android:showAsAction="never" />
+        android:title="@string/sittercity_title"
+        android:orderInCategory="100"/>
 </menu>

@@ -1,4 +1,4 @@
-package com.twotoasters.toastnavmenu.mvp;
+package com.twotoasters.sideoftoast;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -6,11 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.squareup.otto.Subscribe;
-import com.twotoasters.toastnavmenu.SideOfToast;
 
-/**
- * Created by patrickjackson on 4/23/14.
- */
 public class NavigationDrawerFragmentPresenter {
 
     private static final String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
@@ -52,11 +48,11 @@ public class NavigationDrawerFragmentPresenter {
     }
 
     public void refreshNavMenu() {
-        view.setMenuItems(model.getMenuItems(),
-                model.getSideOfToast());
         if (model.getFooterItem() != null) {
             view.setFooterLayout(model.getFooterItem());
         }
+        view.setMenuItems(model.getMenuItems(),
+                model.getSideOfToast());
         view.setCurrentSelectedPosition(model.getCurrentSelectedPosition());
     }
 

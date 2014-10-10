@@ -1,8 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="ToastSideMenu.twotoasters.com.toastsidemenu.MainActivity" >
+    xmlns:tools="http://schemas.android.com/tools">
     <item android:id="@+id/ebates"
         android:title="Ebates"
-        android:orderInCategory="100"
-        android:showAsAction="never" />
+        android:orderInCategory="100"/>
 </menu>

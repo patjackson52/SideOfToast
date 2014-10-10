@@ -1,4 +1,4 @@
-package com.twotoasters.toastsidemenu;
+package com.twotoasters.sideoftoastsample;
 
 import android.app.Fragment;
 import android.content.Intent;
@@ -13,12 +13,12 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.squareup.otto.Subscribe;
-import com.twotoasters.toastnavmenu.BusProvider;
-import com.twotoasters.toastnavmenu.SideOfToast;
-import com.twotoasters.toastnavmenu.ToastMenuFooterItem;
-import com.twotoasters.toastnavmenu.ToastMenuItem;
-import com.twotoasters.toastnavmenu.mvp.NavigationDrawerFragmentPresenter;
-import com.twotoasters.toastnavmenu.mvp.NavigationDrawerFragmentViewImpl;
+import com.twotoasters.sideoftoast.BusProvider;
+import com.twotoasters.sideoftoast.NavigationDrawerFragmentPresenter;
+import com.twotoasters.sideoftoast.NavigationDrawerFragmentView;
+import com.twotoasters.sideoftoast.SideOfToast;
+import com.twotoasters.sideoftoast.ToastMenuFooterItem;
+import com.twotoasters.sideoftoast.ToastMenuItem;
 
 public class EbatesActivity extends FragmentActivity {
 
@@ -157,7 +157,7 @@ public class EbatesActivity extends FragmentActivity {
 
     @Subscribe
     public void onToastMenuItemClick(
-            NavigationDrawerFragmentViewImpl.ToastMenuItemClickEvent event) {
+            NavigationDrawerFragmentView.ToastMenuItemClickEvent event) {
         Toast.makeText(this, "Menu Item Id: " + event.getMenuId() + ", position: "
                 + event.getPosition() + " clicked.", Toast.LENGTH_SHORT)
                 .show();

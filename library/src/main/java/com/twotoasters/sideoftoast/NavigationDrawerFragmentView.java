@@ -1,4 +1,4 @@
-package com.twotoasters.toastnavmenu.mvp;
+package com.twotoasters.sideoftoast;
 
 import android.app.ActionBar;
 import android.content.res.Configuration;
@@ -10,17 +10,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.twotoasters.toastnavmenu.BusProvider;
-import com.twotoasters.toastnavmenu.FragmentViewImpl;
-import com.twotoasters.toastnavmenu.NavDrawerItemAdapter;
-import com.twotoasters.toastnavmenu.R;
-import com.twotoasters.toastnavmenu.ToastMenuFooterItem;
-import com.twotoasters.toastnavmenu.ToastMenuItem;
-import com.twotoasters.toastnavmenu.SideOfToast;
 
-
-public class NavigationDrawerFragmentViewImpl extends FragmentViewImpl<Fragment>
-        implements NavigationDrawerFragmentView {
+public class NavigationDrawerFragmentView extends FragmentViewImpl<Fragment> {
 
     private DrawerLayout drawerLayout;
     private ListView drawerListView;
@@ -32,7 +23,7 @@ public class NavigationDrawerFragmentViewImpl extends FragmentViewImpl<Fragment>
      */
     private ActionBarDrawerToggle drawerToggle;
 
-    public NavigationDrawerFragmentViewImpl(Fragment fragment) {
+    public NavigationDrawerFragmentView(Fragment fragment) {
         super(fragment);
         setupWidgets();
         setUpNavDrawer();
@@ -57,7 +48,6 @@ public class NavigationDrawerFragmentViewImpl extends FragmentViewImpl<Fragment>
         return drawerLayout != null && drawerLayout.isDrawerOpen(fragmentContainerView);
     }
 
-    @Override
     public void setFooterLayout(ToastMenuFooterItem footerItem) {
         if (footer != null) {
             drawerListView.removeFooterView(footer);
@@ -72,7 +62,6 @@ public class NavigationDrawerFragmentViewImpl extends FragmentViewImpl<Fragment>
     }
 
 
-    @Override
     public void setMenuItems(final ToastMenuItem[] items,
                              final SideOfToast sideOfToast) {
         getActivity().runOnUiThread(new Runnable() {
@@ -87,7 +76,6 @@ public class NavigationDrawerFragmentViewImpl extends FragmentViewImpl<Fragment>
         });
     }
 
-    @Override
     public void setCurrentSelectedPosition(int position) {
         if (drawerListView != null) {
             drawerListView.setItemChecked(position, true);
@@ -114,7 +102,7 @@ public class NavigationDrawerFragmentViewImpl extends FragmentViewImpl<Fragment>
         // between the navigation drawer and the action bar app icon.
         drawerToggle = new ActionBarDrawerToggle(
                 getActivity(),                    /* host Activity */
-                NavigationDrawerFragmentViewImpl.this.drawerLayout,                    /* DrawerLayout object */
+                NavigationDrawerFragmentView.this.drawerLayout,                    /* DrawerLayout object */
                 R.drawable.ic_navigation_drawer,             /* nav drawer image to replace 'Up' caret */
                 R.string.navigation_drawer_open,  /* "open drawer" description for accessibility */
                 R.string.navigation_drawer_close  /* "close drawer" description for accessibility */
@@ -155,7 +143,6 @@ public class NavigationDrawerFragmentViewImpl extends FragmentViewImpl<Fragment>
         drawerToggle.onConfigurationChanged(newConfig);
     }
 
-    @Override
     public boolean drawerToggleOnOptionsItemSelected(MenuItem item) {
         return drawerToggle.onOptionsItemSelected(item);
     }

@@ -1,4 +1,4 @@
-package com.twotoasters.toastnavmenu;
+package com.twotoasters.sideoftoast;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -6,9 +6,6 @@ import android.widget.TextView;
 
 import java.util.HashMap;
 
-/**
- * Created by patrickjackson on 8/11/14.
- */
 public abstract class ValueMappedItem {
 
     private HashMap<Integer, Integer> imageMap;

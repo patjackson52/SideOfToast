@@ -8,8 +8,13 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.twotoasters.sideoftoastsample.EbatesActivity"
+<<<<<<< HEAD
+            android:name=".EbatesActivity"
             android:label="@string/ebates_title" >
+=======
+            android:name="com.twotoasters.sideoftoastsample.MainActivity"
+            android:label="@string/title_activity_main" >
+>>>>>>> master
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,4 +1,4 @@
-package ToastSideMenu.twotoasters.com.toastsidemenu;
+package com.twotoasters.sideoftoast;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

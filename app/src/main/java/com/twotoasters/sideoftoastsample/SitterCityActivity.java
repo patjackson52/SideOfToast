@@ -1,4 +1,4 @@
-package com.twotoasters.toastsidemenu;
+package com.twotoasters.sideoftoastsample;
 
 import android.app.Fragment;
 import android.content.Intent;
@@ -12,10 +12,10 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.squareup.otto.Subscribe;
-import com.twotoasters.toastnavmenu.BusProvider;
-import com.twotoasters.toastnavmenu.SideOfToast;
-import com.twotoasters.toastnavmenu.ToastMenuItem;
-import com.twotoasters.toastnavmenu.mvp.NavigationDrawerFragmentViewImpl;
+import com.twotoasters.sideoftoast.BusProvider;
+import com.twotoasters.sideoftoast.NavigationDrawerFragmentView;
+import com.twotoasters.sideoftoast.SideOfToast;
+import com.twotoasters.sideoftoast.ToastMenuItem;
 
 public class SitterCityActivity extends FragmentActivity {
 
@@ -28,7 +28,7 @@ public class SitterCityActivity extends FragmentActivity {
     public static final int LOGIN_ID = 3;
     public static final int SIGN_UP_ID = 4;
     public static final int ARE_YOU_SITTER_ID = 5;
-    public static final int SWITCH_ID = 0;
+    public static final int SWITCH_ID = 6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,7 +147,7 @@ public class SitterCityActivity extends FragmentActivity {
 
     @Subscribe
     public void onToastMenuItemClick(
-            NavigationDrawerFragmentViewImpl.ToastMenuItemClickEvent event) {
+            NavigationDrawerFragmentView.ToastMenuItemClickEvent event) {
         Toast.makeText(this, "Menu Item Id: " + event.getMenuId() + ", position: "
                 + event.getPosition() + " clicked.", Toast.LENGTH_SHORT)
                 .show();
