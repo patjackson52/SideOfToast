@@ -2,6 +2,7 @@
 
 _Quick, easy_ side navigation menu for Android.  
 
+<img style="width: 25%; height: 25%" src="http://storage.googleapis.com/fflog/side_of_toast_sc.png"/>
 #Build the SideNav Menu
 In your Activity:
 
@@ -16,21 +17,9 @@ In your Activity:
 		.build()
 		.create();
 				
-
-#Create It
-
-SideOfToast.Builder.create() will insert a [NavigationDrawer](https://developer.android.com/design/patterns/navigation-drawer.html) with your menu inside it.  Do not add a NavigationDrawer to your xml layout.
-
-	sideMenu.create();
+`.create()` will insert a [NavigationDrawer](https://developer.android.com/design/patterns/navigation-drawer.html) with your menu inside it to your activity.  Do not add a NavigationDrawer to your xml layout.
 	
 
-#Supply SideNav Layout (OPTIONAL):
-
-* Pass layout in SideOfToast.Builder constructor
-* Must include a ListView with id r.id.sideOfToastListView  (included with in SideOfToast war).
-	
-		SideOfToast sideMenu = SideOfToast.Build(R.layout.my_awesome_layout);
-		
 #Respond to Item Clicks
 SideOfToast fires an [Otto event](https://github.com/square/otto) with the corresponding item ID when an item is tapped. 
 
@@ -81,6 +70,18 @@ Example Item Layout:
         	android:layout_width="match_parent"/>
 	</RelativeLayout>
 	
+
+
+#Supply SideNav Layout (OPTIONAL):
+
+Need a more complex layout in your side nav? 
+
+* Pass layout in SideOfToast.Builder constructor
+
+		SideOfToast sideMenu = SideOfToast.Build(R.layout.my_awesome_layout);
+		
+* Must include a ListView with id r.id.sideOfToastListView  (included with in SideOfToast war).
+
 #Footers
 
 There are cases where you may want to attach a footer to the bottom of your Side nag menu.  To do this use  `ToastMenuFooterItem`. 
