@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.squareup.otto.Subscribe;
+import com.twotoasters.sideoftoast.Events;
 import com.twotoasters.sideoftoast.SideOfToast;
 
 public class SideNavPresenter {
@@ -64,30 +65,15 @@ public class SideNavPresenter {
     }
 
     @Subscribe
-    public void onSetResource(SetResourceEvent event) {
-        if (event.str != null) {
-            model.updateSideOfToast(event.menuId, event.layoutId, event.str);
+    public void onSetResource(Events.SetResourceEvent event) {
+        if (event.getStr() != null) {
+            model.updateSideOfToast(event.getMenuId(), event.getLayoutId(), event.getStr());
         } else {
-            model.updateSideOfToast(event.menuId, event.layoutId, event.resourceId);
+            model.updateSideOfToast(event.getMenuId(), event.getLayoutId(), event.getResourceId());
         }
         refreshNavMenu();
     }
 
-    public static class SetResourceEvent {
-        private int menuId, layoutId, resourceId;
-        private String str;
 
-        public SetResourceEvent(int menuId, int layoutId, int resourceId) {
-            this.layoutId = layoutId;
-            this.resourceId = resourceId;
-            this.menuId = menuId;
-        }
-
-        public SetResourceEvent(int menuId, int layoutId, String str) {
-            this.menuId = menuId;
-            this.layoutId = layoutId;
-            this.str = str;
-        }
-    }
 
 }

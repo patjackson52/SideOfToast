@@ -12,10 +12,10 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.squareup.otto.Subscribe;
-import com.twotoasters.sideoftoast.mvp.BusProvider;
-import com.twotoasters.sideoftoast.mvp.SideNavView;
+import com.twotoasters.sideoftoast.Events;
 import com.twotoasters.sideoftoast.SideOfToast;
 import com.twotoasters.sideoftoast.items.ToastMenuItem;
+import com.twotoasters.sideoftoast.mvp.BusProvider;
 
 public class SitterCityActivity extends FragmentActivity {
 
@@ -139,7 +139,7 @@ public class SitterCityActivity extends FragmentActivity {
 
     @Subscribe
     public void onToastMenuItemClick(
-            SideNavView.ToastMenuItemClickEvent event) {
+            Events.ToastMenuItemClickEvent event) {
         Toast.makeText(this, "Menu Item Id: " + event.getMenuId() + ", position: "
                 + event.getPosition() + " clicked.", Toast.LENGTH_SHORT)
                 .show();

@@ -13,12 +13,11 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.squareup.otto.Subscribe;
-import com.twotoasters.sideoftoast.mvp.BusProvider;
-import com.twotoasters.sideoftoast.mvp.SideNavPresenter;
-import com.twotoasters.sideoftoast.mvp.SideNavView;
+import com.twotoasters.sideoftoast.Events;
 import com.twotoasters.sideoftoast.SideOfToast;
 import com.twotoasters.sideoftoast.items.ToastMenuFooterItem;
 import com.twotoasters.sideoftoast.items.ToastMenuItem;
+import com.twotoasters.sideoftoast.mvp.BusProvider;
 
 public class EbatesActivity extends FragmentActivity {
 
@@ -133,7 +132,7 @@ public class EbatesActivity extends FragmentActivity {
                         @Override
                         public void onClick(View v) {
                             BusProvider.post(
-                                    new SideNavPresenter.SetResourceEvent(
+                                    new Events.SetResourceEvent(
                                             FOOTER_ID,
                                             R.id.txtSidebarCashPendingValue,
                                             "$1500"));
@@ -145,7 +144,7 @@ public class EbatesActivity extends FragmentActivity {
                         @Override
                         public void onClick(View v) {
                             BusProvider.post(
-                                    new SideNavPresenter.SetResourceEvent(
+                                    new Events.SetResourceEvent(
                                             FEATURED_ID,
                                             R.id.navmenuitem_icon,
                                             R.drawable.selector_ebates_menu_help));
@@ -157,7 +156,7 @@ public class EbatesActivity extends FragmentActivity {
 
     @Subscribe
     public void onToastMenuItemClick(
-            SideNavView.ToastMenuItemClickEvent event) {
+            Events.ToastMenuItemClickEvent event) {
         Toast.makeText(this, "Menu Item Id: " + event.getMenuId() + ", position: "
                 + event.getPosition() + " clicked.", Toast.LENGTH_SHORT)
                 .show();

@@ -10,8 +10,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.twotoasters.sideoftoast.SideNavItemAdapter;
+import com.twotoasters.sideoftoast.Events;
 import com.twotoasters.sideoftoast.R;
+import com.twotoasters.sideoftoast.SideNavItemAdapter;
 import com.twotoasters.sideoftoast.SideOfToast;
 import com.twotoasters.sideoftoast.items.ToastMenuFooterItem;
 import com.twotoasters.sideoftoast.items.ToastMenuItem;
@@ -41,7 +42,7 @@ public class SideNavView extends FragmentViewImpl<Fragment> {
         drawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                BusProvider.post(new ToastMenuItemClickEvent(position,
+                BusProvider.post(new Events.ToastMenuItemClickEvent(position,
                         ((ToastMenuItem) drawerListView
                                 .getAdapter().getItem(position)).getMenuId()));
             }
@@ -154,20 +155,4 @@ public class SideNavView extends FragmentViewImpl<Fragment> {
         return drawerToggle.onOptionsItemSelected(item);
     }
 
-    public static class ToastMenuItemClickEvent {
-        final int position, menuId;
-
-        public ToastMenuItemClickEvent(int position, int menuId) {
-            this.position = position;
-            this.menuId = menuId;
-        }
-
-        public int getPosition() {
-            return position;
-        }
-
-        public int getMenuId() {
-            return menuId;
-        }
-    }
 }
