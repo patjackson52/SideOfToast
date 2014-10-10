@@ -1,8 +1,11 @@
-package com.twotoasters.sideoftoast;
+package com.twotoasters.sideoftoast.items;
 
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.twotoasters.sideoftoast.R;
+import com.twotoasters.sideoftoast.SideOfToast;
 
 import java.util.HashMap;
 
@@ -17,7 +20,7 @@ public abstract class ValueMappedItem {
         this.textMap = textMap;
     }
 
-    public void setImageAndText(View view, int position) {
+    public void setImageOrText(View view, int position) {
         for (Object id : getTextMap().keySet()) {
             TextView tmp = (TextView) view.findViewById((Integer) id);
             if (tmp != null) {

@@ -2,5 +2,6 @@
 <resources>
     <item name="drawer_layout" type="id"/>
     <item name="drawer_contents" type="id"/>
+    <item name="activity_content" type="id"/>
 
 </resources>

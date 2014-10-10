@@ -12,10 +12,10 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.squareup.otto.Subscribe;
-import com.twotoasters.sideoftoast.BusProvider;
-import com.twotoasters.sideoftoast.NavigationDrawerFragmentView;
+import com.twotoasters.sideoftoast.mvp.BusProvider;
+import com.twotoasters.sideoftoast.mvp.SideNavView;
 import com.twotoasters.sideoftoast.SideOfToast;
-import com.twotoasters.sideoftoast.ToastMenuItem;
+import com.twotoasters.sideoftoast.items.ToastMenuItem;
 
 public class SitterCityActivity extends FragmentActivity {
 
@@ -90,9 +90,9 @@ public class SitterCityActivity extends FragmentActivity {
                         .addImage(R.id.navmenuitem_icon, R.drawable.selector_switch_menu_icon)
                         .build(this);
 
-        new SideOfToast.Builder(R.layout.navigation_drawer)
-                .addItemViewType(0, R.layout.navmenu_section)
-                .addItemViewType(1, R.layout.navmenu_item)
+        new SideOfToast.Builder(R.layout.sittercity_navigation_drawer)
+                .addItemViewType(0, R.layout.sittercity_section)
+                .addItemViewType(1, R.layout.sittercity_item)
                 .addMenuItem(parentHomeTitleToastMenuItem)
                 .addMenuItem(homeToastMenuItem)
                 .addMenuItem(needAccountSectionHeader)
@@ -128,26 +128,18 @@ public class SitterCityActivity extends FragmentActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
     public static class SCFragmentFragment extends Fragment {
-
-        public SCFragmentFragment() {
-        }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_ebates, container, false);
-            return rootView;
+            return inflater.inflate(R.layout.fragment_sittercity, container, false);
         }
     }
 
     @Subscribe
     public void onToastMenuItemClick(
-            NavigationDrawerFragmentView.ToastMenuItemClickEvent event) {
+            SideNavView.ToastMenuItemClickEvent event) {
         Toast.makeText(this, "Menu Item Id: " + event.getMenuId() + ", position: "
                 + event.getPosition() + " clicked.", Toast.LENGTH_SHORT)
                 .show();

@@ -12,6 +12,10 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import com.twotoasters.sideoftoast.items.ToastMenuFooterItem;
+import com.twotoasters.sideoftoast.items.ToastMenuItem;
+import com.twotoasters.sideoftoast.mvp.BusProvider;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -100,10 +104,10 @@ public class SideOfToast implements Serializable {
 
         FragmentManager fm = activity.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        Fragment fragment = (Fragment) NavigationDrawerFragment.getInstance(this);
+        Fragment fragment = (Fragment) SideNavFragment.getInstance(this);
         fragmentTransaction.add(R.id.drawer_contents,
                 fragment,
-                NavigationDrawerFragment.TAG);
+                SideNavFragment.TAG);
         fragmentTransaction.commit();
 
         log(activity.getString(R.string.log_create_finished));

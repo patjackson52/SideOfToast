@@ -1,4 +1,4 @@
-package com.twotoasters.sideoftoast;
+package com.twotoasters.sideoftoast.mvp;
 
 import android.app.ActionBar;
 import android.content.res.Configuration;
@@ -10,8 +10,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.twotoasters.sideoftoast.SideNavItemAdapter;
+import com.twotoasters.sideoftoast.R;
+import com.twotoasters.sideoftoast.SideOfToast;
+import com.twotoasters.sideoftoast.items.ToastMenuFooterItem;
+import com.twotoasters.sideoftoast.items.ToastMenuItem;
 
-public class NavigationDrawerFragmentView extends FragmentViewImpl<Fragment> {
+
+public class SideNavView extends FragmentViewImpl<Fragment> {
 
     private DrawerLayout drawerLayout;
     private ListView drawerListView;
@@ -23,7 +29,7 @@ public class NavigationDrawerFragmentView extends FragmentViewImpl<Fragment> {
      */
     private ActionBarDrawerToggle drawerToggle;
 
-    public NavigationDrawerFragmentView(Fragment fragment) {
+    public SideNavView(Fragment fragment) {
         super(fragment);
         setupWidgets();
         setUpNavDrawer();
@@ -58,7 +64,7 @@ public class NavigationDrawerFragmentView extends FragmentViewImpl<Fragment> {
                 null);
         drawerListView.addFooterView(footer, null, footerItem.isEnabled());
 
-        footerItem.setImageAndText(footer, -1);
+        footerItem.setImageOrText(footer, -1);
     }
 
 
@@ -68,7 +74,7 @@ public class NavigationDrawerFragmentView extends FragmentViewImpl<Fragment> {
             @Override
             public void run() {
                 drawerListView.setAdapter(
-                        new NavDrawerItemAdapter(getActivity(),
+                        new SideNavItemAdapter(getActivity(),
                                 (int) sideOfToast.getItemViewTypes().values().iterator().next(),
                                 sideOfToast)
                 );
@@ -102,7 +108,7 @@ public class NavigationDrawerFragmentView extends FragmentViewImpl<Fragment> {
         // between the navigation drawer and the action bar app icon.
         drawerToggle = new ActionBarDrawerToggle(
                 getActivity(),                    /* host Activity */
-                NavigationDrawerFragmentView.this.drawerLayout,                    /* DrawerLayout object */
+                SideNavView.this.drawerLayout,                    /* DrawerLayout object */
                 R.drawable.ic_navigation_drawer,             /* nav drawer image to replace 'Up' caret */
                 R.string.navigation_drawer_open,  /* "open drawer" description for accessibility */
                 R.string.navigation_drawer_close  /* "close drawer" description for accessibility */
@@ -126,6 +132,7 @@ public class NavigationDrawerFragmentView extends FragmentViewImpl<Fragment> {
 
                 getActivity().invalidateOptionsMenu();
             }
+
         };
 
         this.drawerLayout.post(new Runnable() {

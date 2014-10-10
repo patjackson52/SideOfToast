@@ -1,4 +1,6 @@
-package com.twotoasters.sideoftoast;
+package com.twotoasters.sideoftoast.items;
+
+import com.twotoasters.sideoftoast.SideOfToast;
 
 public final class Utils {
     private Utils() {

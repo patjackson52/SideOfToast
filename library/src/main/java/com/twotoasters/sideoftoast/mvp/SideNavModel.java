@@ -1,13 +1,18 @@
-package com.twotoasters.sideoftoast;
+package com.twotoasters.sideoftoast.mvp;
 
-public class NavigationDrawerFragmentModel {
+import com.twotoasters.sideoftoast.SideOfToast;
+import com.twotoasters.sideoftoast.items.ToastMenuFooterItem;
+import com.twotoasters.sideoftoast.items.ToastMenuItem;
+import com.twotoasters.sideoftoast.items.Utils;
+
+public class SideNavModel {
 
     private int currentSelectedPosition = 1;
     private SideOfToast sideOfToast;
 
 
-    public NavigationDrawerFragmentModel(SideOfToast sideOfToast,
-                                         int startPosition) {
+    public SideNavModel(SideOfToast sideOfToast,
+                        int startPosition) {
         currentSelectedPosition = startPosition;
         this.sideOfToast = sideOfToast;
         currentSelectedPosition = sideOfToast.getSelectedPosition();

@@ -6,15 +6,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
-public class NavDrawerItemAdapter extends ArrayAdapter<ToastMenuItem> {
+import com.twotoasters.sideoftoast.items.ToastMenuItem;
+import com.twotoasters.sideoftoast.items.Utils;
+
+public class SideNavItemAdapter extends ArrayAdapter<ToastMenuItem> {
 
 
     private LayoutInflater inflater;
     private SideOfToast sideOfToast;
 
-    public NavDrawerItemAdapter(Context context,
-                                int textViewResourceId,
-                                SideOfToast sideOfToast) {
+    public SideNavItemAdapter(Context context,
+                              int textViewResourceId,
+                              SideOfToast sideOfToast) {
 
         super(context, textViewResourceId, Utils.getArrayOfMenuItems(sideOfToast));
         this.inflater = LayoutInflater.from(context);
@@ -28,7 +31,7 @@ public class NavDrawerItemAdapter extends ArrayAdapter<ToastMenuItem> {
 
         view = inflater.inflate(sideOfToast.getLayoutForType(toastMenuItem.getItemViewType()), null);
 
-        toastMenuItem.setImageAndText(view, position);
+        toastMenuItem.setImageOrText(view, position);
 
 
         return view;

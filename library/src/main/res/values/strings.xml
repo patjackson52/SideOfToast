@@ -1,14 +1,9 @@
 <resources>
 
     <string name="app_name">SideOfToast</string>
-    <string name="title_activity_side_of_toast">SideOfToastActivity</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_example">Example action</string>
-    <string name="action_settings">Settings</string>
+
     <string name="log_create_finished">Side of Toast is Ready!</string>
     <string name="log_bad_view_id">View id not found!  Text not set on menu item: </string>
     <string name="log_setting_width">Setting width to </string>

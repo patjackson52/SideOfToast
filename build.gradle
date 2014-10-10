@@ -5,15 +5,35 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.12.+'
+        classpath 'com.android.tools.build:gradle:0.13.1'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
 }
+def configDir = new File(rootDir, 'config')
 
-allprojects {
+subprojects {
+
     repositories {
         jcenter()
     }
+
+    apply plugin: 'checkstyle'
+    task checkstyle(type: Checkstyle) {
+
+        source 'src'
+        include '**/*.java'
+        exclude '**/gen/**'
+        exclude '**/R.java'
+        exclude '**/BuildConfig.java'
+
+        configFile project.file('../config/checkstyle.xml')
+        def configProps = ['proj.module.dir': configDir.absolutePath]
+        configProperties configProps
+
+        // empty classpath
+        classpath = files()
+    }
+
 }

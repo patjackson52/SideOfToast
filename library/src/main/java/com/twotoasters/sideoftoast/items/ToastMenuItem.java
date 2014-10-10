@@ -1,7 +1,9 @@
-package com.twotoasters.sideoftoast;
+package com.twotoasters.sideoftoast.items;
 
 import android.content.Context;
-import android.util.Log;
+
+import com.twotoasters.sideoftoast.R;
+import com.twotoasters.sideoftoast.SideOfToast;
 
 import java.io.Serializable;
 import java.util.HashMap;

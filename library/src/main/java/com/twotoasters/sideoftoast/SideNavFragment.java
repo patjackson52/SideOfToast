@@ -11,24 +11,26 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.twotoasters.sideoftoast.mvp.BusProvider;
+import com.twotoasters.sideoftoast.mvp.SideNavModel;
+import com.twotoasters.sideoftoast.mvp.SideNavPresenter;
+import com.twotoasters.sideoftoast.mvp.SideNavView;
 
-public class NavigationDrawerFragment extends Fragment {
 
-    public static final String TAG = "NavigationDrawer";
+public class SideNavFragment extends Fragment {
+
+    public static final String TAG = "SideNavFragment";
     public static final String TOASTER_KEY = "toaster_key";
 
-    NavigationDrawerFragmentPresenter presenter;
-    Bundle savedInstanceState;
+    private SideNavPresenter presenter;
+    private Bundle savedInstanceState;
 
-    public static NavigationDrawerFragment getInstance(SideOfToast sideOfToast) {
-        NavigationDrawerFragment fragment = new NavigationDrawerFragment();
+    public static SideNavFragment getInstance(SideOfToast sideOfToast) {
+        SideNavFragment fragment = new SideNavFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable(TOASTER_KEY, sideOfToast);
         fragment.setArguments(bundle);
         return fragment;
-    }
-
-    public NavigationDrawerFragment() {
     }
 
     @Override
@@ -99,17 +101,12 @@ public class NavigationDrawerFragment extends Fragment {
                 || super.onOptionsItemSelected(item);
     }
 
-    private NavigationDrawerFragmentPresenter createPresenter() {
+    private SideNavPresenter createPresenter() {
         int startPosition = 0;
-        return new NavigationDrawerFragmentPresenter(
-                new NavigationDrawerFragmentModel(
+        return new SideNavPresenter(
+                new SideNavModel(
                         (SideOfToast) getArguments().getSerializable(TOASTER_KEY),
                         startPosition),
-                new NavigationDrawerFragmentView(this));
+                new SideNavView(this));
     }
-
-    public void refreshNavDrawerList() {
-        presenter.refreshNavMenu();
-    }
-
 }

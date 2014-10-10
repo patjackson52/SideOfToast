@@ -13,12 +13,12 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.squareup.otto.Subscribe;
-import com.twotoasters.sideoftoast.BusProvider;
-import com.twotoasters.sideoftoast.NavigationDrawerFragmentPresenter;
-import com.twotoasters.sideoftoast.NavigationDrawerFragmentView;
+import com.twotoasters.sideoftoast.mvp.BusProvider;
+import com.twotoasters.sideoftoast.mvp.SideNavPresenter;
+import com.twotoasters.sideoftoast.mvp.SideNavView;
 import com.twotoasters.sideoftoast.SideOfToast;
-import com.twotoasters.sideoftoast.ToastMenuFooterItem;
-import com.twotoasters.sideoftoast.ToastMenuItem;
+import com.twotoasters.sideoftoast.items.ToastMenuFooterItem;
+import com.twotoasters.sideoftoast.items.ToastMenuItem;
 
 public class EbatesActivity extends FragmentActivity {
 
@@ -133,7 +133,7 @@ public class EbatesActivity extends FragmentActivity {
                         @Override
                         public void onClick(View v) {
                             BusProvider.post(
-                                    new NavigationDrawerFragmentPresenter.SetResourceEvent(
+                                    new SideNavPresenter.SetResourceEvent(
                                             FOOTER_ID,
                                             R.id.txtSidebarCashPendingValue,
                                             "$1500"));
@@ -145,7 +145,7 @@ public class EbatesActivity extends FragmentActivity {
                         @Override
                         public void onClick(View v) {
                             BusProvider.post(
-                                    new NavigationDrawerFragmentPresenter.SetResourceEvent(
+                                    new SideNavPresenter.SetResourceEvent(
                                             FEATURED_ID,
                                             R.id.navmenuitem_icon,
                                             R.drawable.selector_ebates_menu_help));
@@ -157,7 +157,7 @@ public class EbatesActivity extends FragmentActivity {
 
     @Subscribe
     public void onToastMenuItemClick(
-            NavigationDrawerFragmentView.ToastMenuItemClickEvent event) {
+            SideNavView.ToastMenuItemClickEvent event) {
         Toast.makeText(this, "Menu Item Id: " + event.getMenuId() + ", position: "
                 + event.getPosition() + " clicked.", Toast.LENGTH_SHORT)
                 .show();

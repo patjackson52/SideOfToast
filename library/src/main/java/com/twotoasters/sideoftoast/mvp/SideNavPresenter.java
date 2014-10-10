@@ -1,4 +1,4 @@
-package com.twotoasters.sideoftoast;
+package com.twotoasters.sideoftoast.mvp;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -6,16 +6,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.squareup.otto.Subscribe;
+import com.twotoasters.sideoftoast.SideOfToast;
 
-public class NavigationDrawerFragmentPresenter {
+public class SideNavPresenter {
 
     private static final String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
 
-    NavigationDrawerFragmentModel model;
-    NavigationDrawerFragmentView view;
+    SideNavModel model;
+    SideNavView view;
 
-    public NavigationDrawerFragmentPresenter(NavigationDrawerFragmentModel model,
-                                             NavigationDrawerFragmentView view) {
+    public SideNavPresenter(SideNavModel model,
+                            SideNavView view) {
         this.model = model;
         this.view = view;
         refreshNavMenu();

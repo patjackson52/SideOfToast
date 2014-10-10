@@ -1,4 +1,4 @@
-package com.twotoasters.sideoftoast;
+package com.twotoasters.sideoftoast.mvp;
 
 import android.os.Handler;
 import android.os.Looper;

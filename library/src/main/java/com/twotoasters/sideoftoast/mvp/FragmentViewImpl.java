@@ -1,4 +1,4 @@
-package com.twotoasters.sideoftoast;
+package com.twotoasters.sideoftoast.mvp;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -8,9 +8,6 @@ import android.view.View;
 
 import java.lang.ref.WeakReference;
 
-/**
- * Created by patrickjackson on 4/22/14.
- */
 public abstract class FragmentViewImpl<T extends Fragment> implements FragmentView {
 
 
