@@ -21,6 +21,8 @@ import com.twotoasters.sideoftoast.mvp.BusProvider;
 
 public class EbatesActivity extends FragmentActivity {
 
+    public static final int EBATES_ITEM_TYPE = 0;
+
     public static final int FEATURED_ID = 0;
     public static final int ALL_STORES_ID = 1;
     public static final int TELL_A_FRIEND_ID = 2;
@@ -44,27 +46,27 @@ public class EbatesActivity extends FragmentActivity {
 
     private void addEbatesMenu() {
         ToastMenuItem featuredItem =
-                new ToastMenuItem.Builder(FEATURED_ID, 0)
+                new ToastMenuItem.Builder(FEATURED_ID, EBATES_ITEM_TYPE)
                         .addText(R.id.txtSidebar, R.string.ebates_item_featured)
                         .addImage(R.id.navmenuitem_icon, R.drawable.selector_ebates_menu_featured)
                         .build(this);
         ToastMenuItem allStores =
-                new ToastMenuItem.Builder(ALL_STORES_ID, 0)
+                new ToastMenuItem.Builder(ALL_STORES_ID, EBATES_ITEM_TYPE)
                         .addText(R.id.txtSidebar, R.string.ebates_item_all_stores)
                         .addImage(R.id.navmenuitem_icon, R.drawable.selector_ebates_menu_all_stores)
                         .build(this);
         ToastMenuItem tafItem =
-                new ToastMenuItem.Builder(TELL_A_FRIEND_ID, 0)
+                new ToastMenuItem.Builder(TELL_A_FRIEND_ID, EBATES_ITEM_TYPE)
                         .addText(R.id.txtSidebar, R.string.ebates_item_tell_friend)
                         .addImage(R.id.navmenuitem_icon, R.drawable.selector_ebates_menu_taf)
                         .build(this);
         ToastMenuItem helpItem =
-                new ToastMenuItem.Builder(HELP_ID, 0)
+                new ToastMenuItem.Builder(HELP_ID, EBATES_ITEM_TYPE)
                         .addText(R.id.txtSidebar, R.string.ebates_item_help)
                         .addImage(R.id.navmenuitem_icon, R.drawable.selector_ebates_menu_help)
                         .build(this);
         ToastMenuItem myEbatesItem =
-                new ToastMenuItem.Builder(MY_EBATES_ID, 0)
+                new ToastMenuItem.Builder(MY_EBATES_ID, EBATES_ITEM_TYPE)
                         .addText(R.id.txtSidebar, R.string.ebates_item_my_ebates)
                         .addImage(R.id.navmenuitem_icon, R.drawable.selector_ebates_myebates)
                         .build(this);
@@ -82,7 +84,7 @@ public class EbatesActivity extends FragmentActivity {
                         .build(this);
 
         SideOfToast sideOfToast = new SideOfToast.Builder()
-                .addItemViewType(0, R.layout.ebates_item_sidebar)
+                .addItemViewType(EBATES_ITEM_TYPE, R.layout.ebates_item_sidebar)
                 .addMenuItem(featuredItem)
                 .addMenuItem(allStores)
                 .addMenuItem(tafItem)

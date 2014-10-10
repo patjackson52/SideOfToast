@@ -79,6 +79,7 @@ public class SideOfToast implements Serializable {
 
         DrawerLayout drawerLayout = new DrawerLayout(activity);
 
+        //Convert width to DIP
         width = (width == 0) ? DEFAULT_WIDTH : width;
         width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 width, activity.getResources().getDisplayMetrics());
@@ -172,14 +173,6 @@ public class SideOfToast implements Serializable {
                 tmp.updateImageMap(layoutId, resourceId);
             }
         }
-    }
-
-    private void updateTextResource(int layoutId, int resourceId) {
-
-    }
-
-    private void updateImageResource(int layoutId, int resourceId) {
-
     }
 
     /**

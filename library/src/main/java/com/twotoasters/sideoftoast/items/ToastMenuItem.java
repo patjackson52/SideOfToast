@@ -8,9 +8,6 @@ import com.twotoasters.sideoftoast.SideOfToast;
 import java.io.Serializable;
 import java.util.HashMap;
 
-/**
- * Created by patrickjackson on 7/29/14.
- */
 public class ToastMenuItem extends ValueMappedItem
         implements Comparable<ToastMenuItem>, Serializable {
     private final int menuId;
