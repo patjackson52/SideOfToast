@@ -21,6 +21,7 @@ public class SideNavFragment extends Fragment {
 
     public static final String TAG = "SideNavFragment";
     public static final String TOASTER_KEY = "toaster_key";
+    public static final String LAYOUT_ID = "layout_id_key";
 
     private SideNavPresenter presenter;
     private Bundle savedInstanceState;
@@ -29,6 +30,9 @@ public class SideNavFragment extends Fragment {
         SideNavFragment fragment = new SideNavFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable(TOASTER_KEY, sideOfToast);
+        bundle.putInt(LAYOUT_ID, (sideOfToast.getListLayoutId() == 0)
+                ? R.layout.fragment_navigation_drawer
+                : sideOfToast.getListLayoutId());
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -74,7 +78,7 @@ public class SideNavFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
+        return inflater.inflate(getArguments().getInt(LAYOUT_ID), container, false);
     }
 
 

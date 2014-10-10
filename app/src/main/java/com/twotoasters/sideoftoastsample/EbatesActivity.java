@@ -82,7 +82,7 @@ public class EbatesActivity extends FragmentActivity {
                         .setEnabled(false)
                         .build(this);
 
-        SideOfToast sideOfToast = new SideOfToast.Builder(R.layout.ebates_fragment_sidebar)
+        SideOfToast sideOfToast = new SideOfToast.Builder()
                 .addItemViewType(0, R.layout.ebates_item_sidebar)
                 .addMenuItem(featuredItem)
                 .addMenuItem(allStores)

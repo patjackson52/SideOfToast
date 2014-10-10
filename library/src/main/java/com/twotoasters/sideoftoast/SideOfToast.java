@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -28,6 +27,10 @@ import java.util.logging.Logger;
  */
 public class SideOfToast implements Serializable {
 
+
+    public int getListLayoutId() {
+        return listLayoutId;
+    }
 
     public interface ReadyForToast {
         void ToastMenuItemClicked(int position);
@@ -123,14 +126,6 @@ public class SideOfToast implements Serializable {
         this.selectedPosition = selectedPosition;
     }
 
-    private View inflateListView(FragmentActivity activity) {
-        return activity.getLayoutInflater().inflate(listLayoutId, null);
-    }
-
-    public int getListLayoutId() {
-        return listLayoutId;
-    }
-
     public HashMap getItemViewTypes() {
         return itemViewTypes;
     }
@@ -200,6 +195,13 @@ public class SideOfToast implements Serializable {
         private int width;
         private int selectedPosition;
 
+
+
+        public Builder() {
+            listLayoutId = 0;
+            items = new LinkedHashMap<>();
+            itemViewTypes = new HashMap();
+        }
 
         public Builder(int listLayoutId) {
             this.listLayoutId = listLayoutId;

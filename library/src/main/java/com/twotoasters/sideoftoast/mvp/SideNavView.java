@@ -37,7 +37,7 @@ public class SideNavView extends FragmentViewImpl<Fragment> {
 
     public void setupWidgets() {
         drawerLayout = (DrawerLayout) getActivity().findViewById(R.id.drawer_layout);
-        drawerListView = (ListView) findViewInFragment(R.id.drawerListView);
+        drawerListView = (ListView) findViewInFragment(R.id.sideOfToastListView);
         drawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
