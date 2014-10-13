@@ -2,7 +2,8 @@
 
 _Quick, easy_ side navigation menu for Android.  
 
-<img style="width: 25%; height: 25%" src="http://storage.googleapis.com/fflog/side_of_toast_sc.png"/>
+<img width="50%" height="50%" src="http://storage.googleapis.com/fflog/side_of_toast_sc.png"/>
+
 #Build the SideNav Menu
 In your Activity:
 
@@ -28,7 +29,8 @@ SideOfToast fires an [Otto event](https://github.com/square/otto) with the corre
         switch(event.getItemId()) {
         	case (SOURDOUGH_MENU_ID):
         		//switch to MyFragment
-        		break;        }
+        		break;
+        }
         
 
 #Update Text/Images
