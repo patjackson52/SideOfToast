@@ -45,6 +45,7 @@ public class SideNavView extends FragmentViewImpl<Fragment> {
                 BusProvider.post(new Events.ToastMenuItemClickEvent(position,
                         ((ToastMenuItem) drawerListView
                                 .getAdapter().getItem(position)).getMenuId()));
+                drawerLayout.closeDrawers();
             }
         });
 
