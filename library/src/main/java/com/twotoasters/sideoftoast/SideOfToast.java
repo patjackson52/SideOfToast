@@ -27,9 +27,10 @@ import java.util.logging.Logger;
  */
 public class SideOfToast implements Serializable {
 
-    public static final String STATUS_BAR_HEIGHT = "status_bar_height";
-    public static final String DIMEN = "dimen";
-    public static final String ANDROID = "android";
+    private static final String STATUS_BAR_HEIGHT = "status_bar_height";
+    private static final String DIMEN = "dimen";
+    private static final String ANDROID = "android";
+    private static final int STATUS_BAR_HEIGHT_ADJUSTMENT = 2;
 
     public int getListLayoutId() {
         return listLayoutId;
@@ -104,15 +105,14 @@ public class SideOfToast implements Serializable {
             firstViewInLayout = (ViewGroup) ((ViewGroup) activity
                     .getWindow().getDecorView()).getChildAt(0);
             activityRoot = (ViewGroup) ((ViewGroup) activity.getWindow().getDecorView());
-            ((ViewGroup) activity.getWindow().getDecorView()).removeView(firstViewInLayout);
             fl.setPadding(0, getStatusBarHeight(activity), 0, 0);
         } else {
             firstViewInLayout = (ViewGroup) ((ViewGroup) activity
                     .findViewById(android.R.id.content)).getChildAt(0);
             activityRoot = (ViewGroup) ((ViewGroup) activity
                     .findViewById(android.R.id.content));
-            activityRoot.removeView(firstViewInLayout);
         }
+        activityRoot.removeView(firstViewInLayout);
 
         setupDrawerLayout(drawerLayout, firstViewInLayout, fl, activityRoot);
 
@@ -149,8 +149,9 @@ public class SideOfToast implements Serializable {
                 DIMEN,
                 ANDROID);
         if (resourceId > 0) {
-            //need to subtract to for some reason
-            result = activity.getResources().getDimensionPixelSize(resourceId) - 2;
+            //need to subtract two for some reason
+            result = activity.getResources().getDimensionPixelSize(resourceId)
+                    - STATUS_BAR_HEIGHT_ADJUSTMENT;
         }
         return result;
     }
@@ -324,28 +325,12 @@ public class SideOfToast implements Serializable {
         }
 
         public SideOfToast build() {
-            if (itemViewTypes.size() < 1) {
-//                throw new NoItemViewTypesException();
-            }
             return new SideOfToast(this);
         }
 
         public Builder setSelected(int position) {
             this.selectedPosition = position;
             return this;
-        }
-
-//
-//        private void countItemViewTypes() {
-//            ArrayList<Integer> list = new ArrayList<>();
-//            for (ToastMenuItem item: items) {
-//                if (list.contains(item.))
-//            }
-//
-//        }
-
-
-        public static class NoItemViewTypesException extends Exception {
         }
     }
 
