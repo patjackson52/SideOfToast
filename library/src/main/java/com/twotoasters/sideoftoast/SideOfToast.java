@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 
 import com.twotoasters.sideoftoast.items.ToastMenuFooterItem;
 import com.twotoasters.sideoftoast.items.ToastMenuItem;
-import com.twotoasters.sideoftoast.mvp.BusProvider;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -162,20 +161,15 @@ public class SideOfToast implements Serializable {
      */
     private void addSideNavFragment(FragmentActivity activity) {
         FragmentManager fm = activity.getSupportFragmentManager();
+
+        Fragment fragment = fm.findFragmentByTag(SideNavFragment.TAG);
+
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        Fragment fragment = (Fragment) SideNavFragment.getInstance(this);
-        fragmentTransaction.add(R.id.drawer_contents,
+        if (fragment == null) fragment = (Fragment) SideNavFragment.getInstance(this);
+        fragmentTransaction.replace(R.id.drawer_contents,
                 fragment,
                 SideNavFragment.TAG);
         fragmentTransaction.commit();
-    }
-
-    public void setSelected(int position) {
-        BusProvider.post(new SetSelectedItemEvent(position));
-    }
-
-    public void setSelectedPosition(int selectedPosition) {
-        this.selectedPosition = selectedPosition;
     }
 
     public HashMap getItemViewTypes() {
@@ -324,40 +318,12 @@ public class SideOfToast implements Serializable {
         }
 
         public SideOfToast build() {
-            if (itemViewTypes.size() < 1) {
-//                throw new NoItemViewTypesException();
-            }
             return new SideOfToast(this);
         }
 
         public Builder setSelected(int position) {
             this.selectedPosition = position;
             return this;
-        }
-
-//
-//        private void countItemViewTypes() {
-//            ArrayList<Integer> list = new ArrayList<>();
-//            for (ToastMenuItem item: items) {
-//                if (list.contains(item.))
-//            }
-//
-//        }
-
-
-        public static class NoItemViewTypesException extends Exception {
-        }
-    }
-
-    public class SetSelectedItemEvent {
-        private final int position;
-
-        public SetSelectedItemEvent(int position) {
-            this.position = position;
-        }
-
-        public int getPosition() {
-            return position;
         }
     }
 }

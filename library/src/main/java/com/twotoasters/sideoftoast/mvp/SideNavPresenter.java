@@ -7,7 +7,6 @@ import android.view.MenuItem;
 
 import com.squareup.otto.Subscribe;
 import com.twotoasters.sideoftoast.Events;
-import com.twotoasters.sideoftoast.SideOfToast;
 
 public class SideNavPresenter {
 
@@ -32,8 +31,8 @@ public class SideNavPresenter {
 
     public void restoreInstanceState(Bundle savedInstanceState) {
         if (savedInstanceState != null) {
-//            model.setCurrentSelectedPosition(savedInstanceState.getInt(STATE_SELECTED_POSITION));
-//            view.setCurrentSelectedPosition(model.getCurrentSelectedPosition());
+            model.setCurrentSelectedPosition(savedInstanceState.getInt(STATE_SELECTED_POSITION));
+            view.setCurrentSelectedPosition(model.getCurrentSelectedPosition());
 
         }
     }
@@ -54,13 +53,12 @@ public class SideNavPresenter {
         if (model.getFooterItem() != null) {
             view.setFooterLayout(model.getFooterItem());
         }
-        view.setMenuItems(model.getMenuItems(),
-                model.getSideOfToast());
+        view.setMenuItems(model.getSideOfToast());
         view.setCurrentSelectedPosition(model.getCurrentSelectedPosition());
     }
 
     @Subscribe
-    public void onSetSelectedItem(SideOfToast.SetSelectedItemEvent event) {
+    public void onToastItemSelected(Events.ToastMenuItemClickEvent event) {
         model.setCurrentSelectedPosition(event.getPosition());
         view.setCurrentSelectedPosition(event.getPosition());
     }

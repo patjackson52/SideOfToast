@@ -72,8 +72,7 @@ public class SideNavView extends FragmentViewImpl<Fragment> {
     }
 
 
-    public void setMenuItems(final ToastMenuItem[] items,
-                             final SideOfToast sideOfToast) {
+    public void setMenuItems(final SideOfToast sideOfToast) {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -89,10 +88,6 @@ public class SideNavView extends FragmentViewImpl<Fragment> {
     public void setCurrentSelectedPosition(int position) {
         if (drawerListView != null) {
             drawerListView.setItemChecked(position, true);
-        }
-
-        if (drawerLayout != null) {
-//            drawerLayout.closeDrawer(fragmentContainerView);
         }
     }
 
