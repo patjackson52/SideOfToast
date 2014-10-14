@@ -93,9 +93,10 @@ public class EbatesActivity extends FragmentActivity {
                 .addFooter(footer)
                 .setWidth(300)
                 .setSelected(0)
+                .setSlidingContent(true)
+                .includeActionBarInDrawerContent(true)
                 .build()
                 .create(this);
-
     }
 
     @Override

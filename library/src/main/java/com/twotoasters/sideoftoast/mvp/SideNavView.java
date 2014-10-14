@@ -23,7 +23,9 @@ public class SideNavView extends FragmentViewImpl<Fragment> {
     private DrawerLayout drawerLayout;
     private ListView drawerListView;
     private View fragmentContainerView;
+    private View contentView;
     private View footer;
+    private boolean slidingContent;
 
     /**
      * Helper component that ties the action bar to the navigation drawer.
@@ -48,7 +50,7 @@ public class SideNavView extends FragmentViewImpl<Fragment> {
                 drawerLayout.closeDrawers();
             }
         });
-
+        contentView = drawerLayout.getChildAt(0);
     }
 
 
@@ -110,8 +112,8 @@ public class SideNavView extends FragmentViewImpl<Fragment> {
         // between the navigation drawer and the action bar app icon.
         drawerToggle = new ActionBarDrawerToggle(
                 getActivity(),                    /* host Activity */
-                SideNavView.this.drawerLayout,                    /* DrawerLayout object */
-                R.drawable.ic_navigation_drawer,             /* nav drawer image to replace 'Up' caret */
+                SideNavView.this.drawerLayout,    /* DrawerLayout object */
+                R.drawable.ic_navigation_drawer,  /* nav drawer image to replace 'Up' caret */
                 R.string.navigation_drawer_open,  /* "open drawer" description for accessibility */
                 R.string.navigation_drawer_close  /* "close drawer" description for accessibility */
         ) {
@@ -135,6 +137,12 @@ public class SideNavView extends FragmentViewImpl<Fragment> {
                 getActivity().invalidateOptionsMenu();
             }
 
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                if (!slidingContent) return;
+                float moveFactor = (drawerListView.getWidth() * slideOffset);
+                contentView.setTranslationX(moveFactor);
+            }
         };
 
         this.drawerLayout.post(new Runnable() {
@@ -156,4 +164,7 @@ public class SideNavView extends FragmentViewImpl<Fragment> {
         return drawerToggle.onOptionsItemSelected(item);
     }
 
+    public void setSlidingContent(boolean slidingContent) {
+        this.slidingContent = slidingContent;
+    }
 }
