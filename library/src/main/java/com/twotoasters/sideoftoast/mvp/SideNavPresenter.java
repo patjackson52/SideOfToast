@@ -20,6 +20,7 @@ public class SideNavPresenter {
                             SideNavView view) {
         this.model = model;
         this.view = view;
+        view.setSlidingContent(model.getSideOfToast().isSlidingContent());
         refreshNavMenu();
     }
 
