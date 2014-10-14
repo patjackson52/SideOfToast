@@ -2,7 +2,6 @@ package com.twotoasters.sideoftoast.mvp;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import com.squareup.otto.Subscribe;
@@ -10,7 +9,7 @@ import com.twotoasters.sideoftoast.Events;
 
 public class SideNavPresenter {
 
-    private static final String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
+    public static final String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
 
     SideNavModel model;
     SideNavView view;
@@ -33,7 +32,6 @@ public class SideNavPresenter {
         if (savedInstanceState != null) {
             model.setCurrentSelectedPosition(savedInstanceState.getInt(STATE_SELECTED_POSITION));
             view.setCurrentSelectedPosition(model.getCurrentSelectedPosition());
-
         }
     }
 
@@ -43,10 +41,6 @@ public class SideNavPresenter {
 
     public boolean onOptionsItemSelected(MenuItem item) {
         return view.drawerToggleOnOptionsItemSelected(item);
-    }
-
-    public void onPrepareOptionsMenu(Menu menu) {
-
     }
 
     public void refreshNavMenu() {
@@ -60,19 +54,17 @@ public class SideNavPresenter {
     @Subscribe
     public void onToastItemSelected(Events.ToastMenuItemClickEvent event) {
         model.setCurrentSelectedPosition(event.getPosition());
-        view.setCurrentSelectedPosition(event.getPosition());
     }
 
     @Subscribe
     public void onSetResource(Events.SetResourceEvent event) {
         if (event.getStr() != null) {
-            model.updateSideOfToast(event.getMenuId(), event.getLayoutId(), event.getStr());
+            model.updateStringResource(event.getMenuId(), event.getLayoutId(), event.getStr());
         } else {
-            model.updateSideOfToast(event.getMenuId(), event.getLayoutId(), event.getResourceId());
+            model.updateImageResource(event.getMenuId(), event.getLayoutId(), event.getResourceId());
         }
         refreshNavMenu();
     }
-
 
 
 }

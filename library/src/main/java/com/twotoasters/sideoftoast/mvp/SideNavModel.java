@@ -46,11 +46,11 @@ public class SideNavModel {
         return sideOfToast.getFooterItem();
     }
 
-    public void updateSideOfToast(int menuId, int layoutId, String str) {
-       sideOfToast.updateResource(menuId, layoutId, str);
+    public void updateStringResource(int menuId, int layoutId, String str) {
+       sideOfToast.updateStringResource(menuId, layoutId, str);
     }
 
-    public void updateSideOfToast(int menuId, int layoutId, int resourceId) {
+    public void updateImageResource(int menuId, int layoutId, int resourceId) {
         sideOfToast.updateImageResource(menuId, layoutId, resourceId);
 
     }

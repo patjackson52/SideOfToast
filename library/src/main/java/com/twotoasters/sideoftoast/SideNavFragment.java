@@ -68,14 +68,6 @@ public class SideNavFragment extends Fragment {
     }
 
     @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        if (presenter != null) {
-            presenter.onPrepareOptionsMenu(menu);
-        }
-        super.onPrepareOptionsMenu(menu);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(getArguments().getInt(LAYOUT_ID), container, false);
@@ -104,6 +96,7 @@ public class SideNavFragment extends Fragment {
         return presenter.onOptionsItemSelected(item)
                 || super.onOptionsItemSelected(item);
     }
+
 
     private SideNavPresenter createPresenter() {
         int startPosition = 0;

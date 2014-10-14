@@ -198,7 +198,7 @@ public class SideOfToast implements Serializable {
     }
 
 
-    public void updateResource(int id, int layoutId, String str) {
+    public void updateStringResource(int id, int layoutId, String str) {
         if (footer.getMenuId() == id) {
             footer.updateTextMap(layoutId, str);
         } else {
