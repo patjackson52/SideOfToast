@@ -164,9 +164,11 @@ public class SideOfToast implements Serializable {
         FragmentManager fm = activity.getSupportFragmentManager();
 
         Fragment fragment = fm.findFragmentByTag(SideNavFragment.TAG);
+        if (fragment == null) {
+            fragment =  SideNavFragment.getInstance(this);
+        }
 
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        if (fragment == null) fragment = (Fragment) SideNavFragment.getInstance(this);
         fragmentTransaction.replace(R.id.drawer_contents,
                 fragment,
                 SideNavFragment.TAG);
