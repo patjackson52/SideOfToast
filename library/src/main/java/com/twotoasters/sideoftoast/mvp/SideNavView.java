@@ -14,7 +14,6 @@ import com.twotoasters.sideoftoast.Events;
 import com.twotoasters.sideoftoast.R;
 import com.twotoasters.sideoftoast.SideNavItemAdapter;
 import com.twotoasters.sideoftoast.SideOfToast;
-import com.twotoasters.sideoftoast.items.ToastMenuFooterItem;
 import com.twotoasters.sideoftoast.items.ToastMenuItem;
 
 
@@ -24,7 +23,6 @@ public class SideNavView extends FragmentViewImpl<Fragment> {
     private ListView drawerListView;
     private View fragmentContainerView;
     private View contentView;
-    private View footer;
     private boolean slidingContent;
 
     private ActionBarDrawerToggle drawerToggle;
@@ -54,20 +52,6 @@ public class SideNavView extends FragmentViewImpl<Fragment> {
     public boolean isDrawerOpen() {
         return drawerLayout != null && drawerLayout.isDrawerOpen(fragmentContainerView);
     }
-
-    public void setFooterLayout(ToastMenuFooterItem footerItem) {
-        if (footer != null) {
-            drawerListView.removeFooterView(footer);
-        }
-
-        footer = View.inflate(getActivity(),
-                footerItem.getLayoutId(),
-                null);
-        drawerListView.addFooterView(footer, null, footerItem.isEnabled());
-
-        footerItem.setImageOrText(footer, -1);
-    }
-
 
     public void setMenuItems(final SideOfToast sideOfToast) {
         getActivity().runOnUiThread(new Runnable() {

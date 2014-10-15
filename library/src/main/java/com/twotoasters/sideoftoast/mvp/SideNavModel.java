@@ -1,7 +1,6 @@
 package com.twotoasters.sideoftoast.mvp;
 
 import com.twotoasters.sideoftoast.SideOfToast;
-import com.twotoasters.sideoftoast.items.ToastMenuFooterItem;
 import com.twotoasters.sideoftoast.items.ToastMenuItem;
 import com.twotoasters.sideoftoast.items.Utils;
 
@@ -40,10 +39,6 @@ public class SideNavModel {
 
     public SideOfToast getSideOfToast() {
         return sideOfToast;
-    }
-
-    public ToastMenuFooterItem getFooterItem() {
-        return sideOfToast.getFooterItem();
     }
 
     public void updateStringResource(int menuId, int layoutId, String str) {
