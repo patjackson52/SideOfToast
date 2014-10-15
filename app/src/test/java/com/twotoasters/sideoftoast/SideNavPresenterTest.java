@@ -1,7 +1,6 @@
 package com.twotoasters.sideoftoast;
 
 import android.content.res.Configuration;
-import android.os.Bundle;
 
 import com.twotoasters.sideoftoast.mvp.SideNavModel;
 import com.twotoasters.sideoftoast.mvp.SideNavPresenter;
@@ -31,7 +30,6 @@ public class SideNavPresenterTest {
     @Mock SideNavModel model;
     @Mock SideNavView view;
     @Mock SideOfToast sideOfToast;
-    @Mock Bundle outstate;
     private SideNavPresenter presenter;
 
     @Before
@@ -54,20 +52,11 @@ public class SideNavPresenterTest {
 
 
     @Test
-    public void itShouldSaveMenuPositionOnRotation() {
+    public void itShouldRefreshAfterRotation() {
         when(model.getCurrentSelectedPosition()).thenReturn(TEST_MENU_POSITION);
-        presenter.onSaveInstanceState(outstate);
-        verify(outstate).putInt(SideNavPresenter.STATE_SELECTED_POSITION,
-                TEST_MENU_POSITION);
-    }
-
-    @Test
-    public void itShouldRestoreMenuPositionAfterRotation() {
-        when(outstate.getInt(SideNavPresenter.STATE_SELECTED_POSITION))
-                .thenReturn(TEST_MENU_POSITION);
-        when(model.getCurrentSelectedPosition()).thenReturn(TEST_MENU_POSITION);
-        presenter.restoreInstanceState(outstate);
-        verify(model).setCurrentSelectedPosition(TEST_MENU_POSITION);
+        presenter.refresh();
+        verify(view).refresh();
+        verify(view, times(2)).setMenuItems(sideOfToast);
         verify(view).setCurrentSelectedPosition(TEST_MENU_POSITION);
     }
 
