@@ -15,13 +15,13 @@ import android.widget.Toast;
 import com.squareup.otto.Subscribe;
 import com.twotoasters.sideoftoast.Events;
 import com.twotoasters.sideoftoast.SideOfToast;
-import com.twotoasters.sideoftoast.items.ToastMenuFooterItem;
 import com.twotoasters.sideoftoast.items.ToastMenuItem;
 import com.twotoasters.sideoftoast.mvp.BusProvider;
 
 public class EbatesActivity extends FragmentActivity {
 
     public static final int EBATES_ITEM_TYPE = 0;
+    public static final int FOOTER_TYPE = 1;
 
     public static final int FEATURED_ID = 0;
     public static final int ALL_STORES_ID = 1;
@@ -72,9 +72,8 @@ public class EbatesActivity extends FragmentActivity {
                         .build(this);
 
 
-        ToastMenuFooterItem footer =
-                new ToastMenuFooterItem.Builder(R.layout.ebates_view_sidebar_footer)
-                        .setMenuId(FOOTER_ID)
+        ToastMenuItem footer =
+                new ToastMenuItem.Builder(FOOTER_ID, FOOTER_TYPE)
                         .addText(R.id.txtSidebarName, R.string.ebates_sidebar_account_name)
                         .addText(R.id.txtSidebarCashPaidValue, "$158.22")
                         .addText(R.id.txtSidebarCashPendingValue, "$1000.00")
@@ -85,12 +84,13 @@ public class EbatesActivity extends FragmentActivity {
 
         SideOfToast sideOfToast = new SideOfToast.Builder()
                 .addItemViewType(EBATES_ITEM_TYPE, R.layout.ebates_item_sidebar)
+                .addItemViewType(FOOTER_TYPE, R.layout.ebates_view_sidebar_footer)
                 .addMenuItem(featuredItem)
                 .addMenuItem(allStores)
                 .addMenuItem(tafItem)
                 .addMenuItem(helpItem)
                 .addMenuItem(myEbatesItem)
-                .addFooter(footer)
+                .addMenuItem(footer)
                 .setWidth(300)
                 .setSelected(0)
                 .setSlidingContent(true)

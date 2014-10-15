@@ -35,9 +35,6 @@ public class SideNavPresenter {
     }
 
     public void refreshNavMenu() {
-        if (model.getFooterItem() != null) {
-            view.setFooterLayout(model.getFooterItem());
-        }
         view.setMenuItems(model.getSideOfToast());
         view.setCurrentSelectedPosition(model.getCurrentSelectedPosition());
     }

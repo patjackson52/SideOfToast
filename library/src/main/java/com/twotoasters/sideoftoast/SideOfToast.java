@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
-import com.twotoasters.sideoftoast.items.ToastMenuFooterItem;
 import com.twotoasters.sideoftoast.items.ToastMenuItem;
 
 import java.io.Serializable;
@@ -46,7 +45,6 @@ public class SideOfToast implements Serializable {
     private final int listLayoutId;
     private final HashMap itemViewTypes;
     private LinkedHashMap<Integer, ToastMenuItem> items;
-    private ToastMenuFooterItem footer;
     private int width;
     private int selectedPosition;
     private static Level logLevel = Level.OFF;
@@ -59,7 +57,6 @@ public class SideOfToast implements Serializable {
         listLayoutId = builder.listLayoutId;
         this.itemViewTypes = builder.itemViewTypes;
         this.width = builder.width;
-        this.footer = builder.footerItem;
 
         logLevel = (builder.logLevel != null)
                 ? builder.logLevel
@@ -187,39 +184,21 @@ public class SideOfToast implements Serializable {
         return (int) getItemViewTypes().get(type);
     }
 
-    public ToastMenuFooterItem getFooterItem() {
-        return footer;
-    }
-
-    public int getFooterLayout() {
-        return footer.getLayoutId();
-    }
-
     public int getSelectedPosition() {
         return selectedPosition;
     }
 
-
     public void updateStringResource(int id, int layoutId, String str) {
-        if (footer.getMenuId() == id) {
-            footer.updateTextMap(layoutId, str);
-        } else {
-            ToastMenuItem tmp = items.get(Integer.valueOf(id));
-            if (tmp != null) {
-                tmp.updateTextMap(layoutId, str);
-            }
+        ToastMenuItem tmp = items.get(Integer.valueOf(id));
+        if (tmp != null) {
+            tmp.updateTextMap(layoutId, str);
         }
-
     }
 
     public void updateImageResource(int menuId, int layoutId, int resourceId) {
-        if (footer.getMenuId() == menuId) {
-            footer.updateImageMap(layoutId, resourceId);
-        } else {
-            ToastMenuItem tmp = items.get(Integer.valueOf(menuId));
-            if (tmp != null) {
-                tmp.updateImageMap(layoutId, resourceId);
-            }
+        ToastMenuItem tmp = items.get(Integer.valueOf(menuId));
+        if (tmp != null) {
+            tmp.updateImageMap(layoutId, resourceId);
         }
     }
 
@@ -239,7 +218,6 @@ public class SideOfToast implements Serializable {
         private final int listLayoutId;
         private HashMap itemViewTypes;
         private LinkedHashMap<Integer, ToastMenuItem> items;
-        private ToastMenuFooterItem footerItem;
         private Level logLevel;
         private int width;
         private int selectedPosition;
@@ -267,11 +245,6 @@ public class SideOfToast implements Serializable {
          */
         public Builder addMenuItem(ToastMenuItem item) {
             items.put(item.getMenuId(), item);
-            return this;
-        }
-
-        public Builder addFooter(ToastMenuFooterItem footerItem) {
-            this.footerItem = footerItem;
             return this;
         }
 

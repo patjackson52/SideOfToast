@@ -9,7 +9,7 @@ import com.twotoasters.sideoftoast.SideOfToast;
 
 import java.util.HashMap;
 
-public abstract class ValueMappedItem {
+public class ValueMappedItem {
 
     private HashMap<Integer, Integer> imageMap;
     private HashMap<Integer, String> textMap;
