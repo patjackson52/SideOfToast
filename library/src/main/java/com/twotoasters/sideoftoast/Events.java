@@ -12,9 +12,9 @@ public class Events {
             this.menuId = menuId;
         }
 
-        public SetResourceEvent(int menuId, int layoutId, String str) {
+        public SetResourceEvent(int menuId, int resId, String str) {
             this.menuId = menuId;
-            this.layoutId = layoutId;
+            this.layoutId = resId;
             this.str = str;
         }
 

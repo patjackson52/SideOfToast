@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 
 import com.twotoasters.sideoftoast.items.ToastMenuFooterItem;
 import com.twotoasters.sideoftoast.items.ToastMenuItem;
-import com.twotoasters.sideoftoast.mvp.BusProvider;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -163,20 +162,17 @@ public class SideOfToast implements Serializable {
      */
     private void addSideNavFragment(FragmentActivity activity) {
         FragmentManager fm = activity.getSupportFragmentManager();
+
+        Fragment fragment = fm.findFragmentByTag(SideNavFragment.TAG);
+        if (fragment == null) {
+            fragment =  SideNavFragment.getInstance(this);
+        }
+
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        Fragment fragment = (Fragment) SideNavFragment.getInstance(this);
-        fragmentTransaction.add(R.id.drawer_contents,
+        fragmentTransaction.replace(R.id.drawer_contents,
                 fragment,
                 SideNavFragment.TAG);
         fragmentTransaction.commit();
-    }
-
-    public void setSelected(int position) {
-        BusProvider.post(new SetSelectedItemEvent(position));
-    }
-
-    public void setSelectedPosition(int selectedPosition) {
-        this.selectedPosition = selectedPosition;
     }
 
     public HashMap getItemViewTypes() {
@@ -204,7 +200,7 @@ public class SideOfToast implements Serializable {
     }
 
 
-    public void updateResource(int id, int layoutId, String str) {
+    public void updateStringResource(int id, int layoutId, String str) {
         if (footer.getMenuId() == id) {
             footer.updateTextMap(layoutId, str);
         } else {
@@ -331,18 +327,6 @@ public class SideOfToast implements Serializable {
         public Builder setSelected(int position) {
             this.selectedPosition = position;
             return this;
-        }
-    }
-
-    public class SetSelectedItemEvent {
-        private final int position;
-
-        public SetSelectedItemEvent(int position) {
-            this.position = position;
-        }
-
-        public int getPosition() {
-            return position;
         }
     }
 }

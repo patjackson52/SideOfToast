@@ -27,13 +27,14 @@ public class SideNavView extends FragmentViewImpl<Fragment> {
     private View footer;
     private boolean slidingContent;
 
-    /**
-     * Helper component that ties the action bar to the navigation drawer.
-     */
     private ActionBarDrawerToggle drawerToggle;
 
     public SideNavView(Fragment fragment) {
         super(fragment);
+        refresh();
+    }
+
+    public void refresh() {
         setupWidgets();
         setUpNavDrawer();
     }
@@ -72,8 +73,7 @@ public class SideNavView extends FragmentViewImpl<Fragment> {
     }
 
 
-    public void setMenuItems(final ToastMenuItem[] items,
-                             final SideOfToast sideOfToast) {
+    public void setMenuItems(final SideOfToast sideOfToast) {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -90,19 +90,11 @@ public class SideNavView extends FragmentViewImpl<Fragment> {
         if (drawerListView != null) {
             drawerListView.setItemChecked(position, true);
         }
-
-        if (drawerLayout != null) {
-//            drawerLayout.closeDrawer(fragmentContainerView);
-        }
     }
 
 
     public void setUpNavDrawer() {
         fragmentContainerView = getActivity().findViewById(R.id.drawer_layout);
-
-        // set a custom shadow that overlays the main content when the drawer opens
-//        this.drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-        // set up the drawer's list view with items and click listener
 
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
