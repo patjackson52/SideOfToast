@@ -1,7 +1,6 @@
 package com.twotoasters.sideoftoast.mvp;
 
 import android.content.res.Configuration;
-import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.squareup.otto.Subscribe;
@@ -22,17 +21,9 @@ public class SideNavPresenter {
         refreshNavMenu();
     }
 
-
-    public Bundle onSaveInstanceState(Bundle outState) {
-        outState.putInt(STATE_SELECTED_POSITION, model.getCurrentSelectedPosition());
-        return outState;
-    }
-
-    public void restoreInstanceState(Bundle savedInstanceState) {
-        if (savedInstanceState != null) {
-            model.setCurrentSelectedPosition(savedInstanceState.getInt(STATE_SELECTED_POSITION));
-            view.setCurrentSelectedPosition(model.getCurrentSelectedPosition());
-        }
+    public void refresh() {
+        view.refresh();
+        refreshNavMenu();
     }
 
     public void onConfigurationChanged(Configuration newConfig) {

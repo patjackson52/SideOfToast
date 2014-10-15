@@ -40,6 +40,7 @@ public class SideNavFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         setHasOptionsMenu(true);
     }
 
@@ -48,9 +49,10 @@ public class SideNavFragment extends Fragment {
         super.onStart();
         if (presenter == null) {
             presenter = createPresenter();
-            presenter.restoreInstanceState(savedInstanceState);
             // Some older devices don't have the presenter created before the options menu is created
             getActivity().invalidateOptionsMenu();
+        } else {
+            presenter.refresh();
         }
         BusProvider.register(presenter);
     }
@@ -71,13 +73,6 @@ public class SideNavFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(getArguments().getInt(LAYOUT_ID), container, false);
-    }
-
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        presenter.onSaveInstanceState(outState);
-        super.onSaveInstanceState(outState);
     }
 
     @Override

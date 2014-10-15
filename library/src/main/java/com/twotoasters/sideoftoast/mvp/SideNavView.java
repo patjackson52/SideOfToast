@@ -29,6 +29,10 @@ public class SideNavView extends FragmentViewImpl<Fragment> {
 
     public SideNavView(Fragment fragment) {
         super(fragment);
+        refresh();
+    }
+
+    public void refresh() {
         setupWidgets();
         setUpNavDrawer();
     }

@@ -15,8 +15,8 @@ public class SideNavModel {
         currentSelectedPosition = startPosition;
         this.sideOfToast = sideOfToast;
         currentSelectedPosition = sideOfToast.getSelectedPosition();
-
     }
+
     public int getCurrentSelectedPosition() {
         return currentSelectedPosition;
     }
@@ -47,7 +47,6 @@ public class SideNavModel {
 
     public void updateImageResource(int menuId, int layoutId, int resourceId) {
         sideOfToast.updateImageResource(menuId, layoutId, resourceId);
-
     }
 
 }
