@@ -12,8 +12,6 @@ apply plugin: 'android-sdk-manager'
 apply plugin: 'com.android.library'
 apply plugin: 'robolectric'
 
-def gitSha = 'git rev-parse --short HEAD'.execute([], project.rootDir).text.trim()
-def buildTime = new Date().format("yyyy-MM-dd'T'HH:mm'Z'", TimeZone.getTimeZone("UTC"))
 android {
     compileSdkVersion Integer.parseInt(project.ANDROID_BUILD_SDK_VERSION)
     buildToolsVersion project.ANDROID_BUILD_TOOLS_VERSION
@@ -22,10 +20,10 @@ android {
         minSdkVersion Integer.parseInt(ANDROID_BUILD_MIN_SDK_VERSION)
         targetSdkVersion Integer.parseInt(ANDROID_BUILD_TARGET_SDK_VERSION)
 
-        applicationId "com.twotoasters.sideoftoast"
+        versionName VERSION_NAME
+        versionCode Integer.parseInt(VERSION_CODE)
 
-        buildConfigField "String", "GIT_SHA", "\"${gitSha}\""
-        buildConfigField "String", "BUILD_TIME", "\"${buildTime}\""
+        applicationId GROUP
     }
 
     compileOptions {
