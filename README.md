@@ -1,4 +1,6 @@
-#Side of Toast
+# Side of Toast
+[![Build Status for master](https://travis-ci.org/twotoasters/SideOfToast.svg?branch=master)](https://travis-ci.org/twotoasters/SideOfToast)
+
 
 _Quick, easy_ side navigation menu for Android.  
 
