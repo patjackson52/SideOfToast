@@ -44,6 +44,11 @@ android {
             debuggable false
         }
     }
+    android {
+        lintOptions {
+            abortOnError false
+        }
+    }
 }
 
 dependencies {
@@ -51,5 +56,27 @@ dependencies {
     compile 'com.squareup:otto:1.3.5'
     compile 'com.android.support:support-v4:20.+'
 }
+
+def isReleaseBuild() {
+    return version.contains("SNAPSHOT") == false
+}
+
+apply plugin: 'checkstyle'
+task checkstyle(type: Checkstyle) {
+
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+    exclude '**/R.java'
+    exclude '**/BuildConfig.java'
+    configFile file("${project.rootDir}/config/checkstyle.xml")
+
+    def configProps = ['checkstyleConfigDir': project.rootDir.path + "/config"]
+    configProperties configProps
+
+    // empty classpath
+    classpath = files()
+}
+preBuild.dependsOn('checkstyle')
 
 apply from: 'https://raw.github.com/twotoasters/gradle-mvn-push/master/gradle-mvn-push.gradle'

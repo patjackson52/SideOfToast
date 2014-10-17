@@ -9,7 +9,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.squareup.otto.Subscribe;
@@ -20,15 +19,15 @@ import com.twotoasters.sideoftoast.mvp.BusProvider;
 
 public class EbatesActivity extends FragmentActivity {
 
-    public static final int EBATES_ITEM_TYPE = 0;
-    public static final int FOOTER_TYPE = 1;
+    private static final int EBATES_ITEM_TYPE = 0;
+    private static final int FOOTER_TYPE = 1;
 
-    public static final int FEATURED_ID = 0;
-    public static final int ALL_STORES_ID = 1;
-    public static final int TELL_A_FRIEND_ID = 2;
-    public static final int HELP_ID = 3;
-    public static final int MY_EBATES_ID = 4;
-    public static final int FOOTER_ID = 5;
+    private static final int FEATURED_ID = 0;
+    private static final int ALL_STORES_ID = 1;
+    private static final int TELL_A_FRIEND_ID = 2;
+    private static final int HELP_ID = 3;
+    private static final int MY_EBATES_ID = 4;
+    private static final int FOOTER_ID = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +81,7 @@ public class EbatesActivity extends FragmentActivity {
                         .setEnabled(false)
                         .build(this);
 
-        SideOfToast sideOfToast = new SideOfToast.Builder()
+        new SideOfToast.Builder()
                 .addItemViewType(EBATES_ITEM_TYPE, R.layout.ebates_item_sidebar)
                 .addItemViewType(FOOTER_TYPE, R.layout.ebates_view_sidebar_footer)
                 .addMenuItem(featuredItem)
@@ -130,7 +129,7 @@ public class EbatesActivity extends FragmentActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_ebates, container, false);
-            ((Button) rootView.findViewById(R.id.btn_change_cash)).setOnClickListener(
+            rootView.findViewById(R.id.btn_change_cash).setOnClickListener(
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -142,7 +141,7 @@ public class EbatesActivity extends FragmentActivity {
                         }
                     });
 
-            ((Button) rootView.findViewById(R.id.btn_change_icon)).setOnClickListener(
+            rootView.findViewById(R.id.btn_change_icon).setOnClickListener(
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

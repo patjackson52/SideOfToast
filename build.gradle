@@ -11,7 +11,6 @@ buildscript {
         // in the individual module build.gradle files
     }
 }
-def configDir = new File(rootDir, 'config')
 
 subprojects {
 
@@ -19,21 +18,6 @@ subprojects {
         jcenter()
     }
 
-    apply plugin: 'checkstyle'
-    task checkstyle(type: Checkstyle) {
 
-        source 'src'
-        include '**/*.java'
-        exclude '**/gen/**'
-        exclude '**/R.java'
-        exclude '**/BuildConfig.java'
-
-        configFile project.file('../config/checkstyle.xml')
-        def configProps = ['proj.module.dir': configDir.absolutePath]
-        configProperties configProps
-
-        // empty classpath
-        classpath = files()
-    }
 
 }

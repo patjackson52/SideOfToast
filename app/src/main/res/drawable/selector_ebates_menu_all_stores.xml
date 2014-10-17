@@ -3,8 +3,8 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true"
           android:state_activated="true"
-          android:drawable="@drawable/ic_menu_allstores_normal"></item>
+          android:drawable="@drawable/ic_menu_allstores_normal"/>
     <item android:state_activated="true"
-          android:drawable="@drawable/ic_menu_allstores_selected"></item>
-    <item android:drawable="@drawable/ic_menu_allstores_normal"></item>
+          android:drawable="@drawable/ic_menu_allstores_selected"/>
+    <item android:drawable="@drawable/ic_menu_allstores_normal"/>
 </selector>

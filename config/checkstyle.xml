@@ -5,7 +5,7 @@
 
 <module name="Checker">
     <module name="SuppressionFilter">
-        <property name="file" value="${proj.module.dir}/checkstyle-suppressions.xml"/>
+        <property name="file" value="${checkstyleConfigDir}/checkstyle-suppressions.xml"/>
     </module>
     
     <module name="NewlineAtEndOfFile">

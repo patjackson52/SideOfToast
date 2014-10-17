@@ -24,7 +24,6 @@ public class SideNavFragment extends Fragment {
     public static final String LAYOUT_ID = "layout_id_key";
 
     private SideNavPresenter presenter;
-    private Bundle savedInstanceState;
 
     public static SideNavFragment getInstance(SideOfToast sideOfToast) {
         SideNavFragment fragment = new SideNavFragment();
@@ -61,12 +60,6 @@ public class SideNavFragment extends Fragment {
     public void onStop() {
         BusProvider.unregister(presenter);
         super.onStop();
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        this.savedInstanceState = savedInstanceState;
     }
 
     @Override

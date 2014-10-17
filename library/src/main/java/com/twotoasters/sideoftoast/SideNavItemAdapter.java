@@ -26,7 +26,7 @@ public class SideNavItemAdapter extends ArrayAdapter<ToastMenuItem> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = null;
+        View view;
         ToastMenuItem toastMenuItem = this.getItem(position);
 
         view = inflater.inflate(sideOfToast.getLayoutForType(toastMenuItem.getItemViewType()), null);

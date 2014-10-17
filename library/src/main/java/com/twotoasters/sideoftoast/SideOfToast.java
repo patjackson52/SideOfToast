@@ -36,7 +36,7 @@ public class SideOfToast implements Serializable {
 
 
     public interface ReadyForToast {
-        void ToastMenuItemClicked(int position);
+        void toastMenuItemClicked(int position);
     }
 
     private static final String TAG = "SideOfToast";
@@ -75,7 +75,7 @@ public class SideOfToast implements Serializable {
      * Inserts a NavigationDrawer View in the view hierarchy for the supplied activity.
      * Then attaches a fragment containing the Nav Menu
      *
-     * @param activity
+     * @param activity Activity that will have Side Nav Menu added to it's view hierarchy
      * @return SideOfToast
      */
     public SideOfToast create(FragmentActivity activity) {
@@ -100,13 +100,13 @@ public class SideOfToast implements Serializable {
         if (includeActionBarInContent) {
             firstViewInLayout = (ViewGroup) ((ViewGroup) activity
                     .getWindow().getDecorView()).getChildAt(0);
-            activityRoot = (ViewGroup) ((ViewGroup) activity.getWindow().getDecorView());
+            activityRoot = (ViewGroup) activity.getWindow().getDecorView();
             fl.setPadding(0, getStatusBarHeight(activity), 0, 0);
         } else {
             firstViewInLayout = (ViewGroup) ((ViewGroup) activity
                     .findViewById(android.R.id.content)).getChildAt(0);
-            activityRoot = (ViewGroup) ((ViewGroup) activity
-                    .findViewById(android.R.id.content));
+            activityRoot = (ViewGroup) activity
+                    .findViewById(android.R.id.content);
         }
         activityRoot.removeView(firstViewInLayout);
 
@@ -155,7 +155,7 @@ public class SideOfToast implements Serializable {
     /**
      * Adds SideNavFragment to the Navigation drawer.
      *
-     * @param activity
+     * @param activity reference to current activity
      */
     private void addSideNavFragment(FragmentActivity activity) {
         FragmentManager fm = activity.getSupportFragmentManager();
@@ -211,7 +211,7 @@ public class SideOfToast implements Serializable {
     }
 
     /**
-     * ******************** BEGIN BUILDER CLASS **************************************
+     * ******************** BEGIN BUILDER CLASS **************************************.
      */
 
     public static class Builder {
@@ -240,8 +240,8 @@ public class SideOfToast implements Serializable {
         /**
          * Adds ToastMenuItem to the Side Menu.  Will display in the order they were added.
          *
-         * @param item
-         * @return
+         * @param item pre-configured ToastMenuItem
+         * @return instance of Builder
          */
         public Builder addMenuItem(ToastMenuItem item) {
             items.put(item.getMenuId(), item);
@@ -254,10 +254,9 @@ public class SideOfToast implements Serializable {
         }
 
         /**
-         * Logging level from Log class constants
+         * Logging level from Log class constants.
          * Log.VERBOSE, Log.ERROR, etc
          *
-         * @param level
          * @return
          */
         public Builder setLogLevel(Level level) {
@@ -270,7 +269,7 @@ public class SideOfToast implements Serializable {
          * Default is 300dp
          *
          * @param width dp
-         * @return
+         * @return instance of Builder
          */
         public Builder setWidth(int width) {
             this.width = width;
@@ -280,8 +279,8 @@ public class SideOfToast implements Serializable {
         /**
          * Setting true slides the content view to the side as the drawer opens.
          *
-         * @param slidingContent
-         * @return
+         * @param slidingContent true if opening drawer is to slide activity view to the right.
+         * @return instance of builder
          */
         public Builder setSlidingContent(boolean slidingContent) {
             this.slidingContent = slidingContent;

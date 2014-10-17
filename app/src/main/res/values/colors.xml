@@ -1,57 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--SitterCity-->
-    <color name="Black">#000000</color>
-    <color name="BlackAlpha">#26000000</color>
-    <color name="White">#FFFFFF</color>
-    <color name="WhiteHalf">#80FFFFFF</color>
-    <color name="Appbg">#eeeeee</color>
-    <color name="Blue">#0076bb</color>
-    <color name="LightBlue">#edf5fa</color>
-    <color name="Orange">#e87542</color>
-    <color name="LightOrange">#1ae87542</color>
-    <color name="Navy">#274367</color>
-    <color name="Grey">#707070</color>
-    <color name="MidGrey">#b2b2b2</color>
-    <color name="LightGrey">#c5c5c5</color>
-    <color name="Divider">#dcdcdc</color>
-    <color name="NavmenuDivider">#eeeeee</color>
-    <color name="BlueSelected">#00539A</color>
-    <color name="Green">#83b765</color>
-
-    <!--ebates-->
-
-    <color name="eba_green">#19b333</color>
-    <color name="eba_ab_highlight">#4d000000</color>
-
-    <color name="eba_bg_color">#e7e7e7</color>
-
-    <color name="eba_orange">#FD5B33</color>
-    <color name="eba_yellow">#FFCC02</color>
-    <color name="eba_gray_divider">#DCDCDC</color>
-    <color name="eba_gray_verylight">#A2A2A2</color>
-    <color name="eba_gray_light">#808080</color>
-    <color name="eba_gray_lightmed">#717171</color>
-    <color name="eba_gray_med">#555555</color>
     <color name="eba_gray_meddark">#505050</color>
-    <color name="eba_gray_dark">#4F4F4F</color>
-    <color name="eba_gray_very_dark">#333333</color>
-
-    <color name="eba_ab_text">#d1f0d6</color>
-
-    <color name="eba_white_pressed">#B2B2B2</color>
-
-    <color name="holoBlue">#33B5E5</color>
-    <color name="holoYellowLight">#FFFFBB33</color>
-    <color name="eba_croutonred">#B38E0201</color>
-    <color name="eba_croutonblack">#B3000000</color>
-
-    <color name="eba_circle_indicator_filled">#FFFFFF</color>
-    <color name="eba_circle_indicator_trans">#32FFFFFF</color>
-
-    <color name="coupon_background_shadow">#20000000</color>
-    <color name="coupon_background_pressed">#EEEEEE</color>
-
-    <color name="store_detail_header_overlay_bg">#CC000000</color>
-
+    <color name="eba_green">#19b333</color>
+    <color name="NavmenuDivider">#eeeeee</color>
+    <color name="eba_yellow">#FFCC02</color>
+    <color name="Blue">#0076bb</color>
+    <color name="White">#FFFFFF</color>
+    <color name="Grey">#707070</color>
+    <color name="eba_gray_divider">#DCDCDC</color>
+    <color name="eba_orange">#FD5B33</color>
+    <color name="LightGrey">#c5c5c5</color>
 </resources>

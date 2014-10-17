@@ -4,147 +4,23 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <!--ebates-->
-    <dimen name="field_margin">8dp</dimen>
-    <dimen name="field_margin_1_2">4dp</dimen>
-
-    <dimen name="crouton_height">48dp</dimen>
-    <dimen name="view_pager_tabs_height">48dp</dimen>
-
-    <dimen name="actionbar_toast_offset_right">24dp</dimen>
-    <dimen name="actionbar_toast_offset_top">56dp</dimen>
-    <dimen name="actionbar_tab_horizontal_padding">0dp</dimen>
-    <dimen name="actionbar_progress_bar_offset">-6.5dp</dimen>
-
-    <dimen name="search_icon_padding">8dp</dimen>
-
     <dimen name="touchable_field_height">48dp</dimen>
     <dimen name="divider_thickness">1dp</dimen>
     <dimen name="divider_section_thickness">2dp</dimen>
-    <dimen name="dialog_title_divider_height">2dp</dimen>
-    <dimen name="edit_text_drawable_padding">12dp</dimen>
 
     <dimen name="standard_padding">16dp</dimen>
-    <dimen name="standard_padding_1_4">4dp</dimen>
     <dimen name="standard_padding_1_2">8dp</dimen>
     <dimen name="standard_padding_3_4">12dp</dimen>
 
 
     <!-- font sizes -->
-    <dimen name="textsize_nano">10sp</dimen>
-    <dimen name="textsize_micro">12sp</dimen>
     <dimen name="textsize_mini">14sp</dimen>
     <dimen name="textsize_small">16sp</dimen>
     <dimen name="textsize_med">18sp</dimen>
-    <dimen name="textsize_large">20sp</dimen>
-    <dimen name="textsize_xlarge">24sp</dimen>
-
-    <!-- Tutorial -->
-    <dimen name="tutorial_bubble_left_margin">@dimen/standard_padding_3_4</dimen>
-    <dimen name="tutorial_bubble_right_margin">14dp</dimen>
-    <dimen name="tutorial_button_left_margin">@dimen/standard_padding_1_2</dimen>
-    <dimen name="tutorial_button_text_size">18sp</dimen>
-    <dimen name="tutorial_circle_radius">4dp</dimen>
-    <dimen name="tutorial_textsize_xlarge">@dimen/textsize_xlarge</dimen>
-    <dimen name="tutorial_textsize_med">@dimen/textsize_med</dimen>
-    <dimen name="tutorial_viewpager_width">336dp</dimen>
-    <dimen name="tutorial_viewpager_height">254dp</dimen>
-
-    <!-- auth -->
-    <dimen name="auth_or_text_margin">11dp</dimen> <!-- redline said 20 -->
-
-    <!-- login -->
-    <dimen name="login_padding_top">8dp</dimen>
-    <dimen name="login_reset_pwd_padding">18dp</dimen>
-    <dimen name="login_reset_pwd_margin_top">0dp</dimen>
-    <dimen name="login_button_margin_top">26dp</dimen> <!-- redline said 47 -->
-    <dimen name="login_nav_text_width">80dp</dimen>
-    <dimen name="login_nav_text_margin_inner">12dp</dimen>
-    <dimen name="login_margin_bottom">24dp</dimen>
-    <dimen name="login_nav_text_margin_top">130dp</dimen>
-    <dimen name="login_padding_bottom">24dp</dimen>
-
-    <!-- signup -->
-    <dimen name="signup_crouton_text_margin_left">81dp</dimen>
-    <dimen name="signup_terms_margin_top">10dp</dimen>
-    <dimen name="signup_terms_margin_bottom">10dp</dimen>
 
     <!-- sidebar -->
     <dimen name="sidebar_info_margin">24dp</dimen>
-    <dimen name="sidebar_myebates_info_height">32dp</dimen>
     <dimen name="sidebar_footer_name_textsize">@dimen/textsize_small</dimen>
     <dimen name="sidebar_footer_textsize">@dimen/textsize_mini</dimen>
-    <dimen name="sidebar_width">240dp</dimen>
-
-    <!-- dash -->
-    <dimen name="dash_grid_spacing">16dp</dimen>
-    <dimen name="dash_store_logo_width">112dp</dimen>
-    <dimen name="dash_store_logo_height">46dp</dimen><!-- includes 8dp of padding above and below -->
-    <dimen name="dash_store_logo_margin_left">4dp</dimen>
-    <dimen name="dash_store_logo_margin_right">4dp</dimen>
-    <dimen name="dash_store_search_header_height">96dp</dimen>
-    <dimen name="dash_store_search_text_margin_left">40dp</dimen>
-
-    <dimen name="coupon_background_shadow_height">2dp</dimen>
-    <dimen name="coupon_background_corner_radius">2dp</dimen>
-
-    <!-- hot deals -->
-    <dimen name="hot_deals_grid_spacing">8dp</dimen>
-    <dimen name="hot_deals_store_logo_margin_left">11dp</dimen>
-    <dimen name="hot_deals_store_logo_width">112dp</dimen>
-    <dimen name="hot_deals_store_logo_height">46dp</dimen><!-- includes 8dp of padding above and below -->
-    <dimen name="hot_deals_cash_back_text_size">@dimen/textsize_mini</dimen>
-
-    <!-- primary campaign -->
-    <dimen name="primary_campaign_header_shadow_height">3dp</dimen>
-
-    <!-- favorite stores -->
-    <dimen name="fav_stores_empty_image_margin_top">0dp</dimen>
-    <dimen name="fav_stores_empty_text_margin_top">38dp</dimen>
-    <dimen name="fav_stores_empty_text_two_margin_top">10dp</dimen>
-    <dimen name="fav_stores_cash_back_text_size">@dimen/textsize_micro</dimen>
-
-    <!-- search -->
-    <dimen name="product_results_image_size">91dp</dimen>
-
-    <!-- all stores -->
-    <dimen name="all_stores_item_margin_right">24dp</dimen>
-    <dimen name="all_stores_empty_text_margin_top">32dp</dimen>
-
-    <!-- store detail -->
-    <dimen name="store_detail_header_shadow_height">3dp</dimen>
-    <dimen name="store_detail_shop_now_padding_right">24dp</dimen>
-    <dimen name="store_detail_header_block_padding">24dp</dimen>
-    <dimen name="store_detail_header_text_height_collapsed">44dp</dimen>
-    <dimen name="store_detail_empty_view_height">80dp</dimen>
-
-    <!-- browse -->
-    <dimen name="browse_bottom_bar_icon_size">32dp</dimen>
-    <dimen name="browse_code_copied_bubble_anim_dist">-50dp</dimen>
-    <dimen name="browse_cashback_bubble_anim_dist">50dp</dimen>
-    <dimen name="browse_action_bar_code_margin_vertical">8dp</dimen>
-
-    <!-- Tell a Friend -->
-    <dimen name="taf_bonus_top_margin">-4dp</dimen>
-    <dimen name="taf_copy_margin_l_r">@dimen/standard_padding</dimen>
-    <dimen name="taf_corner_bonus_w_and_h">64dp</dimen>
-    <dimen name="taf_dollar_bonus_margin">3dp</dimen>
-    <dimen name="taf_description_txt_right_margin">24dp</dimen>
-    <dimen name="taf_max_top_margin">22dp</dimen>
-    <dimen name="taf_share_textsize_header">@dimen/textsize_med</dimen>
-    <dimen name="taf_share_textsize_content">@dimen/textsize_mini</dimen>
-
-    <!-- Share Dialog -->
-    <dimen name="share_list_min_height">128dp</dimen>
-    <dimen name="share_item_height">64dp</dimen>
-
-    <!-- My Ebates -->
-    <dimen name="my_ebates_text_size_med">@dimen/textsize_med</dimen>
-    <dimen name="my_ebates_text_size_mini">@dimen/textsize_mini</dimen>
-    <dimen name="my_ebates_item_height">48dp</dimen>
-    <dimen name="my_ebates_item_margin">@dimen/standard_padding</dimen>
-    <dimen name="my_ebates_item_section_margin">24dp</dimen>
-
-    <!-- My Ebates Details -->
-    <dimen name="my_ebates_details_header_height">62dp</dimen>
 
 </resources>

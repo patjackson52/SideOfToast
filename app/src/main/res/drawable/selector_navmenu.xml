@@ -3,11 +3,9 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_activated="true"
           android:state_pressed="true"
-          android:drawable="@drawable/nav_menu_pressed" />
+          android:drawable="@drawable/nav_menu_pressed"/>
     <item android:state_activated="true"
-          android:drawable="@drawable/navmenu_selected_background" />
+          android:drawable="@drawable/navmenu_selected_background"/>
     <item android:state_pressed="true"
-          android:drawable="@drawable/nav_menu_pressed"></item>
-
-
-    </selector>
+          android:drawable="@drawable/nav_menu_pressed"/>
+</selector>
