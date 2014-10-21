@@ -10,4 +10,6 @@
     <color name="eba_gray_divider">#DCDCDC</color>
     <color name="eba_orange">#FD5B33</color>
     <color name="LightGrey">#c5c5c5</color>
+    <color name="primaryColor">#dd322a</color>
+    <color name="primaryDarkColor">#972620</color>
 </resources>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/ebates_selector_list_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/sidebar_info_margin"
+        style="@style/SidebarInfoLayout">
+
+        <TextView
+            android:id="@+id/txtSidenavBagelsOrdered"
+            style="@style/SidebarInfoDescription"
+            android:fontFamily="@string/font_roboto_light"
+            android:text="White"/>
+
+        <TextView
+            android:id="@+id/txtSidebarCashPaidValue"
+            style="@style/SidebarInfoValue"
+            android:fontFamily="@string/font_roboto_light"/>
+    </LinearLayout>
+
+    <LinearLayout style="@style/SidebarInfoLayout">
+
+        <TextView
+            android:id="@+id/txtSidebarCashPendingDiscription"
+            style="@style/SidebarInfoDescription"
+            android:fontFamily="@string/font_roboto_light"
+            android:text="Wheat"/>
+
+        <TextView
+            android:id="@+id/txtSidebarCashPendingValue"
+            style="@style/SidebarInfoValue"
+            android:fontFamily="@string/font_roboto_light"/>
+    </LinearLayout>
+
+    <LinearLayout style="@style/SidebarInfoLayout">
+
+        <TextView
+            android:id="@+id/txtSidebarTotalCashDiscription"
+            style="@style/SidebarInfoDescription"
+            android:fontFamily="@string/font_roboto_light"
+            android:text="Bagels"/>
+
+        <TextView
+            android:id="@+id/txtSidebarTotalCashValue"
+            style="@style/SidebarInfoValue"
+            android:fontFamily="@string/font_roboto_light"/>
+    </LinearLayout>
+
+    <LinearLayout style="@style/SidebarInfoLayout">
+
+        <TextView
+            android:id="@+id/txtSidebarNextCashDiscription"
+            style="@style/SidebarInfoDescription"
+            android:fontFamily="@string/font_roboto_light"
+            android:text="Total Ordered"/>
+
+        <TextView
+            android:id="@+id/txtSidebarNextCashValue"
+            style="@style/SidebarInfoValue"
+            android:fontFamily="@string/font_roboto_light"/>
+    </LinearLayout>
+
+
+</LinearLayout>
