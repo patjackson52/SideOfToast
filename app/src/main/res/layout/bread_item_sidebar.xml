@@ -19,14 +19,14 @@
     <TextView
         android:id="@+id/txtSidebar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/touchable_field_height"
+        android:layout_height="@dimen/side_nav_height"
         android:gravity="center_vertical"
         android:fontFamily="@string/font_roboto_light"
         android:textSize="@dimen/textsize_med"
         android:textColor="@color/eba_gray_meddark"
-        android:padding="@dimen/standard_padding_3_4"
+        android:padding="@dimen/side_nav_text_padding"
         android:layout_toRightOf="@+id/navmenuitem_icon"
-        android:drawablePadding="@dimen/standard_padding_3_4"
+        android:drawablePadding="@dimen/side_nav_text_padding"
         />
 
     <View

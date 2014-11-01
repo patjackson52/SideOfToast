@@ -12,13 +12,12 @@
         style="@style/SidebarInfoLayout">
 
         <TextView
-            android:id="@+id/txtSidenavBagelsOrdered"
             style="@style/SidebarInfoDescription"
             android:fontFamily="@string/font_roboto_light"
             android:text="White"/>
 
         <TextView
-            android:id="@+id/txtSidebarCashPaidValue"
+            android:id="@+id/txt_num_white_ordered"
             style="@style/SidebarInfoValue"
             android:fontFamily="@string/font_roboto_light"/>
     </LinearLayout>
@@ -26,13 +25,12 @@
     <LinearLayout style="@style/SidebarInfoLayout">
 
         <TextView
-            android:id="@+id/txtSidebarCashPendingDiscription"
             style="@style/SidebarInfoDescription"
             android:fontFamily="@string/font_roboto_light"
             android:text="Wheat"/>
 
         <TextView
-            android:id="@+id/txtSidebarCashPendingValue"
+            android:id="@+id/txt_num_wheat_ordered"
             style="@style/SidebarInfoValue"
             android:fontFamily="@string/font_roboto_light"/>
     </LinearLayout>
@@ -40,13 +38,12 @@
     <LinearLayout style="@style/SidebarInfoLayout">
 
         <TextView
-            android:id="@+id/txtSidebarTotalCashDiscription"
             style="@style/SidebarInfoDescription"
             android:fontFamily="@string/font_roboto_light"
             android:text="Bagels"/>
 
         <TextView
-            android:id="@+id/txtSidebarTotalCashValue"
+            android:id="@+id/txt_num_bagels_ordered"
             style="@style/SidebarInfoValue"
             android:fontFamily="@string/font_roboto_light"/>
     </LinearLayout>
@@ -54,13 +51,12 @@
     <LinearLayout style="@style/SidebarInfoLayout">
 
         <TextView
-            android:id="@+id/txtSidebarNextCashDiscription"
             style="@style/SidebarInfoDescription"
             android:fontFamily="@string/font_roboto_light"
             android:text="Total Ordered"/>
 
         <TextView
-            android:id="@+id/txtSidebarNextCashValue"
+            android:id="@+id/txt_total_ordered"
             style="@style/SidebarInfoValue"
             android:fontFamily="@string/font_roboto_light"/>
     </LinearLayout>

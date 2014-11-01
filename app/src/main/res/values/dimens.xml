@@ -3,14 +3,9 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <!--ebates-->
-    <dimen name="touchable_field_height">48dp</dimen>
     <dimen name="divider_thickness">1dp</dimen>
-    <dimen name="divider_section_thickness">2dp</dimen>
 
     <dimen name="standard_padding">16dp</dimen>
-    <dimen name="standard_padding_1_2">8dp</dimen>
-    <dimen name="standard_padding_3_4">12dp</dimen>
 
 
     <!-- font sizes -->
@@ -20,7 +15,8 @@
 
     <!-- sidebar -->
     <dimen name="sidebar_info_margin">24dp</dimen>
-    <dimen name="sidebar_footer_name_textsize">@dimen/textsize_small</dimen>
     <dimen name="sidebar_footer_textsize">@dimen/textsize_mini</dimen>
+    <dimen name="side_nav_height">48dp</dimen>
+    <dimen name="side_nav_text_padding">12dp</dimen>
 
 </resources>

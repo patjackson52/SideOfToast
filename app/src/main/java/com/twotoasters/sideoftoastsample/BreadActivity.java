@@ -53,11 +53,10 @@ public class BreadActivity extends FragmentActivity {
                         .build(this);
         ToastMenuItem footer =
                 new ToastMenuItem.Builder(TOTALS_ID, TOAST_MENU_FOOTER_TYPE)
-                        .addText(R.id.txtSidebarName, R.string.ebates_sidebar_account_name)
-                        .addText(R.id.txtSidebarCashPaidValue, "0")
-                        .addText(R.id.txtSidebarCashPendingValue, "0")
-                        .addText(R.id.txtSidebarTotalCashValue, "0")
-                        .addText(R.id.txtSidebarNextCashValue, "0")
+                        .addText(R.id.txt_num_white_ordered, "0")
+                        .addText(R.id.txt_num_wheat_ordered, "0")
+                        .addText(R.id.txt_num_bagels_ordered, "0")
+                        .addText(R.id.txt_total_ordered, "0")
                         .setEnabled(false)
                         .build(this);
         new SideOfToast.Builder()
