@@ -2,40 +2,12 @@
 <resources>
 
     <string name="app_name">ToastSideMenu</string>
-
-    <!--SitterCity-->
-    <string name="parent_menu_title">Parent View</string>
-    <string name="menu_need_account_to_post_jobs">You need an account to post jobs</string>
-    <string name="menu_title_home">Home</string>
-
-    <string name="menu_login_title">Log In</string>
-    <string name="menu_sign_up_title">Sign Up</string>
-    <string name="menu_switch_title">Switch to View Jobs</string>
-    <string name="menu_are_you_sitter_title">Are you a Sitter?</string>
     <string name="roboto">sans-serif</string>
 
 
-    <!--ebates-->
     <!-- fonts -->
     <string name="font_roboto_light">fonts/Roboto-Light.ttf</string>
     <string name="font_roboto_bold">fonts/Roboto-Bold.ttf</string>
 
-    <!-- Sidebar -->
-    <string name="sidebar_cash_paid">Cash Paid</string>
-    <string name="sidebar_cash_pending">Cash Pending</string>
-    <string name="sidebar_total_cash">Total Cash Back</string>
-    <string name="sidebar_next_cash">Next Cash Back</string>
-    <string name="ebates_item_featured">Featured</string>
-    <string name="ebates_item_all_stores">All Stores</string>
-    <string name="ebates_item_tell_friend">Tell a Friend</string>
-    <string name="ebates_item_help">Help</string>
-    <string name="ebates_item_my_ebates">My Ebates</string>
-    <string name="ebates_sidebar_account_name">Joe Toaster</string>
-    <string name="sittercity_title">SitterCity</string>
-    <string name="ebates_title">Ebates</string>
-    <string name="ebates_context">Ebates</string>
-    <string name="ebates_cash_pending">Change cash pending</string>
-    <string name="ebates_btn_change_featured_image">Change Featured Icon</string>
-    <string name="sittercity_activity_text">This is a SitterCity Activity</string>
-    <string name="sc_version_string">Version 0.0.1</string>
+    <string name="bread_title">Side Of Toast</string>
 </resources>

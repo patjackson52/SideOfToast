@@ -15,7 +15,7 @@ apply plugin: 'robolectric'
 
 android {
     compileSdkVersion 21
-    buildToolsVersion "21.0.0"
+    buildToolsVersion "21.0.2"
 
     defaultConfig {
         applicationId "com.twotoasters.sideoftoastsample"
@@ -43,6 +43,7 @@ android {
 dependencies {
     compile 'com.squareup:otto:1.3.5'
     compile 'com.android.support:appcompat-v7:21.0.0'
+    compile 'com.android.support:support-v4:21.+'
     compile project(":library")
 
     androidTestCompile 'junit:junit:4.10'

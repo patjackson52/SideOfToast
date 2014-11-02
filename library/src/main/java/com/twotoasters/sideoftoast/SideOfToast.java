@@ -63,7 +63,7 @@ public class SideOfToast implements Serializable {
                 : Level.OFF;
         this.selectedPosition = builder.selectedPosition;
         this.slidingContent = builder.slidingContent;
-        this.includeActionBarInContent = builder.includeActionBarInContent;
+        this.includeActionBarInContent = builder.drawerCoversActionBar;
     }
 
 
@@ -222,7 +222,7 @@ public class SideOfToast implements Serializable {
         private int width;
         private int selectedPosition;
         private boolean slidingContent;
-        private boolean includeActionBarInContent;
+        private boolean drawerCoversActionBar = true;
 
 
         public Builder() {
@@ -287,8 +287,13 @@ public class SideOfToast implements Serializable {
             return this;
         }
 
-        public Builder includeActionBarInDrawerContent(boolean includeActionBarInContent) {
-            this.includeActionBarInContent = includeActionBarInContent;
+        /**
+         * If false the actionbar will not be covered up by the drawer.  Defaults to true.
+         * @param drawerCoversActionBar
+         * @return
+         */
+        public Builder drawerCoversActionBar(boolean drawerCoversActionBar) {
+            this.drawerCoversActionBar = drawerCoversActionBar;
             return this;
         }
 

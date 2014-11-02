@@ -22,6 +22,7 @@ public class BreadActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         addBreadMenu();
     }
 
@@ -71,7 +72,6 @@ public class BreadActivity extends FragmentActivity {
                 .addMenuItem(footer)
                 .setWidth(300)
                 .setSelected(1)
-                .includeActionBarInDrawerContent(true)
                 .build()
                 .create(this);
     }
