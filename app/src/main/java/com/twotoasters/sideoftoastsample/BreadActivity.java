@@ -1,7 +1,14 @@
 package com.twotoasters.sideoftoastsample;
 
+import android.content.ClipData;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.DragEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.twotoasters.sideoftoast.SideOfToast;
 import com.twotoasters.sideoftoast.items.ToastMenuItem;
@@ -23,6 +30,7 @@ public class BreadActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setupWidgets();
         addBreadMenu();
     }
 
@@ -75,4 +83,57 @@ public class BreadActivity extends FragmentActivity {
                 .build()
                 .create(this);
     }
+
+
+    private ImageView toast;
+
+    private void setupWidgets() {
+        toast = (ImageView) findViewById(R.id.toast1);
+        toast.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                ClipData data = ClipData.newPlainText("", "");
+                View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(v);
+                v.startDrag(data, shadowBuilder, v, 0);
+                v.setVisibility(View.INVISIBLE);
+                return false;
+            }
+        });
+    }
+
+    class MyDragListener implements View.OnDragListener {
+        Drawable enterShape = getResources().getDrawable(R.drawable.drop_target);
+        Drawable normalShape = getResources().getDrawable(R.drawable.shape);
+
+        @Override
+        public boolean onDrag(View v, DragEvent event) {
+            int action = event.getAction();
+            switch (event.getAction()) {
+                case DragEvent.ACTION_DRAG_STARTED:
+                    // do nothing
+                    break;
+                case DragEvent.ACTION_DRAG_ENTERED:
+                    v.setBackgroundDrawable(enterShape);
+                    break;
+                case DragEvent.ACTION_DRAG_EXITED:
+                    v.setBackgroundDrawable(normalShape);
+                    break;
+                case DragEvent.ACTION_DROP:
+                    // Dropped, reassign View to ViewGroup
+                    View view = (View) event.getLocalState();
+                    ViewGroup owner = (ViewGroup) view.getParent();
+                    owner.removeView(view);
+                    LinearLayout container = (LinearLayout) v;
+                    container.addView(view);
+                    view.setVisibility(View.VISIBLE);
+                    break;
+                case DragEvent.ACTION_DRAG_ENDED:
+                    v.setBackgroundDrawable(normalShape);
+                default:
+                    break;
+            }
+            return true;
+        }
+    }
+
 }
