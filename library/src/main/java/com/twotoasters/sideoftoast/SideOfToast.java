@@ -1,9 +1,9 @@
 package com.twotoasters.sideoftoast;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -78,7 +78,7 @@ public class SideOfToast implements Serializable {
      * @param activity Activity that will have Side Nav Menu added to it's view hierarchy
      * @return SideOfToast
      */
-    public SideOfToast create(FragmentActivity activity) {
+    public SideOfToast create(Activity activity) {
         convertWidthToDip(activity);
 
         DrawerLayout.LayoutParams lp = new DrawerLayout.LayoutParams(
@@ -118,7 +118,7 @@ public class SideOfToast implements Serializable {
         return this;
     }
 
-    private void convertWidthToDip(FragmentActivity activity) {
+    private void convertWidthToDip(Activity activity) {
         width = (width == 0) ? DEFAULT_WIDTH : width;
         width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 width, activity.getResources().getDisplayMetrics());
@@ -139,7 +139,7 @@ public class SideOfToast implements Serializable {
 
     }
 
-    private int getStatusBarHeight(FragmentActivity activity) {
+    private int getStatusBarHeight(Activity activity) {
         int result = 0;
         int resourceId = activity.getResources().getIdentifier(STATUS_BAR_HEIGHT,
                 DIMEN,
@@ -157,8 +157,8 @@ public class SideOfToast implements Serializable {
      *
      * @param activity reference to current activity
      */
-    private void addSideNavFragment(FragmentActivity activity) {
-        FragmentManager fm = activity.getSupportFragmentManager();
+    private void addSideNavFragment(Activity activity) {
+        FragmentManager fm = activity.getFragmentManager();
 
         Fragment fragment = fm.findFragmentByTag(SideNavFragment.TAG);
         if (fragment == null) {

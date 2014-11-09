@@ -8,8 +8,6 @@ import com.twotoasters.sideoftoast.Events;
 
 public class SideNavPresenter {
 
-    public static final String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
-
     SideNavModel model;
     SideNavView view;
 

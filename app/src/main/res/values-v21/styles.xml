@@ -4,4 +4,5 @@
         <item name="android:colorPrimary">@color/primaryColor</item>
         <item name="android:colorPrimaryDark">@color/primaryDarkColor</item>
     </style>
+
 </resources>

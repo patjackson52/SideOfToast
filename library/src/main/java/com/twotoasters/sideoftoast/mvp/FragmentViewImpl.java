@@ -2,8 +2,7 @@ package com.twotoasters.sideoftoast.mvp;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
+import android.app.Fragment;
 import android.view.View;
 
 import java.lang.ref.WeakReference;
@@ -40,7 +39,7 @@ public abstract class FragmentViewImpl<T extends Fragment> implements FragmentVi
         return null;
     }
 
-    public FragmentActivity getActivity() {
+    public Activity getActivity() {
         if (hasFragmentRef()) {
             return getFragment().getActivity();
         }

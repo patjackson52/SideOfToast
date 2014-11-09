@@ -1,10 +1,9 @@
 package com.twotoasters.sideoftoast.mvp;
 
-import android.app.ActionBar;
+import android.app.Fragment;
 import android.content.res.Configuration;
-import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -80,16 +79,12 @@ public class SideNavView extends FragmentViewImpl<Fragment> {
     public void setUpNavDrawer() {
         fragmentContainerView = getActivity().findViewById(R.id.drawer_layout);
 
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeButtonEnabled(true);
 
         // ActionBarDrawerToggle ties together the the proper interactions
         // between the navigation drawer and the action bar app icon.
         drawerToggle = new ActionBarDrawerToggle(
                 getActivity(),                    /* host Activity */
                 SideNavView.this.drawerLayout,    /* DrawerLayout object */
-                R.drawable.ic_navigation_drawer,  /* nav drawer image to replace 'Up' caret */
                 R.string.navigation_drawer_open,  /* "open drawer" description for accessibility */
                 R.string.navigation_drawer_close  /* "close drawer" description for accessibility */
         ) {
