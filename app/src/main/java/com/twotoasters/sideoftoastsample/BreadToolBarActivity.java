@@ -7,16 +7,17 @@ import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class BreadFragmentActivity extends FragmentActivity {
+public class BreadToolBarActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_with_toolbar);
         SideNavMenu.addBreadMenu(this);
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_type_menu, menu);
@@ -25,7 +26,7 @@ public class BreadFragmentActivity extends FragmentActivity {
 
     @Override
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.activity:
                 startActivity(new Intent(this, BreadActivity.class));
                 break;

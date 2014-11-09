@@ -79,9 +79,6 @@ public class SideNavView extends FragmentViewImpl<Fragment> {
     public void setUpNavDrawer() {
         fragmentContainerView = getActivity().findViewById(R.id.drawer_layout);
 
-
-        // ActionBarDrawerToggle ties together the the proper interactions
-        // between the navigation drawer and the action bar app icon.
         drawerToggle = new ActionBarDrawerToggle(
                 getActivity(),                    /* host Activity */
                 SideNavView.this.drawerLayout,    /* DrawerLayout object */

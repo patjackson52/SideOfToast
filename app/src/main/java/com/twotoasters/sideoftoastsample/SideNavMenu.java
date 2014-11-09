@@ -62,7 +62,6 @@ public class SideNavMenu {
                 .addMenuItem(bagelItem)
                 .addMenuItem(totalsHeader)
                 .addMenuItem(footer)
-                .setSlidingContent(true)
                 .setWidth(300)
                 .setSelected(1)
                 .build()
