@@ -3,14 +3,11 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.12.0'
-        classpath 'org.robolectric:robolectric-gradle-plugin:0.13.0'
+        classpath 'com.github.jcandksolutions.gradle:android-unit-test:2.0.+'
     }
 }
 
-apply plugin: 'android-sdk-manager'
 apply plugin: 'com.android.library'
-apply plugin: 'robolectric'
 
 android {
     compileSdkVersion Integer.parseInt(project.ANDROID_BUILD_SDK_VERSION)
@@ -23,7 +20,6 @@ android {
         versionName VERSION_NAME
         versionCode Integer.parseInt(VERSION_CODE)
 
-        applicationId GROUP
     }
 
     compileOptions {
@@ -33,14 +29,14 @@ android {
     buildTypes {
         debug {
             versionNameSuffix '-dev'
-            runProguard false
+            minifyEnabled false
             debuggable true
             signingConfig signingConfigs.debug
         }
 
         release {
             versionNameSuffix '-release'
-            runProguard false
+            minifyEnabled false
             debuggable false
         }
     }
@@ -56,6 +52,7 @@ dependencies {
     compile 'com.squareup:otto:1.3.5'
     compile 'com.android.support:support-v4:21.+'
     compile 'com.android.support:appcompat-v7:21.0.0'
+    compile 'com.jakewharton:butterknife:6.1.+'
 }
 
 def isReleaseBuild() {

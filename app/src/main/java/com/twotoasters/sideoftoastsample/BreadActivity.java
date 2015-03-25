@@ -1,42 +1,56 @@
 package com.twotoasters.sideoftoastsample;
 
-import android.app.ActionBar;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
+import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.v4.app.FragmentActivity;
+import android.util.DisplayMetrics;
 import android.view.DragEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.View.OnTouchListener;
+import android.view.ViewGroup.LayoutParams;
+import android.view.ViewPropertyAnimator;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+
+import java.util.Random;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 public class BreadActivity extends FragmentActivity {
 
-    private static final int TYPES_OF_BREAD_ID = 0;
-    private static final int PLAIN_TOAST_MENU_ID = 1;
-    private static final int BAGEL_MENU_ID = 2;
-    private static final int OTHER_TOAST_MENU_ID = 3;
-    private static final int TOTALS_HEADER_ID = 4;
-    private static final int TOTALS_ID = 5;
-
-    private static final int TOAST_MENU_TYPE = 1;
-    private static final int TOAST_MENU_HEADER_TYPE = 2;
-    private static final int TOAST_MENU_FOOTER_TYPE = 3;
+    ImageView toast1;
+    ImageView toast2;
+    ImageView toast3;
+    @InjectView(R.id.toaster) ImageView toaster;
+    @InjectView(R.id.container) RelativeLayout container;
+    private int numToasted = 0;
+    private Random random;
+    private DisplayMetrics metrics;
+    private int spaceAtTop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        random = new Random();
+        metrics = new DisplayMetrics();
+        spaceAtTop = getStatusBarHeight() + getToolbarHeightPx(this);
+
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
         setupWidgets();
         SideNavMenu.addBreadMenu(this);
 
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeButtonEnabled(true);
     }
 
     @Override
@@ -47,7 +61,7 @@ public class BreadActivity extends FragmentActivity {
 
     @Override
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.activity:
                 startActivity(new Intent(this, BreadActivity.class));
                 break;
@@ -64,55 +78,124 @@ public class BreadActivity extends FragmentActivity {
         return super.onMenuItemSelected(featureId, item);
     }
 
-    private ImageView toast;
-
-    private void setupWidgets() {
-        toast = (ImageView) findViewById(R.id.toast1);
-        toast.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                ClipData data = ClipData.newPlainText("", "");
-                View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(v);
-                v.startDrag(data, shadowBuilder, v, 0);
-                v.setVisibility(View.INVISIBLE);
-                return false;
-            }
-        });
-    }
-
-    class MyDragListener implements View.OnDragListener {
-        Drawable enterShape = getResources().getDrawable(R.drawable.drop_target);
-        Drawable normalShape = getResources().getDrawable(R.drawable.shape);
-
+    public class ToastTouchListener implements OnTouchListener {
         @Override
-        public boolean onDrag(View v, DragEvent event) {
-            int action = event.getAction();
-            switch (event.getAction()) {
-                case DragEvent.ACTION_DRAG_STARTED:
-                    // do nothing
-                    break;
-                case DragEvent.ACTION_DRAG_ENTERED:
-                    v.setBackgroundDrawable(enterShape);
-                    break;
-                case DragEvent.ACTION_DRAG_EXITED:
-                    v.setBackgroundDrawable(normalShape);
-                    break;
-                case DragEvent.ACTION_DROP:
-                    // Dropped, reassign View to ViewGroup
-                    View view = (View) event.getLocalState();
-                    ViewGroup owner = (ViewGroup) view.getParent();
-                    owner.removeView(view);
-                    LinearLayout container = (LinearLayout) v;
-                    container.addView(view);
-                    view.setVisibility(View.VISIBLE);
-                    break;
-                case DragEvent.ACTION_DRAG_ENDED:
-                    v.setBackgroundDrawable(normalShape);
-                default:
-                    break;
-            }
-            return true;
+        public boolean onTouch(View v, MotionEvent event) {
+            ClipData data = ClipData.newPlainText("", "");
+            View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(v);
+            v.setOnDragListener(new MyDragListener());
+            v.startDrag(data, shadowBuilder, v, 0);
+            v.setVisibility(View.INVISIBLE);
+            return false;
         }
     }
 
+    private void setupWidgets() {
+        ButterKnife.inject(this);
+        toaster.setOnDragListener(new MyDragListener());
+
+        toast1 = getToast(R.drawable.dark_untoasted_lg);
+        toast2 = getToast(R.drawable.light_untoasted_lg);
+        toast3 = getToast(R.drawable.light_untoasted_lg);
+
+        container.addView(toast1);
+        container.addView(toast2);
+        container.addView(toast3);
+    }
+
+    private ImageView getToast(@DrawableRes int drawableRes) {
+        ImageView imageView = new ImageView(this);
+        LayoutParams params = container.getLayoutParams();
+        params.height = LayoutParams.WRAP_CONTENT;
+        params.width = LayoutParams.WRAP_CONTENT;
+        imageView.setImageResource(drawableRes);
+        imageView.setLayoutParams(params);
+        imageView.setX(getRandomX(imageView.getWidth()));
+        imageView.setY(getRandomY(imageView.getHeight()));
+        imageView.setOnTouchListener(new ToastTouchListener());
+        return imageView;
+    }
+
+    private int getRandomX(int viewWidth) {
+        return random.nextInt(metrics.widthPixels - viewWidth);
+    }
+
+
+    private int getRandomY(int viewHeight) {
+        int y = random.nextInt(metrics.heightPixels - spaceAtTop) + spaceAtTop;
+        if (y > metrics.heightPixels - spaceAtTop - toaster.getHeight()) {
+            y-= toaster.getHeight() + spaceAtTop;
+        }
+        return y;
+    }
+
+    class MyDragListener implements View.OnDragListener {
+
+        @Override
+        public boolean onDrag(final View v, DragEvent event) {
+            switch (event.getAction()) {
+                case DragEvent.ACTION_DRAG_STARTED:
+                    break;
+                case DragEvent.ACTION_DRAG_ENTERED:
+                    break;
+                case DragEvent.ACTION_DRAG_EXITED:
+                    break;
+                case DragEvent.ACTION_DROP:
+                    int loc1[] = new int[2];
+                    int toasterLoc[] = new int[2];
+
+                    final View draggedView = (View) event.getLocalState();
+                    toaster.getLocationOnScreen(toasterLoc);
+                    draggedView.getLocationOnScreen(loc1);
+
+                    int startX = toasterLoc[0];
+                    int startY = toasterLoc[1] - toaster.getHeight() + spaceAtTop;
+
+                    draggedView.setX(startX);
+                    draggedView.setY(startY);
+
+                    Random random = new Random();
+
+                    ViewPropertyAnimator anim1 = draggedView.animate()
+                            .x(getRandomX(toaster.getWidth()))
+                            .y(getRandomY(toaster.getHeight()))
+                            .rotationBy(random.nextInt(4000))
+                            .setDuration(random.nextInt(2000) + 400)
+                            .setInterpolator(new DecelerateInterpolator())
+                            .setListener(new AnimatorListenerAdapter() {
+                                @Override
+                                public void onAnimationStart(Animator animation) {
+                                    draggedView.setVisibility(View.VISIBLE);
+                                    super.onAnimationStart(animation);
+                                }
+                            });
+
+                    anim1.start();
+                    break;
+                case DragEvent.ACTION_DRAG_ENDED:
+                default:
+                    break;
+            }
+
+            return true;
+        }
+
+    }
+
+    public static int getToolbarHeightPx(Context context) {
+        int toolbarHeight;
+        final TypedArray ta = context.getTheme().obtainStyledAttributes(new int[]{android.R.attr.actionBarSize});
+        toolbarHeight = (int) ta.getDimension(0, 0);
+        ta.recycle();
+        return toolbarHeight;
+    }
+
+    public int getStatusBarHeight() {
+        int result = 0;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }
 }
